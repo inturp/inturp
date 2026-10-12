@@ -596,7 +596,7 @@ main a.rounded-full:hover {
   border-top: 1px solid var(--border);
 }
 .founders-section > div {
-  max-width: 900px;
+  max-width: 720px;
 }
 .founders-section .max-w-3xl {
   max-width: none;
@@ -604,8 +604,8 @@ main a.rounded-full:hover {
 .founder-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
-  margin-top: 40px;
+  gap: 28px;
+  margin-top: 32px;
 }
 .founder-card {
   min-width: 0;
@@ -845,7 +845,9 @@ main a.rounded-full:hover {
     width: 20px;
   }
   .founder-grid {
-    gap: 36px;
+    max-width: 300px;
+    margin-inline: auto;
+    gap: 32px;
     grid-template-columns: 1fr;
   }
   .founder-image {
