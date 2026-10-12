@@ -11,7 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as VetchartedRouteImport } from './routes/vetcharted'
+import { Route as ArIndexRouteImport } from './routes/ar.index'
+import { Route as ArAboutRouteImport } from './routes/ar.about'
+import { Route as ArPrivacyRouteImport } from './routes/ar.privacy'
+import { Route as ArVetchartedRouteImport } from './routes/ar.vetcharted'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +28,110 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VetchartedRoute = VetchartedRouteImport.update({
   id: '/vetcharted',
   path: '/vetcharted',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArIndexRoute = ArIndexRouteImport.update({
+  id: '/ar/',
+  path: '/ar/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArAboutRoute = ArAboutRouteImport.update({
+  id: '/ar/about',
+  path: '/ar/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArPrivacyRoute = ArPrivacyRouteImport.update({
+  id: '/ar/privacy',
+  path: '/ar/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArVetchartedRoute = ArVetchartedRouteImport.update({
+  id: '/ar/vetcharted',
+  path: '/ar/vetcharted',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/privacy': typeof PrivacyRoute
   '/vetcharted': typeof VetchartedRoute
+  '/ar/about': typeof ArAboutRoute
+  '/ar/privacy': typeof ArPrivacyRoute
+  '/ar/vetcharted': typeof ArVetchartedRoute
+  '/ar/': typeof ArIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/privacy': typeof PrivacyRoute
   '/vetcharted': typeof VetchartedRoute
+  '/ar/about': typeof ArAboutRoute
+  '/ar/privacy': typeof ArPrivacyRoute
+  '/ar/vetcharted': typeof ArVetchartedRoute
+  '/ar': typeof ArIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/privacy': typeof PrivacyRoute
   '/vetcharted': typeof VetchartedRoute
+  '/ar/about': typeof ArAboutRoute
+  '/ar/privacy': typeof ArPrivacyRoute
+  '/ar/vetcharted': typeof ArVetchartedRoute
+  '/ar/': typeof ArIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/vetcharted'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/privacy'
+    | '/vetcharted'
+    | '/ar/about'
+    | '/ar/privacy'
+    | '/ar/vetcharted'
+    | '/ar/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/vetcharted'
-  id: '__root__' | '/' | '/about' | '/vetcharted'
+  to:
+    | '/'
+    | '/about'
+    | '/privacy'
+    | '/vetcharted'
+    | '/ar/about'
+    | '/ar/privacy'
+    | '/ar/vetcharted'
+    | '/ar'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/privacy'
+    | '/vetcharted'
+    | '/ar/about'
+    | '/ar/privacy'
+    | '/ar/vetcharted'
+    | '/ar/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  PrivacyRoute: typeof PrivacyRoute
   VetchartedRoute: typeof VetchartedRoute
+  ArAboutRoute: typeof ArAboutRoute
+  ArPrivacyRoute: typeof ArPrivacyRoute
+  ArVetchartedRoute: typeof ArVetchartedRoute
+  ArIndexRoute: typeof ArIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,11 +150,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vetcharted': {
       id: '/vetcharted'
       path: '/vetcharted'
       fullPath: '/vetcharted'
       preLoaderRoute: typeof VetchartedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/': {
+      id: '/ar/'
+      path: '/ar'
+      fullPath: '/ar/'
+      preLoaderRoute: typeof ArIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/about': {
+      id: '/ar/about'
+      path: '/ar/about'
+      fullPath: '/ar/about'
+      preLoaderRoute: typeof ArAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/privacy': {
+      id: '/ar/privacy'
+      path: '/ar/privacy'
+      fullPath: '/ar/privacy'
+      preLoaderRoute: typeof ArPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/vetcharted': {
+      id: '/ar/vetcharted'
+      path: '/ar/vetcharted'
+      fullPath: '/ar/vetcharted'
+      preLoaderRoute: typeof ArVetchartedRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -88,7 +198,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  PrivacyRoute: PrivacyRoute,
   VetchartedRoute: VetchartedRoute,
+  ArAboutRoute: ArAboutRoute,
+  ArPrivacyRoute: ArPrivacyRoute,
+  ArVetchartedRoute: ArVetchartedRoute,
+  ArIndexRoute: ArIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

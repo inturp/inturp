@@ -127,7 +127,7 @@ export function SiteNav() {
       </a>
       <header ref={headerRef} className="site-header" dir="ltr">
         <nav className="site-nav" aria-label={t.menu}>
-          <Link to="/" onClick={closeMenu} className="brand-link">
+          <Link to={lang === "ar" ? "/ar/" : "/"} onClick={closeMenu} className="brand-link">
             <img
               src="/inturp-logo.png"
               alt="Inturp"
@@ -146,7 +146,11 @@ export function SiteNav() {
                 aria-expanded={productsOpen}
                 aria-controls="product-links"
                 onClick={() => setProductsOpen(!productsOpen)}
-                className={pathname === "/vetcharted" ? "nav-link active" : "nav-link"}
+                className={
+                  pathname.replace(/^\/ar/, "").replace(/\/$/, "") === "/vetcharted"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
               >
                 {t.products}
                 <ChevronDown size={14} className={productsOpen ? "rotate-180" : ""} />
@@ -173,14 +177,19 @@ export function SiteNav() {
               )}
             </div>
             <Link
-              to="/about"
+              to={lang === "ar" ? "/ar/about/" : "/about/"}
               onClick={closeMenu}
               className="nav-link"
               activeProps={{ className: "nav-link active", "aria-current": "page" }}
             >
               {t.about}
             </Link>
-            <Link to="/" hash="contact" onClick={closeMenu} className="nav-contact">
+            <Link
+              to={lang === "ar" ? "/ar/" : "/"}
+              hash="contact"
+              onClick={closeMenu}
+              className="nav-contact"
+            >
               {t.contact}
               <ArrowUpRight size={16} />
             </Link>
@@ -205,11 +214,11 @@ export function SiteNav() {
             <a href="https://inturp.com/vet-charted/" onClick={closeMenu}>
               VetCharted <ArrowUpRight size={18} />
             </a>
-            <Link to="/about" onClick={closeMenu}>
+            <Link to={lang === "ar" ? "/ar/about/" : "/about/"} onClick={closeMenu}>
               {t.about}
               <ArrowUpRight size={18} />
             </Link>
-            <Link to="/" hash="contact" onClick={closeMenu}>
+            <Link to={lang === "ar" ? "/ar/" : "/"} hash="contact" onClick={closeMenu}>
               {t.contact}
               <ArrowUpRight size={18} />
             </Link>
@@ -225,15 +234,21 @@ export function SiteFooter() {
   return (
     <footer className="site-footer section-padding">
       <div className="footer-inner">
-        <Link to="/" className="brand-link">
+        <Link to={lang === "ar" ? "/ar/" : "/"} className="brand-link">
           <img src="/inturp-logo.png" alt="" width="44" height="44" className="dark:invert" />
           <span>inturp.</span>
         </Link>
         <div className="footer-links">
-          <Link to="/about">{nav[lang].about}</Link>
+          <Link to={lang === "ar" ? "/ar/about/" : "/about/"}>{nav[lang].about}</Link>
           <a href="https://inturp.com/vet-charted/">VetCharted</a>
           <a href="mailto:info@inturp.com">info@inturp.com</a>
+          <Link to={lang === "ar" ? "/ar/privacy/" : "/privacy/"}>
+            {lang === "ar" ? "الخصوصية" : "Privacy"}
+          </Link>
         </div>
+        <button type="button" data-privacy-settings className="text-sm text-muted-foreground">
+          {lang === "ar" ? "إعدادات الخصوصية" : "Privacy settings"}
+        </button>
         <p>
           © {new Date().getFullYear()} Inturp. {nav[lang].footer}
         </p>

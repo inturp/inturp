@@ -1,49 +1,30 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-
+import { createContext, useContext, useEffect, type ReactNode } from "react";
+import { useRouterState } from "@tanstack/react-router";
 export type Lang = "en" | "ar";
-
-type LangContextValue = {
-  lang: Lang;
-  setLang: (l: Lang) => void;
-  rtl: boolean;
-};
-
-const LangContext = createContext<LangContextValue>({
+const LangContext = createContext<{ lang: Lang; setLang: (lang: Lang) => void; rtl: boolean }>({
   lang: "en",
   setLang: () => {},
   rtl: false,
 });
-
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
-  const rtl = lang === "ar";
-
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem("inturp-lang");
-      if (stored === "ar" || stored === "en") setLangState(stored);
-    } catch {
-      /* Private browsing can disable storage. */
-    }
-  }, []);
-
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const lang: Lang = /^\/ar(?:\/|$)/.test(pathname) ? "ar" : "en";
   useEffect(() => {
     document.documentElement.lang = lang;
-    document.documentElement.dir = rtl ? "rtl" : "ltr";
-  }, [lang, rtl]);
-
-  const setLang = (l: Lang) => {
-    setLangState(l);
-    try {
-      window.localStorage.setItem("inturp-lang", l);
-    } catch {
-      /* ignore */
-    }
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  }, [lang]);
+  const setLang = (next: Lang) => {
+    const base = pathname.replace(/^\/ar(?=\/|$)/, "") || "/";
+    window.location.assign(
+      (next === "ar" ? "/ar" + (base === "/" ? "/" : base) : base) + window.location.hash,
+    );
   };
-
-  return <LangContext.Provider value={{ lang, setLang, rtl }}>{children}</LangContext.Provider>;
+  return (
+    <LangContext.Provider value={{ lang, setLang, rtl: lang === "ar" }}>
+      {children}
+    </LangContext.Provider>
+  );
 }
-
 export function useLang() {
   return useContext(LangContext);
 }

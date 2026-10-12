@@ -13,6 +13,15 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
     prerender: { enabled: true, autoSubfolderIndex: true, crawlLinks: false },
-    pages: [{ path: "/" }, { path: "/about" }, { path: "/vetcharted" }],
+    pages: [
+      { path: "/" },
+      { path: "/about" },
+      { path: "/vetcharted" },
+      { path: "/ar/" },
+      { path: "/ar/about" },
+      { path: "/ar/vetcharted" },
+      { path: "/privacy" },
+      { path: "/ar/privacy" },
+    ],
   },
 });

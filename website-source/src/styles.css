@@ -884,3 +884,73 @@ main a.rounded-full:hover {
     transform: none;
   }
 }
+
+.faq-items {
+  margin-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.faq-items details {
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+}
+.faq-items summary {
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  list-style: none;
+}
+.faq-items summary::-webkit-details-marker {
+  display: none;
+}
+.faq-items summary span {
+  font-size: 1.5rem;
+  transition: transform 0.2s;
+}
+.faq-items details[open] summary span {
+  transform: rotate(45deg);
+}
+.faq-items p {
+  margin-top: 1rem;
+  line-height: 1.8;
+  color: var(--muted-foreground);
+}
+:focus-visible {
+  outline: 3px solid var(--foreground);
+  outline-offset: 5px;
+}
+.analytics-choice {
+  position: fixed;
+  z-index: 100;
+  bottom: 1rem;
+  inset-inline: 1rem;
+  max-width: 36rem;
+  margin-inline: auto;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: 0 12px 40px #0002;
+}
+.analytics-choice p {
+  line-height: 1.7;
+}
+.analytics-choice > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+.analytics-choice button {
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+.analytics-choice a {
+  text-decoration: underline;
+}

@@ -34,10 +34,13 @@
     try { localStorage.setItem('vc-lang', l); } catch (_) {}
   }
   (function initLang() {
-    let l = 'ar';
     const q = new URLSearchParams(location.search).get('lang');
-    try { l = q === 'en' || q === 'ar' ? q : localStorage.getItem('vc-lang') === 'en' ? 'en' : 'ar'; } catch (_) { l = q === 'en' ? 'en' : 'ar'; }
-    applyLang(l);
+    const defaultLang = location.pathname.endsWith('/en.html') ? 'en' : root.lang;
+    if (document.body.dataset.page === 'home' && (q === 'en' || q === 'ar')) {
+      location.replace((q === 'en' ? 'en.html' : './') + location.hash);
+      return;
+    }
+    applyLang(defaultLang);
   })();
   /* legal pages keep one article per language, so section ids differ (a3 / e3) */
   const docSectionNo = () => {
@@ -50,6 +53,7 @@
     if (t) t.scrollIntoView({ behavior: 'instant', block: 'start' });
   };
   $$('[data-lang-toggle]').forEach(b => b.addEventListener('click', () => {
+    if (document.body.dataset.page === 'home') { location.assign((lang() === 'ar' ? 'en.html' : './') + location.hash); return; }
     const n = docSectionNo();
     applyLang(lang() === 'ar' ? 'en' : 'ar');
     if (n) jumpToSection(n);

@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { pageSeo } from "@/lib/seo";
+import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site-chrome";
 import { useLang } from "@/lib/lang";
 
@@ -8,52 +9,33 @@ const vetchartedUrl = "/vetcharted-logo.png";
 
 export const Route = createFileRoute("/vetcharted")({
   component: VetChartedPage,
-  head: () => ({
-    meta: [
-      { title: "VetCharted | Clinic management by Inturp" },
-      {
-        name: "description",
-        content:
-          "VetCharted is an affordable, easy to use clinic management app covering appointments, medical records, and patient history for veterinary clinics.",
-      },
-      { property: "og:title", content: "VetCharted | Clinic management by Inturp" },
-      {
-        property: "og:description",
-        content:
-          "VetCharted is an affordable, easy to use clinic management app covering appointments, medical records, and patient history for veterinary clinics.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://inturp.com/vetcharted" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "https://inturp.com/vetcharted" }],
-  }),
+  head: () => pageSeo("product"),
 });
 
 const copy = {
   en: {
     eyebrow: "Our products",
-    title: "A clinic management app built for the veterinary clinics everyone else overlooks.",
+    title: "Veterinary clinic management, all in one place.",
     paragraphs: [
       "VetCharted gives clinics a reliable place to run their day to day operations: appointments, medical records, patient history, and everything in between.",
-      "It is affordable and far easier to use than competing solutions, while still covering every key feature a clinic actually needs.",
-      "More details about VetCharted will be shared here soon.",
+      "Manage animal records, examinations, vaccinations, invoices and inventory in Arabic and English.",
+      "Explore animal records, appointments, billing and inventory on the Vet Charted product website.",
     ],
-    cta: "Get in touch",
+    cta: "Explore Vet Charted",
   },
   ar: {
     eyebrow: "منتجاتنا",
-    title: "تطبيق لإدارة العيادات، مصمم للعيادات البيطرية التي يتجاهلها الجميع.",
+    title: "برنامج إدارة العيادات البيطرية، في مكان واحد.",
     paragraphs: [
       "يمنح VetCharted العيادات مكاناً موثوقاً لإدارة عملياتها اليومية: المواعيد والسجلات الطبية وتاريخ الحالات وكل ما بينها.",
-      "سعره في متناول الجميع، واستخدامه أسهل بكثير من الحلول المنافسة، مع تغطية كاملة لكل ميزة أساسية تحتاجها العيادة فعلياً.",
-      "سنشارك المزيد من التفاصيل حول VetCharted هنا قريباً.",
+      "أدر ملفات الحيوانات والفحوصات والتطعيمات والفواتير والمخزون بالعربية والإنجليزية.",
+      "شاهد لوحة العيادة وتطبيق المالك وتفاصيل المزايا على موقع Vet Charted.",
     ],
-    cta: "تواصل معنا",
+    cta: "اكتشف Vet Charted",
   },
 };
 
-function VetChartedPage() {
+export function VetChartedPage() {
   const { lang, rtl } = useLang();
   const t = copy[lang];
 
@@ -83,13 +65,12 @@ function VetChartedPage() {
                 ))}
               </div>
               <div className="mt-10">
-                <Link
-                  to="/"
-                  hash="contact"
+                <a
+                  href={lang === "ar" ? "/vet-charted/" : "/vet-charted/en.html"}
                   className="inline-flex items-center justify-center rounded-full border border-foreground bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-background hover:text-foreground"
                 >
                   {t.cta}
-                </Link>
+                </a>
               </div>
             </div>
             <ProductPreview />

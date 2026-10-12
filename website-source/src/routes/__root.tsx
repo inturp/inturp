@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -80,10 +81,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Inturp" },
-      { name: "description", content: "Inturp identifies promising business opportunities, builds the software behind them, and supports the ecosystem needed to turn ideas into successful products." },
+      {
+        name: "description",
+        content:
+          "Inturp identifies promising business opportunities, builds the software behind them, and supports the ecosystem needed to turn ideas into successful products.",
+      },
       { name: "author", content: "Inturp" },
       { property: "og:title", content: "Inturp" },
-      { property: "og:description", content: "Inturp identifies promising business opportunities, builds the software behind them, and supports the ecosystem needed to turn ideas into successful products." },
+      {
+        property: "og:description",
+        content:
+          "Inturp identifies promising business opportunities, builds the software behind them, and supports the ecosystem needed to turn ideas into successful products.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://inturp.com/inturp-social.png" },
       { property: "og:image:width", content: "1200" },
@@ -91,7 +100,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image:alt", content: "Inturp — We find the gaps and fill them" },
       { name: "twitter:image", content: "https://inturp.com/inturp-social.png" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Inturp" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "google-site-verification", content: "PNawLMj6AmqhtiteQqB5THg5ma6vKiGJ7gBVXnrdgn4" },
+    ],
+    scripts: [
+      { src: "/js/analytics.js", defer: true },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://inturp.com/#organization",
+              name: "Inturp",
+              url: "https://inturp.com/",
+              logo: "https://inturp.com/inturp-logo.png",
+              email: "info@inturp.com",
+              description: "Inturp builds software products around business needs.",
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "info@inturp.com",
+                contactType: "business enquiries",
+                availableLanguage: ["Arabic", "English"],
+              },
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://inturp.com/#website",
+              url: "https://inturp.com/",
+              name: "Inturp",
+              publisher: { "@id": "https://inturp.com/#organization" },
+              inLanguage: ["en", "ar"],
+            },
+          ],
+        }),
+      },
     ],
     links: [
       {
@@ -114,8 +158,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const lang = /^\/ar(?:\/|$)/.test(pathname) ? "ar" : "en";
   return (
-    <html lang="en">
+    <html lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <head>
         <HeadContent />
       </head>
@@ -129,6 +175,10 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  useEffect(() => {
+    document.dispatchEvent(new Event("inturp:pageview"));
+  }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

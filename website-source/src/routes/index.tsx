@@ -1,3 +1,5 @@
+import { SiteFaq } from "@/components/site-faq";
+import { pageSeo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { SiteNav, SiteFooter } from "@/components/site-chrome";
@@ -8,25 +10,7 @@ const vetchartedUrl = "/vetcharted-logo.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  head: () => ({
-    meta: [
-      { title: "Inturp | We find the gaps and fill them" },
-      {
-        name: "description",
-        content:
-          "Inturp identifies promising business opportunities, builds the software behind them, and supports the ecosystem needed to turn ideas into successful products.",
-      },
-      { property: "og:title", content: "Inturp | We find the gaps and fill them" },
-      {
-        property: "og:description",
-        content:
-          "Inturp identifies promising business opportunities, builds the software behind them, and supports the ecosystem needed to turn ideas into successful products.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://inturp.com/" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () => pageSeo("home"),
 });
 
 type Lang = "en" | "ar";
@@ -50,9 +34,9 @@ const content = {
     product: {
       eyebrow: "What we’re building",
       name: "VetCharted",
-      title: "A clinic management app built for the veterinary clinics everyone else overlooks.",
+      title: "Veterinary clinic management, all in one place.",
       p1: "VetCharted gives clinics a reliable place to run their day to day operations: appointments, medical records, patient history, and everything in between.",
-      p2: "It is affordable and far easier to use than competing solutions, while still covering every key feature a clinic actually needs.",
+      p2: "Manage animal records, examinations, vaccinations, invoices and inventory in Arabic and English.",
       cta: "Get in touch",
     },
     contact: {
@@ -81,9 +65,9 @@ const content = {
     product: {
       eyebrow: "ما الذي نبنيه",
       name: "VetCharted",
-      title: "تطبيق لإدارة العيادات، مصمم للعيادات البيطرية التي يتجاهلها الجميع.",
+      title: "برنامج إدارة العيادات البيطرية، في مكان واحد.",
       p1: "يمنح VetCharted العيادات مكاناً موثوقاً لإدارة عملياتها اليومية: المواعيد والسجلات الطبية وتاريخ الحالات وكل ما بينها.",
-      p2: "سعره في متناول الجميع، واستخدامه أسهل بكثير من الحلول المنافسة، مع تغطية كاملة لكل ميزة أساسية تحتاجها العيادة فعلياً.",
+      p2: "أدر ملفات الحيوانات والفحوصات والتطعيمات والفواتير والمخزون بالعربية والإنجليزية.",
       cta: "تواصل معنا",
     },
     contact: {
@@ -96,7 +80,7 @@ const content = {
   },
 } as const;
 
-function Index() {
+export function Index() {
   const { lang, rtl } = useLang();
   const t = content[lang];
 
@@ -119,6 +103,7 @@ function Index() {
         <Hero t={t} />
         <About t={t} />
         <Product t={t} rtl={rtl} />
+        <SiteFaq />
         <Contact t={t} />
       </main>
       <SiteFooter />

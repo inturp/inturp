@@ -1,3 +1,4 @@
+import { pageSeo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site-chrome";
 import { useLang } from "@/lib/lang";
@@ -7,26 +8,7 @@ const hamzaPhoto = "/hamza-saleh.jpg";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
-  head: () => ({
-    meta: [
-      { title: "About Us | Inturp" },
-      {
-        name: "description",
-        content:
-          "Inturp is a venture studio that finds meaningful business opportunities, builds the software behind them, and supports the ecosystem that turns ideas into products.",
-      },
-      { property: "og:title", content: "About Us | Inturp" },
-      {
-        property: "og:description",
-        content:
-          "Inturp is a venture studio that finds meaningful business opportunities, builds the software behind them, and supports the ecosystem that turns ideas into products.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://inturp.com/about" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "https://inturp.com/about" }],
-  }),
+  head: () => pageSeo("about"),
 });
 
 const copy = {
@@ -66,7 +48,7 @@ const copy = {
 
 type T = typeof copy.en | typeof copy.ar;
 
-function AboutPage() {
+export function AboutPage() {
   const { lang, rtl } = useLang();
   const t = copy[lang];
 
