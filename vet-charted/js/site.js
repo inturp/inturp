@@ -31,13 +31,14 @@
     const t = $('title');
     if (t && t.dataset[l]) document.title = t.dataset[l];
     fillConfig();
-    try { localStorage.setItem('vc-lang', l); } catch (_) {}
+    try { localStorage.setItem('inturp-lang', l); } catch (_) {}
   }
   (function initLang() {
     const q = new URLSearchParams(location.search).get('lang');
-    const defaultLang = location.pathname.endsWith('/en.html') ? 'en' : root.lang;
+    const defaultLang = /\/vet-charted\/en(\/|\.html)?$/.test(location.pathname) ? 'en' : root.lang;
     if (document.body.dataset.page === 'home' && (q === 'en' || q === 'ar')) {
-      location.replace((q === 'en' ? 'en.html' : './') + location.hash);
+      try { localStorage.setItem('inturp-lang', q); } catch (_) {}
+      location.replace((q === 'en' ? '/vet-charted/en/' : '/vet-charted/') + location.hash);
       return;
     }
     applyLang(defaultLang);
@@ -52,16 +53,33 @@
     const t = $('#' + (lang() === 'ar' ? 'a' : 'e') + n);
     if (t) t.scrollIntoView({ behavior: 'instant', block: 'start' });
   };
+  /* every language has its own URL: the language button goes to the page's hreflang twin */
   $$('[data-lang-toggle]').forEach(b => b.addEventListener('click', () => {
-    if (document.body.dataset.page === 'home') { location.assign((lang() === 'ar' ? 'en.html' : './') + location.hash); return; }
-    const n = docSectionNo();
-    applyLang(lang() === 'ar' ? 'en' : 'ar');
-    if (n) jumpToSection(n);
+    const other = lang() === 'ar' ? 'en' : 'ar';
+    const twin = $(`link[rel="alternate"][hreflang="${other}"]`);
+    try { localStorage.setItem('inturp-lang', other); } catch (_) {}
+    if (twin) { location.assign(new URL(twin.href).pathname + location.hash); return; }
+    applyLang(other);
   }));
   (function initHash() {
     const m = /^#[ae](\d+)$/.exec(location.hash);
     if (m) setTimeout(() => jumpToSection(m[1]), 0);
   })();
+
+  /* ───────── theme + products menu (shares inturp.com's storage key) ───────── */
+  $$('[data-theme-toggle]').forEach(b => b.addEventListener('click', () => {
+    const dark = !root.classList.contains('dark');
+    root.classList.toggle('dark', dark);
+    root.style.colorScheme = dark ? 'dark' : 'light';
+    try { localStorage.setItem('inturp-theme', dark ? 'dark' : 'light'); } catch (_) {}
+  }));
+  const pmBtn = $('#pm-btn'), pmMenu = $('#product-links');
+  if (pmBtn && pmMenu) {
+    const setPm = o => { pmBtn.setAttribute('aria-expanded', String(o)); pmMenu.hidden = !o; };
+    pmBtn.addEventListener('click', () => setPm(pmBtn.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('pointerdown', e => { if (!e.target.closest('.product-menu')) setPm(false); });
+    addEventListener('keydown', e => { if (e.key === 'Escape') setPm(false); });
+  }
 
   /* ───────── header & mobile menu ───────── */
   const menuBtn = $('.menu-btn'), mnav = $('#mnav');
@@ -157,8 +175,8 @@
     const rnd = () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
     const finder = (x, y) => (x < 8 && y < 8) || (x >= n - 8 && y < 8) || (x < 8 && y >= n - 8);
     let out = '';
-    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (!finder(x, y) && rnd() < .5) out += `<rect x="${x + .06}" y="${y + .06}" width=".88" height=".88" rx=".18" fill="#1E3A5F"/>`;
-    const eye = (ox, oy) => `<rect x="${ox}" y="${oy}" width="7" height="7" rx="1.4" fill="#1E3A5F"/><rect x="${ox + 1}" y="${oy + 1}" width="5" height="5" rx="1" fill="#fff"/><rect x="${ox + 2}" y="${oy + 2}" width="3" height="3" rx=".7" fill="#1E3A5F"/>`;
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (!finder(x, y) && rnd() < .5) out += `<rect x="${x + .06}" y="${y + .06}" width=".88" height=".88" rx=".18" fill="currentColor"/>`;
+    const eye = (ox, oy) => `<rect x="${ox}" y="${oy}" width="7" height="7" rx="1.4" fill="currentColor"/><rect x="${ox + 1}" y="${oy + 1}" width="5" height="5" rx="1" style="fill:var(--background)"/><rect x="${ox + 2}" y="${oy + 2}" width="3" height="3" rx=".7" fill="currentColor"/>`;
     svg.innerHTML = out + eye(0, 0) + eye(n - 7, 0) + eye(0, n - 7);
   });
 

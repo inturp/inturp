@@ -1,0 +1,1 @@
+import{t as e}from"./privacy-content-BGAn5qo3.js";var t=e;export{t as component};

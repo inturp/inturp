@@ -1,1 +1,0 @@
-import{t as e}from"./privacy-content-BP8lkPs1.js";var t=e;export{t as component};
