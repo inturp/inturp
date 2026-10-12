@@ -139,10 +139,10 @@
     var name=document.getElementById('delName').value.trim();
     var sel=document.getElementById('delScope');
     var scope=sel.options[sel.selectedIndex].getAttribute('data-'+(en?'en':'ar'));
-    var subject=en?'Account deletion request — Al Ameer Hydraulics':'طلب حذف حساب — محلات الأمير';
+    var subject=en?'Account deletion request — Al Ameer Hydraulics':'طلب حذف حساب — شركة الأمير';
     var body=en
       ?'Hello,\n\nI would like to delete my account in the Al Ameer Hydraulics app.\n\nAccount (email/phone): '+id+'\nName: '+(name||'-')+'\nRequest: '+scope+'\n\nThank you.'
-      :'مرحباً،\n\nأرغب بحذف حسابي في تطبيق محلات الأمير.\n\nالحساب (بريد/هاتف): '+id+'\nالاسم: '+(name||'-')+'\nالطلب: '+scope+'\n\nشكراً.';
+      :'مرحباً،\n\nأرغب بحذف حسابي في تطبيق شركة الأمير.\n\nالحساب (بريد/هاتف): '+id+'\nالاسم: '+(name||'-')+'\nالطلب: '+scope+'\n\nشكراً.';
     location.href='mailto:info@inturp.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   });
 })();

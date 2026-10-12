@@ -40,7 +40,7 @@ def emit(rel, title, desc, body_dual, ld_fn=None, extra_end=''):
         en_path, ar_path = '/alameer/' + rel, '/ar/alameer/' + rel
         ld = ('<script type="application/ld+json">' + json.dumps(ld_fn(lang), ensure_ascii=False) + '</script>\n') if ld_fn else ''
         html = shared.head(lang=lang, title=title[lang], desc=desc[lang], en_path=en_path, ar_path=ar_path, css=CSS,
-                           og_image='/alameer/assets/img/og.jpg', og_alt='Al Ameer Hydraulics app screens' if lang == 'en' else 'شاشات تطبيق محلات الأمير', extra=ld)
+                           og_image='/alameer/assets/img/og.jpg', og_alt='Al Ameer Hydraulics app screens' if lang == 'en' else 'شاشات تطبيق شركة الأمير', extra=ld)
         html += chrome_head() + body_dual + chrome_foot() + extra_end + '\n</body>\n</html>\n'
         html = shared.single(localize(html), lang)
         out = (root if lang == 'en' else ar_root) / rel / 'index.html'
@@ -58,8 +58,8 @@ def page(title_ar, title_en, desc, canonical, body, page_id, desc_ar=None):
 
 
 DESC_AR = {
-    'privacy': 'سياسة خصوصية تطبيق محلات الأمير: البيانات التي يجمعها ولماذا ومع من تُشارَك وكيف تحذفها.',
-    'delete': 'كيف تحذف حسابك في تطبيق محلات الأمير: من داخل التطبيق أو بطلب، وما الذي يُحذف وما الذي يبقى.',
+    'privacy': 'سياسة خصوصية تطبيق شركة الأمير: البيانات التي يجمعها ولماذا ومع من تُشارَك وكيف تحذفها.',
+    'delete': 'كيف تحذف حسابك في تطبيق شركة الأمير: من داخل التطبيق أو بطلب، وما الذي يُحذف وما الذي يبقى.',
 }
 
 
@@ -73,7 +73,7 @@ def sec(n, ar_t, en_t, ar_b, en_b):
 # ---------------------------------------------------------------- PRIVACY
 P = []
 P.append(sec(1, 'من نحن', 'Who we are',
- '''<p>تطبيق <b>محلات الأمير (Alameer Hydraulics)</b> هو تطبيق متجر لقطع غيار المعدات الثقيلة والهيدروليك والآليات، تشغّله شركة الأمير وفروعها في فلسطين والأردن ومصر. صُمّم التطبيق وطُوّر بواسطة <b>Inturp</b>، وتخضع هذه السياسة لكل ما يجمعه التطبيق ويعالجه.</p>
+ '''<p>تطبيق <b>شركة الأمير (Alameer Hydraulics)</b> هو تطبيق متجر لقطع غيار المعدات الثقيلة والهيدروليك والآليات، تشغّله شركة الأمير وفروعها في فلسطين والأردن ومصر. صُمّم التطبيق وطُوّر بواسطة <b>Inturp</b>، وتخضع هذه السياسة لكل ما يجمعه التطبيق ويعالجه.</p>
 <p>في هذه السياسة تعني «نحن» شركة الأمير بصفتها صاحبة التطبيق، ومعها Inturp بصفتها الجهة المطوّرة التي تدعم تشغيله تقنياً.</p>''',
  '''<p>The <b>Al Ameer Hydraulics</b> app is a store for heavy-equipment spare parts, hydraulics and machines, run by Al Ameer and its branches in Palestine, Jordan and Egypt. The app was designed and built by <b>Inturp</b>. This policy covers what the app collects and how it is handled.</p>
 <p>“We” means Al Ameer as the owner of the app, together with Inturp as the developer that supports its technical operation.</p>'''))
@@ -171,8 +171,8 @@ toc = ''.join(f'<li><a href="#s{i+1}"><span class="ar">{a}</span><span class="en
 privacy_body = f'''<section class="legal-hero section-padding">
   <div class="inner">
     <h1><span class="ar">سياسة الخصوصية</span><span class="en">Privacy policy</span></h1>
-    <p><span class="ar">كيف يتعامل تطبيق محلات الأمير مع بياناتك: ماذا نجمع، ولماذا، ومع من نشاركه، وكيف تتحكم به.</span><span class="en">How the Al Ameer Hydraulics app handles your data: what we collect, why, who we share it with, and how you stay in control.</span></p>
-    <div class="meta"><span><span class="ar">آخر تحديث:</span><span class="en">Last updated:</span> <b class="latin">{UPDATED}</b></span><span><span class="ar">سارية منذ:</span><span class="en">Effective since:</span> <b class="latin">2025-06-22</b></span><span><span class="ar">التطبيق:</span><span class="en">App:</span> <b><span class="ar">محلات الأمير</span><span class="en">Al Ameer Hydraulics</span></b></span><span><a class="lnk" href="/alameer/delete-account/" style="border-bottom:1px solid var(--muted)"><span class="ar">حذف الحساب ←</span><span class="en">Delete your account →</span></a></span></div>
+    <p><span class="ar">كيف يتعامل تطبيق شركة الأمير مع بياناتك: ماذا نجمع، ولماذا، ومع من نشاركه، وكيف تتحكم به.</span><span class="en">How the Al Ameer Hydraulics app handles your data: what we collect, why, who we share it with, and how you stay in control.</span></p>
+    <div class="meta"><span><span class="ar">آخر تحديث:</span><span class="en">Last updated:</span> <b class="latin">{UPDATED}</b></span><span><span class="ar">سارية منذ:</span><span class="en">Effective since:</span> <b class="latin">2025-06-22</b></span><span><span class="ar">التطبيق:</span><span class="en">App:</span> <b><span class="ar">شركة الأمير</span><span class="en">Al Ameer Hydraulics</span></b></span><span><a class="lnk" href="/alameer/delete-account/" style="border-bottom:1px solid var(--muted)"><span class="ar">حذف الحساب ←</span><span class="en">Delete your account →</span></a></span></div>
   </div>
 </section>
 <div class="section-padding"><div class="doc-wrap inner">
@@ -183,7 +183,7 @@ privacy_body = f'''<section class="legal-hero section-padding">
 </div></div>'''
 
 page(
-    'سياسة الخصوصية — محلات الأمير', 'Privacy policy — Al Ameer Hydraulics',
+    'سياسة الخصوصية — شركة الأمير', 'Privacy policy — Al Ameer Hydraulics',
     'Privacy policy for the Al Ameer Hydraulics app: what data it collects, why, who it is shared with, and how to delete it.',
     'privacy/', privacy_body, 'privacy')
 
@@ -259,8 +259,8 @@ toc2h = ''.join(f'<li><a href="#s{i+1}"><span class="ar">{a}</span><span class="
 delete_body = f'''<section class="legal-hero section-padding">
   <div class="inner">
     <h1><span class="ar">طلب حذف الحساب</span><span class="en">Delete your account</span></h1>
-    <p><span class="ar">احذف حسابك في تطبيق محلات الأمير من داخل التطبيق، أو أرسل لنا طلباً إن لم تستطع تسجيل الدخول. نوضح هنا ما يُحذف وما يبقى وكم يستغرق الأمر.</span><span class="en">Delete your Al Ameer Hydraulics account inside the app, or send us a request if you cannot sign in. Here is what is deleted, what stays and how long it takes.</span></p>
-    <div class="meta"><span><span class="ar">آخر تحديث:</span><span class="en">Last updated:</span> <b class="latin">{UPDATED}</b></span><span><span class="ar">التطبيق:</span><span class="en">App:</span> <b><span class="ar">محلات الأمير</span><span class="en">Al Ameer Hydraulics</span></b></span></div>
+    <p><span class="ar">احذف حسابك في تطبيق شركة الأمير من داخل التطبيق، أو أرسل لنا طلباً إن لم تستطع تسجيل الدخول. نوضح هنا ما يُحذف وما يبقى وكم يستغرق الأمر.</span><span class="en">Delete your Al Ameer Hydraulics account inside the app, or send us a request if you cannot sign in. Here is what is deleted, what stays and how long it takes.</span></p>
+    <div class="meta"><span><span class="ar">آخر تحديث:</span><span class="en">Last updated:</span> <b class="latin">{UPDATED}</b></span><span><span class="ar">التطبيق:</span><span class="en">App:</span> <b><span class="ar">شركة الأمير</span><span class="en">Al Ameer Hydraulics</span></b></span></div>
   </div>
 </section>
 <div class="section-padding"><div class="doc-wrap inner">
@@ -282,22 +282,22 @@ delete_body = f'''<section class="legal-hero section-padding">
     var name=document.getElementById('delName').value.trim();
     var sel=document.getElementById('delScope');
     var scope=sel.options[sel.selectedIndex].getAttribute('data-'+(en?'en':'ar'));
-    var subject=en?'Account deletion request — Al Ameer Hydraulics':'طلب حذف حساب — محلات الأمير';
+    var subject=en?'Account deletion request — Al Ameer Hydraulics':'طلب حذف حساب — شركة الأمير';
     var body=en
       ?'Hello,\\n\\nI would like to delete my account in the Al Ameer Hydraulics app.\\n\\nAccount (email/phone): '+id+'\\nName: '+(name||'-')+'\\nRequest: '+scope+'\\n\\nThank you.'
-      :'مرحباً،\\n\\nأرغب بحذف حسابي في تطبيق محلات الأمير.\\n\\nالحساب (بريد/هاتف): '+id+'\\nالاسم: '+(name||'-')+'\\nالطلب: '+scope+'\\n\\nشكراً.';
+      :'مرحباً،\\n\\nأرغب بحذف حسابي في تطبيق شركة الأمير.\\n\\nالحساب (بريد/هاتف): '+id+'\\nالاسم: '+(name||'-')+'\\nالطلب: '+scope+'\\n\\nشكراً.';
     location.href='mailto:info@inturp.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   }});
 }})();
 </script>'''
 
 page(
-    'حذف الحساب — محلات الأمير', 'Delete your account — Al Ameer Hydraulics',
+    'حذف الحساب — شركة الأمير', 'Delete your account — Al Ameer Hydraulics',
     'How to delete your Al Ameer Hydraulics account: inside the app or by request, what is deleted and what stays.',
     'delete-account/', delete_body, 'delete')
 FAQ = [
-    ('ما هو تطبيق محلات الأمير؟', 'What is the Al Ameer Hydraulics app?',
-     'تطبيق لمحلات الأمير، شركة قطع غيار وهيدروليك وآليات للمعدات الثقيلة بسبعة فروع في فلسطين والأردن ومصر. تتصفح فيه الآليات وقطع الغيار وتطلب وتتواصل مع الفريق.',
+    ('ما هو تطبيق شركة الأمير؟', 'What is the Al Ameer Hydraulics app?',
+     'تطبيق شركة الأمير، المتخصصة في قطع غيار وهيدروليك وآليات للمعدات الثقيلة، بسبعة فروع في فلسطين والأردن ومصر. تتصفح فيه الآليات وقطع الغيار وتطلب وتتواصل مع الفريق.',
      'The app of Al Ameer, a business selling spare parts, hydraulics and machines for heavy equipment, with seven branches in Palestine, Jordan and Egypt. Browse machines and parts, order, and contact the team.'),
     ('هل أستطيع الطلب بالتوصيل أو الاستلام من الفرع؟', 'Can I order for delivery or pick up from a branch?',
      'نعم. عند إتمام الطلب تختار التوصيل إلى عنوانك المحفوظ أو الاستلام من أحد الفروع التي تدعمه: نابلس (شارع الحسبة)، ورام الله (بيتونيا)، وجماعين.',
@@ -320,7 +320,7 @@ def faq_html():
   <div>
     <div class="sec-head" data-reveal>
       <span class="eyebrow"><i class="status-dot"></i><span class="ar">أسئلة شائعة</span><span class="en">Questions</span></span>
-      <h2><span class="ar">أسئلة عن تطبيق محلات الأمير.</span><span class="en">Questions about the Al Ameer app.</span></h2>
+      <h2><span class="ar">أسئلة عن تطبيق شركة الأمير.</span><span class="en">Questions about the Al Ameer app.</span></h2>
     </div>
     <div class="faq-items" data-reveal>{items}</div>
   </div>
@@ -330,14 +330,14 @@ def faq_html():
 def index_ld(lang):
     en_url, ar_url = ORIGIN + '/alameer/', ORIGIN + '/ar/alameer/'
     url = ar_url if lang == 'ar' else en_url
-    desc = ('تطبيق لتصفح الآليات الثقيلة وقطع الغيار والطلب بالتوصيل أو بالاستلام من الفرع والتواصل مع فروع محلات الأمير السبعة في فلسطين والأردن ومصر.'
+    desc = ('تطبيق لتصفح الآليات الثقيلة وقطع الغيار والطلب بالتوصيل أو بالاستلام من الفرع والتواصل مع فروع شركة الأمير السبعة في فلسطين والأردن ومصر.'
             if lang == 'ar' else
             "Mobile app for browsing heavy machines and spare parts, ordering for delivery or branch pickup, and contacting Al Ameer's seven branches in Palestine, Jordan and Egypt.")
     qa = [{"@type": "Question", "name": (q_ar if lang == 'ar' else q_en), "acceptedAnswer": {"@type": "Answer", "text": (a_ar if lang == 'ar' else a_en)}} for q_ar, q_en, a_ar, a_en in FAQ]
     return {"@context": "https://schema.org", "@graph": [
         {"@type": "WebPage", "@id": url + "#page", "url": url, "name": "Al Ameer Hydraulics", "inLanguage": lang,
          "isPartOf": {"@id": ORIGIN + "/#website"}, "about": {"@id": ORIGIN + "/alameer/#app"}},
-        {"@type": "MobileApplication", "@id": ORIGIN + "/alameer/#app", "name": "Al Ameer Hydraulics", "alternateName": "محلات الأمير",
+        {"@type": "MobileApplication", "@id": ORIGIN + "/alameer/#app", "name": "Al Ameer Hydraulics", "alternateName": "شركة الأمير",
          "operatingSystem": "Android, iOS", "applicationCategory": "BusinessApplication", "description": desc,
          "image": ORIGIN + "/alameer/assets/img/og.jpg", "url": en_url, "downloadUrl": [PLAY, APPLE],
          "inLanguage": ["ar"], "author": {"@id": ORIGIN + "/#organization"}},
@@ -350,9 +350,9 @@ def index_ld(lang):
 def build_index():
     body = (pathlib.Path(__file__).parent / 'alameer.index.body.html').read_text(encoding='utf-8')
     body = body.replace('<section class="get section-padding section-space" id="get">', faq_html() + '\n\n<section class="get section-padding section-space" id="get">', 1)
-    emit('', {'en': 'Al Ameer Hydraulics app — heavy-equipment parts and machines | Inturp', 'ar': 'تطبيق محلات الأمير — قطع غيار المعدات الثقيلة والآليات | انتيرب'},
+    emit('', {'en': 'Al Ameer Hydraulics app — heavy-equipment parts and machines | Inturp', 'ar': 'تطبيق شركة الأمير — قطع غيار المعدات الثقيلة والآليات | انتيرب'},
          {'en': 'Case study: the Al Ameer Hydraulics mobile app by Inturp. Browse machines and spare parts, order for delivery or branch pickup, and reach seven branches in Palestine, Jordan and Egypt.',
-          'ar': 'دراسة حالة: تطبيق محلات الأمير للهيدروليك من انتيرب. تصفّح الآليات وقطع الغيار، واطلب بالتوصيل أو بالاستلام من الفرع، وتواصل مع سبعة فروع في فلسطين والأردن ومصر.'},
+          'ar': 'دراسة حالة: تطبيق شركة الأمير للهيدروليك من انتيرب. تصفّح الآليات وقطع الغيار، واطلب بالتوصيل أو بالاستلام من الفرع، وتواصل مع سبعة فروع في فلسطين والأردن ومصر.'},
          body, index_ld)
 
 

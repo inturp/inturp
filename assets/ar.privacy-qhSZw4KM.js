@@ -1,0 +1,1 @@
+import{t as e}from"./privacy-content-Qm1Uddue.js";var t=e;export{t as component};

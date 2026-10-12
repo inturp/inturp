@@ -15,7 +15,7 @@ PRODUCTS = [
          name_en='VetCharted', name_ar='VetCharted',
          sub_en='Veterinary clinic management', sub_ar='إدارة العيادات البيطرية'),
     dict(key='alameer', en_href='/alameer/', ar_href='/ar/alameer/', icon='/alameer/assets/img/app-icon.png', mono=False,
-         name_en='Al Ameer Hydraulics', name_ar='محلات الأمير',
+         name_en='Al Ameer Hydraulics', name_ar='شركة الأمير',
          sub_en='Heavy-equipment parts app', sub_ar='تطبيق قطع الغيار والمعدات الثقيلة'),
     dict(key='checkbook', en_href='/checkbook/', ar_href='/ar/checkbook/', icon='/checkbook/assets/img/app-icon.png', mono=False,
          name_en='CheckBook', name_ar='CheckBook',
@@ -86,7 +86,7 @@ def footer(active, privacy, delete, privacy_ar, privacy_en, privacy_settings=Fal
     <div class="footer-links">
       <a href="/about/" data-ar-href="/ar/about/" data-en-href="/about/" data-attrs="href"><span class="ar">من نحن</span><span class="en">About us</span></a>
       <a href="/vet-charted/en/" data-ar-href="/vet-charted/" data-en-href="/vet-charted/en/" data-attrs="href">VetCharted</a>
-      <a href="/alameer/" data-ar-href="/ar/alameer/" data-en-href="/alameer/" data-attrs="href"><span class="ar">محلات الأمير</span><span class="en">Al Ameer</span></a>
+      <a href="/alameer/" data-ar-href="/ar/alameer/" data-en-href="/alameer/" data-attrs="href"><span class="ar">شركة الأمير</span><span class="en">Al Ameer</span></a>
       <a href="/checkbook/" data-ar-href="/ar/checkbook/" data-en-href="/checkbook/" data-attrs="href">CheckBook</a>
       <a href="mailto:info@inturp.com">info@inturp.com</a>
       <a href="https://www.instagram.com/inturp_/" target="_blank" rel="noopener noreferrer" dir="ltr" aria-label="Inturp on Instagram: @inturp_">{INSTAGRAM}<span>@inturp_</span></a>

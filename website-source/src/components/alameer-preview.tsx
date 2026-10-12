@@ -12,7 +12,7 @@ export function AlameerPreview() {
         <div className={`${phone} -mr-6 mt-10 -rotate-3`}>
           <img
             src="/product/alameer-app-2.webp"
-            alt={ar ? "شاشة الآليات في تطبيق محلات الأمير" : "Machines list in the Al Ameer Hydraulics app"}
+            alt={ar ? "شاشة الآليات في تطبيق شركة الأمير" : "Machines list in the Al Ameer Hydraulics app"}
             width="520"
             height="1130"
             loading="lazy"
@@ -22,7 +22,7 @@ export function AlameerPreview() {
         <div className={`${phone} z-10 -mt-4 rotate-3`}>
           <img
             src="/product/alameer-app-1.webp"
-            alt={ar ? "الشاشة الرئيسية في تطبيق محلات الأمير" : "Home screen of the Al Ameer Hydraulics app"}
+            alt={ar ? "الشاشة الرئيسية في تطبيق شركة الأمير" : "Home screen of the Al Ameer Hydraulics app"}
             width="520"
             height="1130"
             loading="lazy"

@@ -182,7 +182,7 @@ export function SiteNav() {
                       className="rounded-[7px]"
                     />
                     <span>
-                      {lang === "ar" ? "محلات الأمير" : "Al Ameer Hydraulics"}
+                      {lang === "ar" ? "شركة الأمير" : "Al Ameer Hydraulics"}
                       <small>
                         {lang === "ar" ? "تطبيق قطع الغيار والمعدات الثقيلة" : "Heavy-equipment parts app"}
                       </small>
@@ -247,7 +247,7 @@ export function SiteNav() {
               VetCharted <ArrowUpRight size={18} />
             </a>
             <a href={lang === "ar" ? "/ar/alameer/" : "/alameer/"} onClick={closeMenu}>
-              {lang === "ar" ? "محلات الأمير" : "Al Ameer Hydraulics"} <ArrowUpRight size={18} />
+              {lang === "ar" ? "شركة الأمير" : "Al Ameer Hydraulics"} <ArrowUpRight size={18} />
             </a>
             <a href={lang === "ar" ? "/ar/checkbook/" : "/checkbook/"} onClick={closeMenu}>
               CheckBook <ArrowUpRight size={18} />
@@ -279,7 +279,7 @@ export function SiteFooter() {
         <div className="footer-links">
           <Link to={lang === "ar" ? "/ar/about/" : "/about/"}>{nav[lang].about}</Link>
           <a href={lang === "ar" ? "/vet-charted/" : "/vet-charted/en/"}>VetCharted</a>
-          <a href={lang === "ar" ? "/ar/alameer/" : "/alameer/"}>{lang === "ar" ? "محلات الأمير" : "Al Ameer"}</a>
+          <a href={lang === "ar" ? "/ar/alameer/" : "/alameer/"}>{lang === "ar" ? "شركة الأمير" : "Al Ameer"}</a>
           <a href={lang === "ar" ? "/ar/checkbook/" : "/checkbook/"}>CheckBook</a>
           <a href="mailto:info@inturp.com">info@inturp.com</a>
           <a href="https://www.instagram.com/inturp_/" target="_blank" rel="noopener noreferrer" dir="ltr" aria-label="Inturp on Instagram: @inturp_" className="inline-flex items-center gap-2"><Instagram size={18} strokeWidth={1.6} aria-hidden="true" /><span>@inturp_</span></a>
