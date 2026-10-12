@@ -4,6 +4,8 @@
   const measurementId = "G-SSBBVTW4KH"; // Set to the site's GA4 web stream ID.
   const storageKey = "inturp-analytics-consent";
   if (!/^G-[A-Z0-9]+$/.test(measurementId)) return;
+  if (window.__inturpAnalyticsInitialized) return;
+  window.__inturpAnalyticsInitialized = true;
   const production = /^(www\.)?inturp\.com$/.test(location.hostname);
   let consent = null,
     loaded = false,
