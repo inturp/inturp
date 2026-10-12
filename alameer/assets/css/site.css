@@ -284,7 +284,7 @@ html[lang=en] .ar{display:none!important}
 .toc a:hover{color:var(--foreground)}
 .toc a.on{color:var(--foreground);font-weight:600;background:none}
 .toc a.on::before{content:"";position:absolute;inset-inline-start:-1.5px;top:6px;bottom:6px;width:3px;background:var(--foreground);border-radius:2px}
-.doc{max-width:760px}
+.doc{max-width:760px;min-width:0}
 .doc section{padding-block:8px 6px;margin:0;border:0}
 .doc section+section{margin-top:44px;padding-top:44px;border-top:1px solid var(--border)}
 .doc h2{display:flex;align-items:baseline;gap:14px;font-size:1.65rem;font-weight:600;letter-spacing:-.03em;margin-bottom:16px}
@@ -340,7 +340,7 @@ html[lang=en] .ar{display:none!important}
   .stat:nth-child(3){padding-inline-start:0;border-inline-start:0}
   .stat:nth-child(n+3){border-top:1px solid var(--border)}
   .feat-grid{grid-template-columns:repeat(2,1fr)}
-  .doc-wrap{grid-template-columns:1fr;gap:28px;padding-block:44px 80px}
+  .doc-wrap{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:44px 80px}
   .toc{position:static}
   .toc ol{display:flex;flex-wrap:wrap;gap:4px 18px;border:0}
   .toc a{padding:4px 0}
