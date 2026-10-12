@@ -57,7 +57,7 @@ function Preferences() {
 }
 
 export function SiteNav() {
-  const { lang, rtl } = useLang();
+  const { lang } = useLang();
   const t = nav[lang];
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [menuOpen, setMenuOpen] = useState(false);
@@ -125,7 +125,7 @@ export function SiteNav() {
       <a href="#main" className="skip-link">
         {t.skip}
       </a>
-      <header ref={headerRef} className="site-header" dir={rtl ? "rtl" : "ltr"}>
+      <header ref={headerRef} className="site-header" dir="ltr">
         <nav className="site-nav" aria-label={t.menu}>
           <Link to="/" onClick={closeMenu} className="brand-link">
             <img
