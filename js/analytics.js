@@ -120,6 +120,8 @@
     const href = anchor.getAttribute("href") || "";
     if (href.startsWith("mailto:"))
       event("contact_click", { contact_method: "email", language: language() });
+    else if (href.startsWith("https://www.instagram.com/inturp_/"))
+      event("contact_click", { contact_method: "instagram", language: language() });
     else if (href.includes("wa.me/"))
       event("contact_click", { contact_method: "whatsapp", language: language() });
     else if (href.includes("/vet-charted/"))

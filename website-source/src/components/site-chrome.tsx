@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
+import { Instagram, ArrowUpRight, ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
 import { useLang, type Lang } from "@/lib/lang";
 import { useTheme } from "@/lib/theme";
 
@@ -242,6 +242,7 @@ export function SiteFooter() {
           <Link to={lang === "ar" ? "/ar/about/" : "/about/"}>{nav[lang].about}</Link>
           <a href="https://inturp.com/vet-charted/">VetCharted</a>
           <a href="mailto:info@inturp.com">info@inturp.com</a>
+          <a href="https://www.instagram.com/inturp_/" target="_blank" rel="noopener noreferrer" dir="ltr" aria-label="Inturp on Instagram: @inturp_" className="inline-flex items-center gap-2"><Instagram size={18} strokeWidth={1.6} aria-hidden="true" /><span>@inturp_</span></a>
           <Link to={lang === "ar" ? "/ar/privacy/" : "/privacy/"}>
             {lang === "ar" ? "الخصوصية" : "Privacy"}
           </Link>

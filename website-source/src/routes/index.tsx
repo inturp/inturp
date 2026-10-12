@@ -1,3 +1,4 @@
+import { Instagram } from "lucide-react";
 import { SiteFaq } from "@/components/site-faq";
 import { pageSeo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
@@ -129,7 +130,7 @@ function Hero({ t }: { t: T }) {
         <p className="text-balance mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
           {t.hero.subtitle}
         </p>
-        <div className="mt-10">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#product"
             className="inline-flex items-center justify-center rounded-full border border-foreground bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-background hover:text-foreground"
@@ -190,7 +191,7 @@ function Product({ t, rtl }: { t: T; rtl: boolean }) {
               <p>{t.product.p1}</p>
               <p>{t.product.p2}</p>
             </div>
-            <div className="mt-10">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <a
                 href="https://inturp.com/vet-charted/"
                 className="inline-flex items-center justify-center rounded-full border border-foreground bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-background hover:text-foreground"
@@ -217,13 +218,17 @@ function Contact({ t }: { t: T }) {
           {t.contact.title}
         </h2>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{t.contact.p}</p>
-        <div className="mt-10">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
             href="mailto:info@inturp.com"
             dir="ltr"
             className="inline-flex items-center justify-center rounded-full border border-foreground bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-background hover:text-foreground"
           >
             info@inturp.com
+          </a>
+          <a href="https://www.instagram.com/inturp_/" target="_blank" rel="noopener noreferrer" dir="ltr" aria-label="Inturp on Instagram: @inturp_" className="group inline-flex items-center justify-center gap-3 rounded-full border border-foreground/20 px-8 py-3.5 text-sm font-medium transition-all duration-300 hover:border-foreground hover:bg-foreground hover:text-primary-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+            <Instagram size={20} strokeWidth={1.6} aria-hidden="true" className="transition-transform duration-300 group-hover:scale-110 motion-reduce:transform-none" />
+            <span>@inturp_</span>
           </a>
         </div>
       </div>
