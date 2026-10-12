@@ -104,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "google-site-verification", content: "PNawLMj6AmqhtiteQqB5THg5ma6vKiGJ7gBVXnrdgn4" },
     ],
     scripts: [
-      { src: "/js/analytics.js", defer: true },
+      { src: "/js/analytics.js?v=20261012-2", defer: true },
       {
         type: "application/ld+json",
         children: JSON.stringify({
