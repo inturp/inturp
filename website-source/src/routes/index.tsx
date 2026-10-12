@@ -23,6 +23,7 @@ export const Route = createFileRoute("/")({
           "Inturp identifies promising business opportunities, builds the software behind them, and supports the ecosystem needed to turn ideas into successful products.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://inturp.com/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
