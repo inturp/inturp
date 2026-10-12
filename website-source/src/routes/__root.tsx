@@ -117,6 +117,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               url: "https://inturp.com/",
               logo: "https://inturp.com/inturp-logo.png",
               email: "info@inturp.com",
+              sameAs: ["https://www.instagram.com/inturp_/"],
               description: "Inturp builds software products around business needs.",
               contactPoint: {
                 "@type": "ContactPoint",

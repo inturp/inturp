@@ -61,7 +61,7 @@ export function SiteFaq() {
         </div>
         <a
           className="nav-link mt-6 inline-flex"
-          href={lang === "ar" ? "/vet-charted/" : "/vet-charted/en.html"}
+          href={lang === "ar" ? "/vet-charted/" : "/vet-charted/en/"}
         >
           {lang === "ar" ? "اكتشف Vet Charted ←" : "Explore Vet Charted →"}
         </a>

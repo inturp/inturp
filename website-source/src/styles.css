@@ -513,6 +513,23 @@ main a.rounded-full:hover {
   font-size: 16px;
   line-height: 1.85;
 }
+.home-alameer {
+  border-bottom: 1px solid var(--border);
+}
+.home-alameer .grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+.home-alameer h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.3;
+  letter-spacing: -0.035em;
+}
+.home-alameer .space-y-5 {
+  font-size: 16px;
+  line-height: 1.85;
+}
 .product-preview {
   min-width: 0;
   border-radius: 16px;
@@ -773,10 +790,12 @@ main a.rounded-full:hover {
     min-height: min(820px, 100svh);
   }
   .home-product .grid,
+  .home-alameer .grid,
   .product-page-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-  .home-product .grid {
+  .home-product .grid,
+  .home-alameer .grid {
     gap: 48px;
   }
   .product-preview {

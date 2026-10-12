@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 
 export type Theme = "light" | "dark";
 
@@ -16,6 +16,7 @@ const ThemeContext = createContext<ThemeContextValue>({
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("light");
+  const hydrated = useRef(false);
 
   useEffect(() => {
     let initial: Theme = "light";
@@ -33,6 +34,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    // The inline head script already applied the stored theme before first paint; skip the
+    // initial "light" default so the page never flashes light and back.
+    if (!hydrated.current) {
+      hydrated.current = true;
+      return;
+    }
     document.documentElement.classList.toggle("dark", theme === "dark");
     document.documentElement.style.colorScheme = theme;
   }, [theme]);

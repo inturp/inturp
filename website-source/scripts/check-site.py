@@ -34,8 +34,11 @@ for entry in urls:
     assert canonical==[url], (url, canonical)
     assert page.h1==1, (url, page.h1)
     assert any(meta.get('name')=='description' and meta.get('content') for meta in page.meta), url
-    if '/ar/' in url: assert page.lang=='ar', url
-    if url.endswith('en.html'): assert page.lang=='en', url
+    alts={l['hreflang']:l['href'] for l in page.links if l.get('rel')=='alternate' and l.get('hreflang')}
+    smap={x.get('hreflang'):x.get('href') for x in entry.findall('{http://www.w3.org/1999/xhtml}link')}
+    assert alts==smap, (url, alts, smap)
+    assert alts['en']==alts['x-default'], url
+    assert page.lang==('ar' if url==alts['ar'] else 'en'), (url, page.lang)
     for asset in page.assets:
         parsed=urlsplit(asset)
         if parsed.scheme or parsed.netloc: continue

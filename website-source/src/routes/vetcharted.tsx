@@ -66,7 +66,7 @@ export function VetChartedPage() {
               </div>
               <div className="mt-10">
                 <a
-                  href={lang === "ar" ? "/vet-charted/" : "/vet-charted/en.html"}
+                  href={lang === "ar" ? "/vet-charted/" : "/vet-charted/en/"}
                   className="inline-flex items-center justify-center rounded-full border border-foreground bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-background hover:text-foreground"
                 >
                   {t.cta}

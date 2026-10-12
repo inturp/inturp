@@ -14,6 +14,11 @@ export function LangProvider({ children }: { children: ReactNode }) {
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   }, [lang]);
   const setLang = (next: Lang) => {
+    try {
+      window.localStorage.setItem("inturp-lang", next);
+    } catch {
+      /* ignore */
+    }
     const base = pathname.replace(/^\/ar(?=\/|$)/, "") || "/";
     window.location.assign(
       (next === "ar" ? "/ar" + (base === "/" ? "/" : base) : base) + window.location.hash,

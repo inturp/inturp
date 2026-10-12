@@ -6,17 +6,21 @@
 <script>document.documentElement.className+=' js'</script>
 <title data-ar="Vet Charted — برنامج لإدارة العيادات البيطرية" data-en="Vet Charted — Veterinary clinic software">Vet Charted — Veterinary clinic management software</title>
 <meta name="description" content="Vet Charted veterinary clinic management software for animal records, appointments, examinations, invoices and inventory, in Arabic and English.">
-<meta name="theme-color" content="#F5F9FC">
-<link rel="icon" type="image/svg+xml" href="assets/img/vc-tab-white.svg">
-<link rel="stylesheet" href="css/site.css?v=20261012">
-<link rel="canonical" href="https://inturp.com/vet-charted/en.html">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/svg+xml" href="/vet-charted/assets/img/vc-tab-white.svg">
+<script>(function(){try{var d=document.documentElement,t=localStorage.getItem('inturp-theme'),dk=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);d.classList.toggle('dark',dk);d.style.colorScheme=dk?'dark':'light';if(localStorage.getItem('inturp-lang')==='ar'){location.replace('/vet-charted/'+location.search+location.hash)} }catch(e){} })()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="/vet-charted/css/site.css?v=20261014">
+<link rel="canonical" href="https://inturp.com/vet-charted/en/">
 <link rel="alternate" hreflang="ar" href="https://inturp.com/vet-charted/">
-<link rel="alternate" hreflang="en" href="https://inturp.com/vet-charted/en.html">
+<link rel="alternate" hreflang="en" href="https://inturp.com/vet-charted/en/">
 <link rel="alternate" hreflang="x-default" href="https://inturp.com/vet-charted/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:title" content="Vet Charted | Veterinary clinic management software">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://inturp.com/vet-charted/en.html">
+<meta property="og:url" content="https://inturp.com/vet-charted/en/">
 <meta property="og:locale" content="en_US">
 <meta property="og:description" content="Manage animal medical records, appointments, vaccinations, invoices and inventory in one veterinary clinic management system, in Arabic and English.">
 <meta property="og:image" content="https://inturp.com/vet-charted/assets/img/dashboard.webp">
@@ -29,29 +33,32 @@
 </head>
 <body data-page="home">
 <a class="skip" href="#main"><span class="ar">تخطّي إلى المحتوى</span><span class="en">Skip to content</span></a>
-<header class="site-header" id="top">
-  <div class="wrap bar">
-    <a class="brand" href="en.html" aria-label="Vet Charted"><img src="assets/img/vc_mark_navy.png" alt="" width="30" height="29"><span>Vet Charted</span></a>
-    <nav class="primary" aria-label="التنقل الرئيسي" data-ar-aria-label="التنقل الرئيسي" data-en-aria-label="Main" data-attrs="aria-label">
-      <a href="en.html#day" data-spy="day"><span class="ar">يوم في العيادة</span><span class="en">A day in the clinic</span></a>
-      <a href="en.html#owners" data-spy="owners"><span class="ar">تطبيق المالك</span><span class="en">Owner app</span></a>
-      <a href="en.html#shared" data-spy="shared"><span class="ar">السجل المشترك</span><span class="en">Shared record</span></a>
-      <a href="en.html#faq" data-spy="faq"><span class="ar">الأسئلة</span><span class="en">FAQ</span></a>
-    </nav>
-    <div class="bar-end">
-      <button class="lang-btn" type="button" data-lang-toggle aria-label="اللغة / Language"><span class="ar">EN</span><span class="en">عربي</span></button>
-      <a class="btn btn-primary btn-sm" href="en.html#contact"><span class="ar">اطلب عرضاً</span><span class="en">Request a demo</span></a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="القائمة" data-ar-aria-label="القائمة" data-en-aria-label="Menu" data-attrs="aria-label"><i></i><i></i><i></i></button>
+<header class="site-header" id="top" dir="ltr">
+  <nav class="site-nav" aria-label="Navigation menu" data-ar-aria-label="قائمة التنقل" data-en-aria-label="Navigation menu" data-attrs="aria-label">
+    <a class="brand-link" href="/" data-ar-href="/ar/" data-en-href="/" data-attrs="href"><img src="/inturp-logo.png" alt="Inturp" width="58" height="58"><span>inturp<span class="brand-dot">.</span></span></a>
+    <div class="desktop-nav">
+      <div class="product-menu">
+        <button type="button" class="nav-link active" id="pm-btn" aria-expanded="false" aria-controls="product-links"><span class="ar">المنتجات</span><span class="en">Products</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="product-dropdown" id="product-links" hidden>
+          <a class="active" aria-current="page" href="/vet-charted/en/" data-ar-href="/vet-charted/" data-en-href="/vet-charted/en/" data-attrs="href"><img class="mono" src="/vetcharted-logo.png" alt="" width="32" height="32"><span><span class="ar">VetCharted</span><span class="en">VetCharted</span><small><span class="ar">إدارة العيادات البيطرية</span><span class="en">Veterinary clinic management</span></small></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="/alameer/" data-ar-href="/ar/alameer/" data-en-href="/alameer/" data-attrs="href"><img src="/alameer/assets/img/app-icon.png" alt="" width="32" height="32"><span><span class="ar">محلات الأمير</span><span class="en">Al Ameer Hydraulics</span><small><span class="ar">تطبيق قطع الغيار والمعدات الثقيلة</span><span class="en">Heavy-equipment parts app</span></small></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="/checkbook/" data-ar-href="/ar/checkbook/" data-en-href="/checkbook/" data-attrs="href"><img src="/checkbook/assets/img/app-icon.png" alt="" width="32" height="32"><span><span class="ar">CheckBook</span><span class="en">CheckBook</span><small><span class="ar">متابعة الشيكات والتذكيرات</span><span class="en">Cheque tracking and reminders</span></small></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        </div>
+      </div>
+      <a class="nav-link" href="/about/" data-ar-href="/ar/about/" data-en-href="/about/" data-attrs="href"><span class="ar">من نحن</span><span class="en">About us</span></a>
+      <a class="nav-contact" href="/#contact" data-ar-href="/ar/#contact" data-en-href="/#contact" data-attrs="href"><span class="ar">لنتحدث</span><span class="en">Let’s talk</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
     </div>
-  </div>
-  <div class="mnav" id="mnav" hidden>
-    <a href="en.html#day"><span class="ar">يوم في العيادة</span><span class="en">A day in the clinic</span></a>
-    <a href="en.html#owners"><span class="ar">تطبيق المالك</span><span class="en">Owner app</span></a>
-    <a href="en.html#shared"><span class="ar">السجل المشترك</span><span class="en">Shared record</span></a>
-    <a href="en.html#faq"><span class="ar">الأسئلة</span><span class="en">FAQ</span></a>
-    <a href="privacy.html"><span class="ar">سياسة الخصوصية</span><span class="en">Privacy policy</span></a>
-    <a class="btn btn-primary" href="en.html#contact"><span class="ar">اطلب عرضاً</span><span class="en">Request a demo</span></a>
-  </div>
+    <div class="nav-end">
+      <div class="nav-preferences">
+        <button type="button" class="language-control" data-lang-toggle aria-label="Switch language / تبديل اللغة"><span class="ar">EN</span><span class="en">عربي</span></button>
+        <button type="button" class="icon-control" data-theme-toggle aria-label="Toggle theme" data-ar-aria-label="تبديل المظهر" data-en-aria-label="Toggle theme" data-attrs="aria-label"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+      </div>
+      <button type="button" class="icon-control mobile-toggle menu-btn" aria-expanded="false" aria-controls="mnav" aria-label="Navigation menu" data-ar-aria-label="قائمة التنقل" data-en-aria-label="Navigation menu" data-attrs="aria-label"><svg class="bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+  </nav>
+  <nav class="mobile-panel mnav" id="mnav" hidden aria-label="Navigation menu" data-ar-aria-label="قائمة التنقل" data-en-aria-label="Navigation menu" data-attrs="aria-label">
+    <a href="/vet-charted/en/" data-ar-href="/vet-charted/" data-en-href="/vet-charted/en/" data-attrs="href" aria-current="page"><span><span class="ar">VetCharted</span><span class="en">VetCharted</span></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="/alameer/" data-ar-href="/ar/alameer/" data-en-href="/alameer/" data-attrs="href"><span><span class="ar">محلات الأمير</span><span class="en">Al Ameer Hydraulics</span></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="/checkbook/" data-ar-href="/ar/checkbook/" data-en-href="/checkbook/" data-attrs="href"><span><span class="ar">CheckBook</span><span class="en">CheckBook</span></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+    <a href="/about/" data-ar-href="/ar/about/" data-en-href="/about/" data-attrs="href"><span class="ar">من نحن</span><span class="en">About us</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+    <a href="/#contact" data-ar-href="/ar/#contact" data-en-href="/#contact" data-attrs="href"><span class="ar">لنتحدث</span><span class="en">Let’s talk</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+  </nav>
 </header>
 
 <main id="main">
@@ -61,17 +68,18 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy">
+        <img class="hero-mark" src="/vetcharted-logo.png" alt="Vet Charted" width="64" height="64">
         <p class="kick"><span class="ar">برنامج لإدارة العيادات البيطرية</span><span class="en">Veterinary clinic software</span></p>
         <h1><span class="ar">يوم عيادتك أوضح.<br>من أول زيارة لآخر فاتورة.</span><span class="en">A clearer clinic day.<br>From first visit to final invoice.</span></h1>
         <p class="lede"><span class="ar">Vet Charted يجمع ملفات الحيوانات والفحوصات والتطعيمات والمواعيد والفواتير والمخزون في مكان واحد، بالعربية والإنجليزية، على الكمبيوتر والموبايل.</span><span class="en">Vet Charted keeps animal files, examinations, vaccinations, appointments, invoices and stock together, in Arabic and English, on desktop and mobile.</span></p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="en.html#contact"><span class="ar">اطلب عرضاً</span><span class="en">Request a demo</span></a>
-          <a class="link-arrow down" href="en.html#day"><span class="ar">شاهد يوماً في العيادة</span><span class="en">See a day in the clinic</span><svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h13M11 4l6 6-6 6"/></svg></a>
+          <a class="btn btn-primary" href="/vet-charted/en/#contact"><span class="ar">اطلب عرضاً</span><span class="en">Request a demo</span></a>
+          <a class="link-arrow down" href="/vet-charted/en/#day"><span class="ar">شاهد يوماً في العيادة</span><span class="en">See a day in the clinic</span><svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h13M11 4l6 6-6 6"/></svg></a>
         </div>
       </div>
       <div class="shot">
-        <div class="app"><img src="assets/img/dashboard.webp" alt="لوحة تحكم Vet Charted" data-ar-alt="لوحة تحكم Vet Charted" data-en-alt="Vet Charted dashboard" width="2880" height="1800" fetchpriority="high" data-attrs="alt"></div>
-        <img class="phone" src="assets/img/phone_home.webp" alt="" width="1242" height="2472">
+        <div class="app"><img src="/vet-charted/assets/img/dashboard.webp" alt="لوحة تحكم Vet Charted" data-ar-alt="لوحة تحكم Vet Charted" data-en-alt="Vet Charted dashboard" width="2880" height="1800" fetchpriority="high" data-attrs="alt"></div>
+        <img class="phone" src="/vet-charted/assets/img/phone_home.webp" alt="" width="1242" height="2472">
       </div>
     </div>
     <dl class="facts-bar">
@@ -98,51 +106,51 @@
           <time>08:30</time>
           <h3><span class="ar">الاستقبال</span><span class="en">Reception</span></h3>
           <p><span class="ar">يصل أحمد مع ماكس. تبحث باسم أحدهما فيظهر الملف: آخر زيارة، منحنى الوزن، حالة التطعيمات، وتنبيه أحمر بالحساسية من الدجاج قبل أن تبدأ.</span><span class="en">Ahmad arrives with Max. Search either name and the file opens: last visit, weight curve, vaccination status, and a red alert about his chicken allergy before you start.</span></p>
-          <figure class="step-fig"><img src="assets/img/profile.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
+          <figure class="step-fig"><img src="/vet-charted/assets/img/profile.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
         </li>
         <li class="step" data-img="exam" tabindex="0" role="button">
           <time>09:10</time>
           <h3><span class="ar">الفحص</span><span class="en">The examination</span></h3>
           <p><span class="ar">تسجّل الحرارة والنبض والتشخيص، وتكتب الوصفة. ما صرفته من أدوية ينتقل إلى الفاتورة، فلا تُدخل شيئاً مرتين.</span><span class="en">You record temperature, pulse and diagnosis, then write the prescription. What you dispensed moves to the invoice, so nothing is entered twice.</span></p>
-          <figure class="step-fig"><img src="assets/img/exam.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
+          <figure class="step-fig"><img src="/vet-charted/assets/img/exam.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
         </li>
         <li class="step" data-img="invoice" tabindex="0" role="button">
           <time>09:40</time>
           <h3><span class="ar">الفاتورة</span><span class="en">The invoice</span></h3>
           <p><span class="ar">تُحسب البنود نفسها فتسجّل الفاتورة مدفوعة، ثم تطبعها أو تحفظها ملف PDF للمالك.</span><span class="en">The same items are totalled, you mark the invoice paid, then print it or save a PDF for the owner.</span></p>
-          <figure class="step-fig"><img src="assets/img/invoice.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
+          <figure class="step-fig"><img src="/vet-charted/assets/img/invoice.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
         </li>
         <li class="step" data-img="vaccines" data-phone tabindex="0" role="button">
           <time>10:00</time>
           <h3><span class="ar">التطعيم القادم</span><span class="en">The next vaccine</span></h3>
           <p><span class="ar">بوردتيلا بعد ثلاثة أسابيع. تُجدول الجرعة في التقويم، ويصل المالكَ تذكير واتساب قبل الموعد. إن اكتمل الموعد أو أُلغي، يتوقف التذكير وحده.</span><span class="en">Bordetella in three weeks. The dose goes into the calendar and the owner gets a WhatsApp reminder beforehand. If the visit is completed or cancelled, the reminder stops on its own.</span></p>
-          <figure class="step-fig"><img src="assets/img/vaccines.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
+          <figure class="step-fig"><img src="/vet-charted/assets/img/vaccines.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
         </li>
         <li class="step" data-img="appointments" tabindex="0" role="button">
           <time>11:30</time>
           <h3><span class="ar">المواعيد</span><span class="en">The schedule</span></h3>
           <p><span class="ar">يُظهر التقويم المؤكَّد والمعلَّق. وطلبات الحجز التي يرسلها أصحاب الحيوانات من تطبيقهم تصل إليك لتقبلها أو تقترح وقتاً آخر.</span><span class="en">The calendar shows what is confirmed and what is pending. Booking requests owners send from their app reach you to accept or to propose another time.</span></p>
-          <figure class="step-fig"><img src="assets/img/appointments.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
+          <figure class="step-fig"><img src="/vet-charted/assets/img/appointments.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
         </li>
         <li class="step" data-img="dashboard" tabindex="0" role="button">
           <time>17:30</time>
           <h3><span class="ar">نهاية اليوم</span><span class="en">End of day</span></h3>
           <p><span class="ar">لوحة التحكم تلخّص مبيعات اليوم وفواتيره والتطعيمات التي تحتاج متابعة، قبل أن تغلق العيادة.</span><span class="en">The dashboard sums up today’s sales, invoices and the vaccinations that need follow-up, before you lock up.</span></p>
-          <figure class="step-fig"><img src="assets/img/dashboard.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
+          <figure class="step-fig"><img src="/vet-charted/assets/img/dashboard.webp" alt="" width="2880" height="1800" loading="lazy"></figure>
         </li>
       </ol>
 
       <div class="day-media">
         <div class="frame">
           <div class="app" id="dayApp">
-            <img data-k="profile" class="on" src="assets/img/profile.webp" alt="" width="2880" height="1800">
-            <img data-k="exam" src="assets/img/exam.webp" alt="" width="2880" height="1800" decoding="async">
-            <img data-k="invoice" src="assets/img/invoice.webp" alt="" width="2880" height="1800" decoding="async">
-            <img data-k="vaccines" src="assets/img/vaccines.webp" alt="" width="2880" height="1800" decoding="async">
-            <img data-k="appointments" src="assets/img/appointments.webp" alt="" width="2880" height="1800" decoding="async">
-            <img data-k="dashboard" src="assets/img/dashboard.webp" alt="" width="2880" height="1800" decoding="async">
+            <img data-k="profile" class="on" src="/vet-charted/assets/img/profile.webp" alt="" width="2880" height="1800">
+            <img data-k="exam" src="/vet-charted/assets/img/exam.webp" alt="" width="2880" height="1800" decoding="async">
+            <img data-k="invoice" src="/vet-charted/assets/img/invoice.webp" alt="" width="2880" height="1800" decoding="async">
+            <img data-k="vaccines" src="/vet-charted/assets/img/vaccines.webp" alt="" width="2880" height="1800" decoding="async">
+            <img data-k="appointments" src="/vet-charted/assets/img/appointments.webp" alt="" width="2880" height="1800" decoding="async">
+            <img data-k="dashboard" src="/vet-charted/assets/img/dashboard.webp" alt="" width="2880" height="1800" decoding="async">
           </div>
-          <img class="phone" id="dayPhone" src="assets/img/phone_chat.webp" alt="" width="1242" height="2472" loading="lazy">
+          <img class="phone" id="dayPhone" src="/vet-charted/assets/img/phone_chat.webp" alt="" width="1242" height="2472" loading="lazy">
         </div>
         <div class="day-ctl">
           <span class="count latin" id="dayCount" aria-live="polite" aria-atomic="true">01 / 06</span>
@@ -170,9 +178,9 @@
       </dl>
     </div>
     <div class="phones" data-reveal data-d="1">
-      <img src="assets/img/phone_pet.webp" alt="" width="1242" height="2472" loading="lazy">
-      <img src="assets/img/phone_home.webp" alt="" width="1242" height="2472" loading="lazy">
-      <img src="assets/img/phone_chat.webp" alt="" width="1242" height="2472" loading="lazy">
+      <img src="/vet-charted/assets/img/phone_pet.webp" alt="" width="1242" height="2472" loading="lazy">
+      <img src="/vet-charted/assets/img/phone_home.webp" alt="" width="1242" height="2472" loading="lazy">
+      <img src="/vet-charted/assets/img/phone_chat.webp" alt="" width="1242" height="2472" loading="lazy">
     </div>
   </div>
 </section>
@@ -251,7 +259,7 @@
       <details name="faq"><summary><span class="ar">كيف تصل التذكيرات إلى المالك؟</span><span class="en">How do reminders reach the owner?</span></summary><div class="a"><span class="ar">عبر واتساب من رقم العيادة الذي تربطه بمسح رمز QR، وعبر إشعارات تطبيق المالك.</span><span class="en">Through WhatsApp from the clinic’s own number, linked by scanning a QR code, and through notifications in the owner app.</span></div></details>
       <details name="faq"><summary><span class="ar">هل يعمل عدة موظفين معاً؟</span><span class="en">Can several staff work together?</span></summary><div class="a"><span class="ar">نعم. لكل موظف حساب بصلاحيات يحدّدها مالك العيادة، وتُسجَّل الإجراءات في سجل النشاط.</span><span class="en">Yes. Each member has an account with permissions set by the clinic owner, and actions are written to an activity log.</span></div></details>
       <details name="faq"><summary><span class="ar">هل تظهر بيانات عيادتي لعيادات أخرى؟</span><span class="en">Is my clinic’s data visible to other clinics?</span></summary><div class="a"><span class="ar">لا. كل عيادة معزولة عن غيرها. ولا يُشارَك سجل حيوان مع عيادة أخرى إلا بموافقة مالكه.</span><span class="en">No. Each clinic is isolated from the others, and an animal’s record is shared with another clinic only with its owner’s consent.</span></div></details>
-      <details name="faq"><summary><span class="ar">ماذا يحدث إن حذف المالك حسابه؟</span><span class="en">What happens if an owner deletes their account?</span></summary><div class="a"><span class="ar">يُحذف حساب الدخول وتنتهي صلته بالحيوانات، وتبقى سجلات العيادة. التفاصيل في صفحة <a class="lnk" href="delete-account.html">حذف الحساب</a>.</span><span class="en">The login is deleted and its link to the animals ends, while the clinic’s records stay. Details are on the <a class="lnk" href="delete-account.html">account deletion</a> page.</span></div></details>
+      <details name="faq"><summary><span class="ar">ماذا يحدث إن حذف المالك حسابه؟</span><span class="en">What happens if an owner deletes their account?</span></summary><div class="a"><span class="ar">يُحذف حساب الدخول وتنتهي صلته بالحيوانات، وتبقى سجلات العيادة. التفاصيل في صفحة <a class="lnk" href="/vet-charted/delete-account/">حذف الحساب</a>.</span><span class="en">The login is deleted and its link to the animals ends, while the clinic’s records stay. Details are on the <a class="lnk" href="/vet-charted/delete-account/">account deletion</a> page.</span></div></details>
       <details name="faq"><summary><span class="ar">كيف أبدأ؟</span><span class="en">How do I get started?</span></summary><div class="a"><span class="ar">أرسل لنا طلباً من النموذج أدناه وسنتواصل معك.</span><span class="en">Send us a request from the form below and we will get back to you.</span></div></details>
     </div>
   </div>
@@ -287,25 +295,26 @@
 
 </main>
 <footer class="site-footer">
-  <div class="wrap">
-    <div class="foot">
-      <a class="brand" href="en.html" aria-label="Vet Charted"><img src="assets/img/vc_mark.png" alt="" width="30" height="29"><span>Vet Charted</span></a>
-      <nav aria-label="روابط التذييل" data-ar-aria-label="روابط التذييل" data-en-aria-label="Footer" data-attrs="aria-label">
-        <a href="en.html#day"><span class="ar">يوم في العيادة</span><span class="en">A day in the clinic</span></a>
-        <a href="en.html#contact"><span class="ar">تواصل معنا</span><span class="en">Contact</span></a>
-        <a href="privacy.html"><span class="ar">سياسة الخصوصية</span><span class="en">Privacy policy</span></a>
-        <a href="delete-account.html"><span class="ar">حذف الحساب</span><span class="en">Delete account</span></a>
-      </nav>
-      <div class="powered"><small>POWERED BY</small><img src="assets/img/inturp_mark.png" alt="" width="22" height="27"><b>inturp</b></div>
+  <div class="footer-inner">
+    <a class="brand-link" href="/" data-ar-href="/ar/" data-en-href="/" data-attrs="href" aria-label="Inturp"><img src="/inturp-logo.png" alt="" width="44" height="44"><span>inturp.</span></a>
+    <div class="footer-links">
+      <a href="/about/" data-ar-href="/ar/about/" data-en-href="/about/" data-attrs="href"><span class="ar">من نحن</span><span class="en">About us</span></a>
+      <a href="/vet-charted/en/" data-ar-href="/vet-charted/" data-en-href="/vet-charted/en/" data-attrs="href">VetCharted</a>
+      <a href="/alameer/" data-ar-href="/ar/alameer/" data-en-href="/alameer/" data-attrs="href"><span class="ar">محلات الأمير</span><span class="en">Al Ameer</span></a>
+      <a href="/checkbook/" data-ar-href="/ar/checkbook/" data-en-href="/checkbook/" data-attrs="href">CheckBook</a>
+      <a href="mailto:info@inturp.com">info@inturp.com</a>
+      <a href="https://www.instagram.com/inturp_/" target="_blank" rel="noopener noreferrer" dir="ltr" aria-label="Inturp on Instagram: @inturp_"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg><span>@inturp_</span></a>
+      <a href="/vet-charted/en/privacy/" data-ar-href="/vet-charted/privacy/" data-en-href="/vet-charted/en/privacy/" data-attrs="href"><span class="ar">خصوصية Vet Charted</span><span class="en">Vet Charted privacy</span></a>
+      <a href="/vet-charted/en/delete-account/" data-ar-href="/vet-charted/delete-account/" data-en-href="/vet-charted/en/delete-account/" data-attrs="href"><span class="ar">حذف الحساب</span><span class="en">Delete account</span></a>
+      <a href="/privacy/" data-ar-href="/ar/privacy/" data-en-href="/privacy/" data-attrs="href"><span class="ar">الخصوصية</span><span class="en">Privacy</span></a>
+      <button type="button" data-privacy-settings><span class="ar">إعدادات الخصوصية</span><span class="en">Privacy settings</span></button>
     </div>
-    <p class="copy">© 2026 Vet Charted · <span data-operator>inturp</span></p>
+    <p>© <span id="year">2026</span> Inturp. <span class="ar">جميع الحقوق محفوظة.</span><span class="en">All rights reserved.</span></p>
   </div>
-<a href="/privacy/" style="display:block;text-align:center;padding:1rem">Inturp · Privacy</a>
-<button type="button" data-privacy-settings style="display:block;margin:0 auto 1rem;border:0;background:none;color:inherit;cursor:pointer"><span class="ar">إعدادات الخصوصية</span><span class="en">Privacy settings</span></button>
 </footer>
 
 <script src="/js/analytics.js?v=20261012-2" defer></script>
-<script src="js/site-config.js"></script>
-<script src="js/site.js?v=20261012"></script>
+<script src="/vet-charted/js/site-config.js"></script>
+<script src="/vet-charted/js/site.js?v=20261012"></script>
 </body>
 </html>

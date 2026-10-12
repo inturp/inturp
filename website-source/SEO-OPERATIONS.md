@@ -9,7 +9,7 @@ The publish script preserves the product assets and rebuilds the product pages f
 
 - English company pages: `/`, `/about/`, `/vetcharted/`, `/privacy/`.
 - Arabic equivalents: `/ar/`, `/ar/about/`, `/ar/vetcharted/`, `/ar/privacy/`.
-- Product: Arabic `/vet-charted/`, English `/vet-charted/en.html`.
+- Product: Arabic `/vet-charted/`, English `/vet-charted/en/`; legal pages `/vet-charted/privacy/`, `/vet-charted/delete-account/` (old `.html` URLs redirect). Case studies: `/alameer/` and `/checkbook/`, each with `privacy/` and `delete-account/` pages. They are static (not part of the React build): rebuild their legal pages with `python3 showcase/build_alameer.py` and `python3 showcase/build_checkbook.py`; the Products menu for the static pages lives in `showcase/shared.py`.
 - Each language uses its own canonical URL and reciprocal hreflang links.
 - Sitemap: https://inturp.com/sitemap.xml (12 URLs). Update `public/sitemap.xml` when adding pages.
 - Content is prerendered; search crawlers receive actual content without executing JavaScript.

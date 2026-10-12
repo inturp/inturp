@@ -7,6 +7,8 @@ import { SiteNav, SiteFooter } from "@/components/site-chrome";
 import { useLang } from "@/lib/lang";
 
 import { ProductPreview } from "@/components/product-preview";
+import { AlameerPreview } from "@/components/alameer-preview";
+import { CheckbookPreview } from "@/components/checkbook-preview";
 const vetchartedUrl = "/vetcharted-logo.png";
 
 export const Route = createFileRoute("/")({
@@ -40,6 +42,22 @@ const content = {
       p2: "Manage animal records, examinations, vaccinations, invoices and inventory in Arabic and English.",
       cta: "Get in touch",
     },
+    alameer: {
+      eyebrow: "Our work",
+      name: "Al Ameer Hydraulics",
+      title: "Heavy-equipment parts and machines, in one app.",
+      p1: "We designed and built the Al Ameer Hydraulics app for a business with seven branches across Palestine, Jordan and Egypt.",
+      p2: "Customers browse machines and spare parts, order for delivery or branch pickup, and reach the team on WhatsApp.",
+      cta: "See the case study",
+    },
+    checkbook: {
+      eyebrow: "Our work",
+      name: "CheckBook",
+      title: "Every cheque, every due date, under control.",
+      p1: "CheckBook is a mobile app for keeping track of cheques: amounts, banks, due dates and states, with a dashboard of totals.",
+      p2: "Plan a whole series of cheques in a minute with the smart plan, and get reminded before each one falls due.",
+      cta: "See the case study",
+    },
     contact: {
       eyebrow: "Contact",
       title: "Let’s talk.",
@@ -70,6 +88,22 @@ const content = {
       p1: "يمنح VetCharted العيادات مكاناً موثوقاً لإدارة عملياتها اليومية: المواعيد والسجلات الطبية وتاريخ الحالات وكل ما بينها.",
       p2: "أدر ملفات الحيوانات والفحوصات والتطعيمات والفواتير والمخزون بالعربية والإنجليزية.",
       cta: "تواصل معنا",
+    },
+    alameer: {
+      eyebrow: "أعمالنا",
+      name: "Al Ameer Hydraulics",
+      title: "قطع غيار المعدات الثقيلة والآليات، في تطبيق واحد.",
+      p1: "صمّمنا وبنينا تطبيق محلات الأمير للهيدروليك، شركة بسبعة فروع في فلسطين والأردن ومصر.",
+      p2: "يتصفح العميل الآليات وقطع الغيار، ويطلب بالتوصيل أو بالاستلام من الفرع، ويتواصل مع الفريق عبر واتساب.",
+      cta: "شاهد دراسة الحالة",
+    },
+    checkbook: {
+      eyebrow: "أعمالنا",
+      name: "CheckBook",
+      title: "كل شيك وكل موعد استحقاق، تحت السيطرة.",
+      p1: "CheckBook تطبيق موبايل لمتابعة الشيكات: المبالغ والبنوك ومواعيد الاستحقاق والحالات، مع لوحة بالمجاميع.",
+      p2: "خطّط لسلسلة شيكات كاملة في دقيقة بالخطة الذكية، وتلقَّ تذكيراً قبل استحقاق كل شيك.",
+      cta: "شاهد دراسة الحالة",
     },
     contact: {
       eyebrow: "تواصل",
@@ -104,6 +138,8 @@ export function Index() {
         <Hero t={t} />
         <About t={t} />
         <Product t={t} rtl={rtl} />
+        <Alameer t={t} rtl={rtl} />
+        <Checkbook t={t} rtl={rtl} />
         <SiteFaq />
         <Contact t={t} />
       </main>
@@ -193,7 +229,7 @@ function Product({ t, rtl }: { t: T; rtl: boolean }) {
             </div>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <a
-                href="https://inturp.com/vet-charted/"
+                href={rtl ? "/vet-charted/" : "/vet-charted/en/"}
                 className="inline-flex items-center justify-center rounded-full border border-foreground bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-background hover:text-foreground"
               >
                 {rtl ? "اكتشف VetCharted" : "Explore VetCharted"}
@@ -201,6 +237,96 @@ function Product({ t, rtl }: { t: T; rtl: boolean }) {
             </div>
           </div>
           <ProductPreview />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Alameer({ t, rtl }: { t: T; rtl: boolean }) {
+  return (
+    <section id="alameer" className="home-alameer section-padding section-space">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
+          <div className="lg:order-2">
+            <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+              {t.alameer.eyebrow}
+            </p>
+            <div className={`mt-6 flex items-center gap-3 ${rtl ? "justify-start" : ""}`}>
+              <img
+                src="/alameer-icon.png"
+                alt="Al Ameer Hydraulics"
+                width="48"
+                height="48"
+                className="h-12 w-12 rounded-xl"
+              />
+              <span className="text-2xl font-semibold tracking-tight" dir="ltr">
+                {t.alameer.name}
+              </span>
+            </div>
+            <h2 className="text-balance mt-6 text-3xl font-semibold leading-snug tracking-tight sm:text-4xl">
+              {t.alameer.title}
+            </h2>
+            <div className="mt-8 space-y-5 text-lg leading-relaxed text-muted-foreground">
+              <p>{t.alameer.p1}</p>
+              <p>{t.alameer.p2}</p>
+            </div>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <a
+                href={rtl ? "/ar/alameer/" : "/alameer/"}
+                className="inline-flex items-center justify-center rounded-full border border-foreground bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-background hover:text-foreground"
+              >
+                {t.alameer.cta}
+              </a>
+            </div>
+          </div>
+          <div className="lg:order-1">
+            <AlameerPreview />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Checkbook({ t, rtl }: { t: T; rtl: boolean }) {
+  return (
+    <section id="checkbook" className="home-product section-padding section-space">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+              {t.checkbook.eyebrow}
+            </p>
+            <div className={`mt-6 flex items-center gap-3 ${rtl ? "justify-start" : ""}`}>
+              <img
+                src="/checkbook-icon.png"
+                alt="CheckBook"
+                width="48"
+                height="48"
+                className="h-12 w-12 rounded-xl"
+              />
+              <span className="text-2xl font-semibold tracking-tight" dir="ltr">
+                {t.checkbook.name}
+              </span>
+            </div>
+            <h2 className="text-balance mt-6 text-3xl font-semibold leading-snug tracking-tight sm:text-4xl">
+              {t.checkbook.title}
+            </h2>
+            <div className="mt-8 space-y-5 text-lg leading-relaxed text-muted-foreground">
+              <p>{t.checkbook.p1}</p>
+              <p>{t.checkbook.p2}</p>
+            </div>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <a
+                href={rtl ? "/ar/checkbook/" : "/checkbook/"}
+                className="inline-flex items-center justify-center rounded-full border border-foreground bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-background hover:text-foreground"
+              >
+                {t.checkbook.cta}
+              </a>
+            </div>
+          </div>
+          <CheckbookPreview />
         </div>
       </div>
     </section>

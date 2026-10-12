@@ -157,7 +157,7 @@ export function SiteNav() {
               </button>
               {productsOpen && (
                 <div className="product-dropdown" id="product-links">
-                  <a href="https://inturp.com/vet-charted/" onClick={closeMenu}>
+                  <a href={lang === "ar" ? "/vet-charted/" : "/vet-charted/en/"} onClick={closeMenu}>
                     <img
                       src="/vetcharted-logo.png"
                       alt=""
@@ -169,6 +169,38 @@ export function SiteNav() {
                       VetCharted
                       <small>
                         {lang === "ar" ? "إدارة العيادات البيطرية" : "Veterinary clinic management"}
+                      </small>
+                    </span>
+                    <ArrowUpRight size={17} />
+                  </a>
+                  <a href={lang === "ar" ? "/ar/alameer/" : "/alameer/"} onClick={closeMenu}>
+                    <img
+                      src="/alameer-icon.png"
+                      alt=""
+                      width="32"
+                      height="32"
+                      className="rounded-[7px]"
+                    />
+                    <span>
+                      {lang === "ar" ? "محلات الأمير" : "Al Ameer Hydraulics"}
+                      <small>
+                        {lang === "ar" ? "تطبيق قطع الغيار والمعدات الثقيلة" : "Heavy-equipment parts app"}
+                      </small>
+                    </span>
+                    <ArrowUpRight size={17} />
+                  </a>
+                  <a href={lang === "ar" ? "/ar/checkbook/" : "/checkbook/"} onClick={closeMenu}>
+                    <img
+                      src="/checkbook-icon.png"
+                      alt=""
+                      width="32"
+                      height="32"
+                      className="rounded-[7px]"
+                    />
+                    <span>
+                      CheckBook
+                      <small>
+                        {lang === "ar" ? "متابعة الشيكات والتذكيرات" : "Cheque tracking and reminders"}
                       </small>
                     </span>
                     <ArrowUpRight size={17} />
@@ -211,8 +243,14 @@ export function SiteNav() {
         </nav>
         {menuOpen && (
           <nav id="mobile-nav" className="mobile-panel" aria-label={t.menu}>
-            <a href="https://inturp.com/vet-charted/" onClick={closeMenu}>
+            <a href={lang === "ar" ? "/vet-charted/" : "/vet-charted/en/"} onClick={closeMenu}>
               VetCharted <ArrowUpRight size={18} />
+            </a>
+            <a href={lang === "ar" ? "/ar/alameer/" : "/alameer/"} onClick={closeMenu}>
+              {lang === "ar" ? "محلات الأمير" : "Al Ameer Hydraulics"} <ArrowUpRight size={18} />
+            </a>
+            <a href={lang === "ar" ? "/ar/checkbook/" : "/checkbook/"} onClick={closeMenu}>
+              CheckBook <ArrowUpRight size={18} />
             </a>
             <Link to={lang === "ar" ? "/ar/about/" : "/about/"} onClick={closeMenu}>
               {t.about}
@@ -240,7 +278,9 @@ export function SiteFooter() {
         </Link>
         <div className="footer-links">
           <Link to={lang === "ar" ? "/ar/about/" : "/about/"}>{nav[lang].about}</Link>
-          <a href="https://inturp.com/vet-charted/">VetCharted</a>
+          <a href={lang === "ar" ? "/vet-charted/" : "/vet-charted/en/"}>VetCharted</a>
+          <a href={lang === "ar" ? "/ar/alameer/" : "/alameer/"}>{lang === "ar" ? "محلات الأمير" : "Al Ameer"}</a>
+          <a href={lang === "ar" ? "/ar/checkbook/" : "/checkbook/"}>CheckBook</a>
           <a href="mailto:info@inturp.com">info@inturp.com</a>
           <a href="https://www.instagram.com/inturp_/" target="_blank" rel="noopener noreferrer" dir="ltr" aria-label="Inturp on Instagram: @inturp_" className="inline-flex items-center gap-2"><Instagram size={18} strokeWidth={1.6} aria-hidden="true" /><span>@inturp_</span></a>
           <Link to={lang === "ar" ? "/ar/privacy/" : "/privacy/"}>

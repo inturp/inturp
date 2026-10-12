@@ -65,7 +65,7 @@ export function PrivacyContent() {
               <p className="mt-3 text-muted-foreground leading-relaxed">{body}</p>
             </section>
           ))}
-          <a className="nav-link mt-10" href="/vet-charted/privacy.html">
+          <a className="nav-link mt-10" href={lang === "ar" ? "/vet-charted/privacy/" : "/vet-charted/en/privacy/"}>
             {ar ? "سياسة خصوصية Vet Charted" : "Vet Charted privacy policy"}
           </a>
         </article>
