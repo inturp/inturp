@@ -44,3 +44,12 @@ The publish script preserves the product assets and rebuilds the product pages f
 - Language switch keeps the current company page and navigation stays left-to-right.
 - Company logos were resized and founder photographs compressed (about 86% less combined image transfer for those four images).
 - This does not promise a Google ranking or a specific Lighthouse score.
+
+## Live setup status — 12 October 2026
+
+- Search Console HTTPS URL-prefix property verified in the signed-in owner's account.
+- Sitemap submitted. Search Console initially reports "Couldn't fetch" / "Sitemap could not be read" without a detailed error. The public XML responds HTTP 200 with application/xml and validates with 12 URLs. Processing has not been confirmed.
+- The company homepage is already indexed; an updated crawl was requested and accepted.
+- GA4 property ID: 558524565; web stream ID: 16112185073.
+- A consented test visit appeared as one active user in the live Analytics overview.
+- Shared analytics script initializes once across client navigation. The script URL is versioned to refresh browser caches.
