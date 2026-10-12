@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var d=document.documentElement,t=localStorage.getItem('inturp-theme'),dk=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);d.classList.toggle('dark',dk);d.style.colorScheme=dk?'dark':'light';if(localStorage.getItem('inturp-lang')==='ar'){location.replace('/ar/checkbook/'+location.search+location.hash)}}catch(e){} })()</script>
+<title>CheckBook — cheque tracking app with reminders | Inturp</title>
+<meta name="description" content="CheckBook is a mobile app by Inturp for tracking cheques: dashboard totals, due-date states, a smart plan for series of cheques and reminders. Arabic and English.">
+<link rel="canonical" href="https://inturp.com/checkbook/">
+<link rel="alternate" hreflang="en" href="https://inturp.com/checkbook/">
+<link rel="alternate" hreflang="ar" href="https://inturp.com/ar/checkbook/">
+<link rel="alternate" hreflang="x-default" href="https://inturp.com/checkbook/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Inturp">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:title" content="CheckBook — cheque tracking app with reminders | Inturp">
+<meta property="og:description" content="CheckBook is a mobile app by Inturp for tracking cheques: dashboard totals, due-date states, a smart plan for series of cheques and reminders. Arabic and English.">
+<meta property="og:url" content="https://inturp.com/checkbook/">
+<meta property="og:image" content="https://inturp.com/checkbook/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CheckBook app screens">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CheckBook — cheque tracking app with reminders | Inturp">
+<meta name="twitter:description" content="CheckBook is a mobile app by Inturp for tracking cheques: dashboard totals, due-date states, a smart plan for series of cheques and reminders. Arabic and English.">
+<meta name="twitter:image" content="https://inturp.com/checkbook/assets/img/og.jpg">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="/inturp-tab-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="/checkbook/assets/css/site.css?v=20261030">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://inturp.com/checkbook/#page", "url": "https://inturp.com/checkbook/", "name": "CheckBook", "inLanguage": "en", "isPartOf": {"@id": "https://inturp.com/#website"}, "about": {"@id": "https://inturp.com/checkbook/#app"}}, {"@type": "MobileApplication", "@id": "https://inturp.com/checkbook/#app", "name": "CheckBook", "alternateName": "H1 Checkbook", "operatingSystem": "Android, iOS", "applicationCategory": "FinanceApplication", "description": "Mobile app for tracking cheques: amounts, banks, due dates and states, with reminders before each due date and a smart plan for series of cheques.", "image": "https://inturp.com/checkbook/assets/img/og.jpg", "url": "https://inturp.com/checkbook/", "downloadUrl": ["https://play.google.com/store/apps/details?id=com.h1apps.h1checkbook", "https://apps.apple.com/us/app/h1-checkbook/id6758664380"], "inLanguage": ["ar", "en"], "author": {"@id": "https://inturp.com/#organization"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inturp", "item": "https://inturp.com/"}, {"@type": "ListItem", "position": 2, "name": "CheckBook", "item": "https://inturp.com/checkbook/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is CheckBook?", "acceptedAnswer": {"@type": "Answer", "text": "CheckBook is a mobile app for Android and iPhone that keeps track of your cheques: banks, amounts, due dates and states, with a reminder before each due date."}}, {"@type": "Question", "name": "How do the reminders work?", "acceptedAnswer": {"@type": "Answer", "text": "For every cheque the app schedules three notifications on your phone: 3 days before, 1 day before and on the due day, at the hour you choose in settings."}}, {"@type": "Question", "name": "What is the smart plan?", "acceptedAnswer": {"@type": "Answer", "text": "It splits a total amount into a series of up to 50 cheques with regular dates, so you do not enter each one by hand. You can review and adjust the amounts before saving."}}, {"@type": "Question", "name": "Is my data private?", "acceptedAnswer": {"@type": "Answer", "text": "Your cheques are stored under your account, and access rules let only you read and change them. You can delete your account and all its data from settings."}}, {"@type": "Question", "name": "Does it support Arabic?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The app is available in Arabic (right-to-left) and in English, and you can switch language from settings."}}]}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main"><span class="en">Skip to content</span></a>
+<header class="site-header" id="top" dir="ltr">
+  <nav class="site-nav" aria-label="Navigation menu">
+    <a class="brand-link" href="/"><img src="/inturp-logo.png" alt="Inturp" width="58" height="58"><span>inturp<span class="brand-dot">.</span></span></a>
+    <div class="desktop-nav">
+      <div class="product-menu">
+        <button type="button" class="nav-link active" id="pm-btn" aria-expanded="false" aria-controls="product-links"><span class="en">Products</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="product-dropdown" id="product-links" hidden>
+          <a href="/vet-charted/en/"><img class="mono" src="/vetcharted-logo.png" alt="" width="32" height="32"><span><span class="en">VetCharted</span><small><span class="en">Veterinary clinic management</span></small></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="/alameer/"><img src="/alameer/assets/img/app-icon.png" alt="" width="32" height="32"><span><span class="en">Al Ameer Hydraulics</span><small><span class="en">Heavy-equipment parts app</span></small></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a class="active" aria-current="page" href="/checkbook/"><img src="/checkbook/assets/img/app-icon.png" alt="" width="32" height="32"><span><span class="en">CheckBook</span><small><span class="en">Cheque tracking and reminders</span></small></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        </div>
+      </div>
+      <a class="nav-link" href="/about/"><span class="en">About us</span></a>
+      <a class="nav-contact" href="/#contact"><span class="en">Let’s talk</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+    </div>
+    <div class="nav-end">
+      <div class="nav-preferences">
+        <button type="button" class="language-control" data-lang-toggle aria-label="Switch language / تبديل اللغة"><span class="en">عربي</span></button>
+        <button type="button" class="icon-control" data-theme-toggle aria-label="Toggle theme"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+      </div>
+      <button type="button" class="icon-control mobile-toggle menu-btn" aria-expanded="false" aria-controls="mnav" aria-label="Navigation menu"><svg class="bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+  </nav>
+  <nav class="mobile-panel mnav" id="mnav" hidden aria-label="Navigation menu">
+    <a href="/vet-charted/en/"><span><span class="en">VetCharted</span></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="/alameer/"><span><span class="en">Al Ameer Hydraulics</span></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="/checkbook/" aria-current="page"><span><span class="en">CheckBook</span></span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+    <a href="/about/"><span class="en">About us</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+    <a href="/#contact"><span class="en">Let’s talk</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+  </nav>
+</header>
+<main id="main">
+
+<section class="product-intro section-padding">
+  <div class="product-page-grid">
+    <div class="product-page-copy">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/"><span class="en">Inturp</span></a><span>/</span>
+        <a href="/#checkbook"><span class="en">Our work</span></a><span>/</span>
+        <span aria-current="page">CheckBook</span>
+      </nav>
+      <span class="eyebrow"><i class="status-dot"></i><span class="en">Case study · Mobile app</span></span>
+      <h1>
+        
+        <span class="en">Every cheque, every due date, <em>under control.</em></span>
+      </h1>
+      <p class="lead"><span class="en">We designed and built CheckBook, a mobile app for keeping track of cheques. Record each one with its bank, amount and due date, see what is due and what has been cashed, and get reminded before the day arrives.</span></p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="https://play.google.com/store/apps/details?id=com.h1apps.h1checkbook" target="_blank" rel="noopener"><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.2 2.6c-.3.2-.5.6-.5 1.1v16.6c0 .5.2.9.5 1.1l9.3-9.4zM14.8 13.2l2.7 2.7-11.4 6.5zM14.8 10.8 6.1 1.6l11.4 6.5zM18.6 9.3l2.8 1.6c.8.5.8 1.7 0 2.2l-2.8 1.6-3-3z"/></svg>Google Play</a>
+        <a class="btn btn-outline" href="https://apps.apple.com/us/app/h1-checkbook/id6758664380" target="_blank" rel="noopener"><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-1.9-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.1 2.5-1.8 3.1-.5 7.6 1.3 10.1.9 1.2 1.9 2.6 3.2 2.5 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8c1.4 0 2.3-1.2 3.1-2.4 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.9-1.1-2.9-4.2zM14 5.3c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.1.1 2.3-.6 3-1.5z"/></svg>App Store</a>
+      </div>
+      <div class="meta-row">
+        <div><span class="en">Platforms</span><b>Android · iOS</b></div>
+        <div><span class="en">Languages</span><b><span class="en">Arabic · English</span></b></div>
+        <div><span class="en">Scope</span><b><span class="en">Design · App · Backend</span></b></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="phone p1"><div class="scr"><img src="/checkbook/assets/img/app-details.webp" alt="" width="520" height="1130"></div></div>
+      <div class="phone p2"><div class="scr"><img src="/checkbook/assets/img/app-home.webp" alt="" width="520" height="1130" fetchpriority="high"></div></div>
+      <div class="hero-badge">
+        <img src="/checkbook/assets/img/app-icon.png" alt="" width="42" height="42">
+        <div><b>CheckBook</b><small><span class="en">Available on Android and iPhone</span></small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats section-padding" aria-label="At a glance">
+  <div class="inner">
+    <div class="stat" data-reveal><b>53</b><span><span class="en">currencies to choose from, per cheque</span></span></div>
+    <div class="stat" data-reveal><b>50</b><span><span class="en">cheques at most in one smart plan</span></span></div>
+    <div class="stat" data-reveal><b>3</b><span><span class="en">reminders per cheque: 3 days before, 1 day before, and on the day</span></span></div>
+    <div class="stat" data-reveal><b>2</b><span><span class="en">languages: Arabic and English, with full right-to-left</span></span></div>
+  </div>
+</section>
+
+<section id="brief" class="section-padding section-space">
+  <div class="brief">
+    <div data-reveal>
+      <span class="eyebrow"><i class="status-dot"></i><span class="en">The project</span></span>
+      <h2><span class="en">A small thing that is easy to lose track of.</span></h2>
+    </div>
+    <div class="cols" data-reveal>
+      <div>
+        <h3><span class="en">The problem</span></h3>
+        <p><span class="en">A cheque is a date, an amount and a name. Once you have a dozen of them, in a drawer or a photo gallery, missing one due date is easy.</span></p>
+        <div class="state-row">
+          <span class="state not"><i></i><span class="en">Not due</span></span><span class="state due"><i></i><span class="en">Due</span></span>
+          <span class="state cashed"><i></i><span class="en">Cashed</span></span><span class="state ret"><i></i><span class="en">Returned</span></span>
+        </div>
+      </div>
+      <div>
+        <h3><span class="en">What we built</span></h3>
+        <p><span class="en">A focused app: a dashboard of totals, a card for each cheque, one-tap state changes, a smart plan for series of cheques, and reminders that run on the phone itself.</span></p>
+        <p><span class="en">Your cheques are stored under your account, and nobody but you can read them.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tour section-padding section-space" id="tour">
+  <div>
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow"><i class="status-dot"></i><span class="en">App tour</span></span>
+      <h2><span class="en">From the dashboard to the smart plan.</span></h2>
+      <p><span class="en">Real screenshots from the app. Select any step to jump to it.</span></p>
+    </div>
+    <div class="tour-grid">
+      <div class="steps" role="list">
+        <button class="step on" type="button" role="listitem" aria-expanded="true"><span class="n">01</span><h3><span class="en">A dashboard that answers at a glance</span></h3><p><span class="en">The total amount and number of cheques, how much is due now, and a count for each state: due, not due, cashed and returned.</span></p></button>
+        <button class="step" type="button" role="listitem" aria-expanded="false"><span class="n">02</span><h3><span class="en">A card for every cheque</span></h3><p><span class="en">Bank, cheque number, payee, phone, amount, issue and due dates on one card, coloured by state, with a filter for each state.</span></p></button>
+        <button class="step" type="button" role="listitem" aria-expanded="false"><span class="n">03</span><h3><span class="en">Change the state in one tap</span></h3><p><span class="en">Mark a cheque as cashed, returned or cancelled, reopen it, edit it or delete it.</span></p></button>
+        <button class="step" type="button" role="listitem" aria-expanded="false"><span class="n">04</span><h3><span class="en">Add one cheque, or plan many</span></h3><p><span class="en">Choose a regular cheque with all its details, or the smart plan to split an amount across several cheques.</span></p></button>
+        <button class="step" type="button" role="listitem" aria-expanded="false"><span class="n">05</span><h3><span class="en">Start the plan with a total</span></h3><p><span class="en">Enter the total price, the currency, the first cheque number, the writing date and the first due date.</span></p></button>
+        <button class="step" type="button" role="listitem" aria-expanded="false"><span class="n">06</span><h3><span class="en">Choose how many, and how far apart</span></h3><p><span class="en">From 1 to 50 cheques, spaced in months. The total duration is shown before you generate the cheques.</span></p></button>
+        <button class="step" type="button" role="listitem" aria-expanded="false"><span class="n">07</span><h3><span class="en">Reminders, language, account</span></h3><p><span class="en">Turn reminders on and pick the hour, switch language, sign out, or delete your account.</span></p></button>
+      </div>
+      <div class="tour-phone">
+        <div>
+          <div class="phone"><div class="scr">
+            <img class="on" src="/checkbook/assets/img/app-home.webp" alt="Dashboard" width="520" height="1130">
+            <img src="/checkbook/assets/img/app-list.webp" alt="Cheque cards" width="520" height="1130" loading="lazy">
+            <img src="/checkbook/assets/img/app-details.webp" alt="Cheque details" width="520" height="1130" loading="lazy">
+            <img src="/checkbook/assets/img/app-add.webp" alt="Add a cheque" width="520" height="1130" loading="lazy">
+            <img src="/checkbook/assets/img/app-plan-start.webp" alt="Smart plan, start" width="520" height="1130" loading="lazy">
+            <img src="/checkbook/assets/img/app-plan-controls.webp" alt="Smart plan, controls" width="520" height="1130" loading="lazy">
+            <img src="/checkbook/assets/img/app-settings.webp" alt="Settings" width="520" height="1130" loading="lazy">
+          </div></div>
+          <div class="tour-dots" role="group" aria-label="Screens"><button type="button" class="on" aria-label="1"></button><button type="button" aria-label="2"></button><button type="button" aria-label="3"></button><button type="button" aria-label="4"></button><button type="button" aria-label="5"></button><button type="button" aria-label="6"></button><button type="button" aria-label="7"></button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="section-padding section-space">
+  <div>
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow"><i class="status-dot"></i><span class="en">Features</span></span>
+      <h2><span class="en">Everything needed to follow your cheques, and nothing in the way.</span></h2>
+    </div>
+    <div class="feat-grid">
+      <article class="feat" data-reveal><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7"/></svg></div><h3><span class="en">A state that updates itself</span></h3><p><span class="en">A cheque becomes “due” on its due date without you doing anything. Cashed, returned and cancelled are one tap away.</span></p></article>
+      <article class="feat" data-reveal><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/><path d="m16 15 2 2 3-4"/></svg></div><h3><span class="en">Smart plan</span></h3><p><span class="en">Split a total into up to 50 cheques with regular dates, then review each one and adjust its amount.</span></p></article>
+      <article class="feat" data-reveal><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15zM10 21h4"/></svg></div><h3><span class="en">Reminders</span></h3><p><span class="en">Notifications scheduled on your device 3 days before, 1 day before and on the due day, at the hour you choose.</span></p></article>
+      <article class="feat" data-reveal><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M9.5 9.5c0-1.2 1-1.8 2.5-1.8s2.5.6 2.5 1.8-1 1.6-2.5 2-2.5.8-2.5 2 1 1.8 2.5 1.8 2.5-.6 2.5-1.8"/></svg></div><h3><span class="en">53 currencies</span></h3><p><span class="en">Pick each cheque’s currency from a list of 53, with Arabic and English names.</span></p></article>
+      <article class="feat" data-reveal><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div><h3><span class="en">Every detail</span></h3><p><span class="en">Bank name, cheque number, account number, payee name and phone, issue and due dates.</span></p></article>
+      <article class="feat" data-reveal><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 8v6l-4-2v-4z"/></svg></div><h3><span class="en">Filters by state</span></h3><p><span class="en">All, due, not due, cashed, returned: one tap and the list follows.</span></p></article>
+      <article class="feat" data-reveal><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div><h3><span class="en">Arabic and English</span></h3><p><span class="en">A full right-to-left Arabic interface and an English one, switchable from settings.</span></p></article>
+      <article class="feat" data-reveal><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.500" width="14" height="9.500" rx="2"/><path d="M8 10.500V8a4 4 0 0 1 8 0v2.500"/></svg></div><h3><span class="en">Private by design</span></h3><p><span class="en">Cheques are stored under your account, and access rules let only you read and change them.</span></p></article>
+      <article class="feat" data-reveal><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/></svg></div><h3><span class="en">Quick sign-in, and delete your account</span></h3><p><span class="en">Sign in with Google or Apple, and delete your account and all its data from settings.</span></p></article>
+    </div>
+  </div>
+</section>
+
+<section class="admin alt section-padding section-space" id="plan">
+  <div class="admin-grid">
+    <div data-reveal>
+      <span class="eyebrow"><i class="status-dot"></i><span class="en">Smart plan</span></span>
+      <h2><span class="en">Plan a whole series of cheques in a minute.</span></h2>
+      <p class="lead"><span class="en">Instead of entering each cheque one by one, set the amount and the rhythm and let the app generate the list.</span></p>
+    </div>
+    <ul class="checks" data-reveal>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg><div><b><span class="en">Start with the total</span></b><span><span class="en">The total price and currency are required; the first cheque number is optional.</span></span></div></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg><div><b><span class="en">Choose the rhythm</span></b><span><span class="en">Anywhere from 1 to 50 cheques, with the gap between them in months.</span></span></div></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg><div><b><span class="en">See the duration</span></b><span><span class="en">The app shows the total duration in months and in years before generating.</span></span></div></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg><div><b><span class="en">Review and adjust</span></b><span><span class="en">Each cheque gets a number, an amount and a date; you can adjust the amounts, then complete the payee details and save.</span></span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="bordered section-padding section-space" id="stack">
+  <div>
+    <div class="sec-head" data-reveal style="margin-bottom:30px">
+      <span class="eyebrow"><i class="status-dot"></i><span class="en">Under the hood</span></span>
+      <h2><span class="en">One codebase, two platforms, dependable services.</span></h2>
+    </div>
+    <div class="stack-row" data-reveal>
+      <span class="chip">Flutter</span><span class="chip">Firebase Auth</span><span class="chip">Cloud Firestore</span><span class="chip">Cloud Functions</span><span class="chip">Cloud Messaging</span><span class="chip">Local notifications</span><span class="chip">Google AdMob</span><span class="chip">Sign in with Apple</span><span class="chip">Google Sign-In</span>
+    </div>
+    <p class="stack-note" data-reveal><span class="en">Reminders are scheduled on the device itself, and cleaning up your data when you delete an account happens automatically on the server.</span></p>
+  </div>
+</section>
+
+<section class="bordered section-padding section-space" id="faq">
+  <div>
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow"><i class="status-dot"></i><span class="en">Questions</span></span>
+      <h2><span class="en">Questions about CheckBook.</span></h2>
+    </div>
+    <div class="faq-items" data-reveal><details><summary><span class="en">What is CheckBook?</span><span aria-hidden="true">+</span></summary><p><span class="en">CheckBook is a mobile app for Android and iPhone that keeps track of your cheques: banks, amounts, due dates and states, with a reminder before each due date.</span></p></details><details><summary><span class="en">How do the reminders work?</span><span aria-hidden="true">+</span></summary><p><span class="en">For every cheque the app schedules three notifications on your phone: 3 days before, 1 day before and on the due day, at the hour you choose in settings.</span></p></details><details><summary><span class="en">What is the smart plan?</span><span aria-hidden="true">+</span></summary><p><span class="en">It splits a total amount into a series of up to 50 cheques with regular dates, so you do not enter each one by hand. You can review and adjust the amounts before saving.</span></p></details><details><summary><span class="en">Is my data private?</span><span aria-hidden="true">+</span></summary><p><span class="en">Your cheques are stored under your account, and access rules let only you read and change them. You can delete your account and all its data from settings.</span></p></details><details><summary><span class="en">Does it support Arabic?</span><span aria-hidden="true">+</span></summary><p><span class="en">Yes. The app is available in Arabic (right-to-left) and in English, and you can switch language from settings.</span></p></details></div>
+  </div>
+</section>
+
+<section class="get section-padding section-space" id="get">
+  <div data-reveal>
+    <img class="ic" src="/checkbook/assets/img/app-icon.png" alt="CheckBook app icon" width="84" height="84">
+    <h2><span class="en">Try CheckBook.</span></h2>
+    <p><span class="en">Available on Android and iPhone.</span></p>
+    <div class="cta-row">
+        <a class="btn btn-solid" href="https://play.google.com/store/apps/details?id=com.h1apps.h1checkbook" target="_blank" rel="noopener"><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.2 2.6c-.3.2-.5.6-.5 1.1v16.6c0 .5.2.9.5 1.1l9.3-9.4zM14.8 13.2l2.7 2.7-11.4 6.5zM14.8 10.8 6.1 1.6l11.4 6.5zM18.6 9.3l2.8 1.6c.8.5.8 1.7 0 2.2l-2.8 1.6-3-3z"/></svg>Google Play</a>
+        <a class="btn btn-outline" href="https://apps.apple.com/us/app/h1-checkbook/id6758664380" target="_blank" rel="noopener"><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-1.9-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.1 2.5-1.8 3.1-.5 7.6 1.3 10.1.9 1.2 1.9 2.6 3.2 2.5 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8c1.4 0 2.3-1.2 3.1-2.4 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.9-1.1-2.9-4.2zM14 5.3c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.1.1 2.3-.6 3-1.5z"/></svg>App Store</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact bordered section-padding section-space" id="contact">
+  <div class="inner">
+    <div data-reveal>
+      <span class="eyebrow"><i class="status-dot"></i><span class="en">Contact</span></span>
+      <h2><span class="en">Want an app like this for your business?</span></h2>
+      <p><span class="en">We build digital products from idea to launch. Tell us about your business and we’ll get back to you.</span></p>
+    </div>
+    <div class="links" data-reveal>
+      <a href="mailto:info@inturp.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>info@inturp.com</a>
+      <a href="https://instagram.com/inturp_" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>@inturp_</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer section-padding">
+  <div class="footer-inner">
+    <a class="brand-link" href="/" aria-label="Inturp"><img src="/inturp-logo.png" alt="" width="44" height="44"><span>inturp.</span></a>
+    <div class="footer-links">
+      <a href="/about/"><span class="en">About us</span></a>
+      <a href="/vet-charted/en/">VetCharted</a>
+      <a href="/alameer/"><span class="en">Al Ameer</span></a>
+      <a href="/checkbook/">CheckBook</a>
+      <a href="mailto:info@inturp.com">info@inturp.com</a>
+      <a href="https://www.instagram.com/inturp_/" target="_blank" rel="noopener noreferrer" dir="ltr" aria-label="Inturp on Instagram: @inturp_"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg><span>@inturp_</span></a>
+      <a href="/checkbook/privacy/"><span class="en">CheckBook privacy</span></a>
+      <a href="/checkbook/delete-account/"><span class="en">Delete account</span></a>
+    </div>
+    <p>© <span id="year">2026</span> Inturp. <span class="en">All rights reserved.</span></p>
+  </div>
+</footer>
+<script src="/checkbook/assets/js/site.js?v=20261030"></script>
+</body>
+</html>
