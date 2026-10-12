@@ -1,0 +1,20 @@
+# Inturp
+
+> Inturp (انتيرب) is a venture studio that finds business opportunities and builds the software products behind them. It publishes in Arabic and English. Contact: info@inturp.com
+
+## Products
+
+- [VetCharted](https://inturp.com/vet-charted/en/): veterinary clinic management software for appointments, animal medical records, examinations, vaccinations, invoices and inventory, in Arabic and English. Arabic page: https://inturp.com/vet-charted/
+- [Al Ameer Hydraulics app](https://inturp.com/alameer/): a mobile app, designed and built by Inturp, for Al Ameer (شركة الأمير), a heavy-equipment spare parts, hydraulics and machines business with seven branches in Palestine, Jordan and Egypt. Arabic page: https://inturp.com/ar/alameer/
+- [CheckBook](https://inturp.com/checkbook/): a mobile app for tracking cheques, with a dashboard, due-date states, a smart plan for series of cheques and reminders. Arabic page: https://inturp.com/ar/checkbook/
+
+## Company
+
+- [About Inturp and its founders](https://inturp.com/about/): founders are Hammam Alaghbar (co-founder, lead developer) and Hamza Saleh (co-founder, sales and product manager). Arabic: https://inturp.com/ar/about/
+- [Website privacy policy](https://inturp.com/privacy/)
+- Each app has its own privacy policy and account-deletion page, for example https://inturp.com/checkbook/privacy/ and https://inturp.com/checkbook/delete-account/
+
+## Contact
+
+- Email: info@inturp.com
+- Instagram: https://www.instagram.com/inturp_/

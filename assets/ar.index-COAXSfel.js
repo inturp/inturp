@@ -1,1 +1,0 @@
-import{r as e}from"./index-mpxiPdn5.js";var t=e;export{t as component};

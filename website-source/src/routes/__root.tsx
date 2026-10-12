@@ -114,7 +114,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               "@type": "Organization",
               "@id": "https://inturp.com/#organization",
               name: "Inturp",
+              alternateName: ["انتيرب", "إنتيرب"],
+              slogan: "We find the gaps and fill them",
               url: "https://inturp.com/",
+              founder: [
+                { "@type": "Person", name: "Hammam Alaghbar", jobTitle: "Co-founder, Lead Developer" },
+                { "@type": "Person", name: "Hamza Saleh", jobTitle: "Co-founder, Sales & Product Manager" },
+              ],
               logo: "https://inturp.com/inturp-logo.png",
               email: "info@inturp.com",
               sameAs: ["https://www.instagram.com/inturp_/"],
