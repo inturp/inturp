@@ -232,7 +232,7 @@ export function SiteFooter() {
         <div className="footer-links">
           <Link to="/about">{nav[lang].about}</Link>
           <a href="https://inturp.com/vet-charted/">VetCharted</a>
-          <a href="mailto:hello@inturp.com">hello@inturp.com</a>
+          <a href="mailto:info@inturp.com">info@inturp.com</a>
         </div>
         <p>
           © {new Date().getFullYear()} Inturp. {nav[lang].footer}

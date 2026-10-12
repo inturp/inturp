@@ -233,11 +233,11 @@ function Contact({ t }: { t: T }) {
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{t.contact.p}</p>
         <div className="mt-10">
           <a
-            href="mailto:hello@inturp.com"
+            href="mailto:info@inturp.com"
             dir="ltr"
             className="inline-flex items-center justify-center rounded-full border border-foreground bg-foreground px-8 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-background hover:text-foreground"
           >
-            hello@inturp.com
+            info@inturp.com
           </a>
         </div>
       </div>
