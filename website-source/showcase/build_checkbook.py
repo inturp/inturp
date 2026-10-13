@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds the CheckBook case study: /checkbook/, /checkbook/privacy/, /checkbook/delete-account/ (stdlib + Pillow for the share image).
+"""Builds the CheckBook pages: /checkbook/, /checkbook/privacy/, /checkbook/delete-account/ (stdlib + Pillow for the share image).
 
   python3 website-source/showcase/build_checkbook.py
 """
@@ -168,7 +168,7 @@ def build_index():
         <a href="/#checkbook" data-ar-href="/ar/#checkbook" data-en-href="/#checkbook" data-attrs="href">{bi('أعمالنا', 'Our work')}</a><span>/</span>
         <span aria-current="page">CheckBook</span>
       </nav>
-      <span class="eyebrow"><i class="status-dot"></i>{bi('دراسة حالة · تطبيق موبايل', 'Case study · Mobile app')}</span>
+      <span class="eyebrow"><i class="status-dot"></i>{bi('من أعمالنا · تطبيق موبايل', 'Our work · Mobile app')}</span>
       <h1>
         <span class="ar">كل شيك وكل موعد استحقاق، <em>تحت السيطرة.</em></span>
         <span class="en">Every cheque, every due date, <em>under control.</em></span>

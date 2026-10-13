@@ -48,7 +48,7 @@ const content = {
       title: "Heavy-equipment parts and machines, in one app.",
       p1: "We designed and built the Al Ameer Hydraulics app for a business with seven branches across Palestine, Jordan and Egypt.",
       p2: "Customers browse machines and spare parts, order for delivery or branch pickup, and reach the team on WhatsApp.",
-      cta: "See the case study",
+      cta: "Explore the app",
     },
     checkbook: {
       eyebrow: "Our work",
@@ -56,7 +56,7 @@ const content = {
       title: "Every cheque, every due date, under control.",
       p1: "CheckBook is a mobile app for keeping track of cheques: amounts, banks, due dates and states, with a dashboard of totals.",
       p2: "Plan a whole series of cheques in a minute with the smart plan, and get reminded before each one falls due.",
-      cta: "See the case study",
+      cta: "Explore the app",
     },
     contact: {
       eyebrow: "Contact",
@@ -95,7 +95,7 @@ const content = {
       title: "قطع غيار المعدات الثقيلة والآليات، في تطبيق واحد.",
       p1: "صمّمنا وبنينا تطبيق شركة الأمير للهيدروليك، بسبعة فروع في فلسطين والأردن ومصر.",
       p2: "يتصفح العميل الآليات وقطع الغيار، ويطلب بالتوصيل أو بالاستلام من الفرع، ويتواصل مع الفريق عبر واتساب.",
-      cta: "شاهد دراسة الحالة",
+      cta: "اكتشف التطبيق",
     },
     checkbook: {
       eyebrow: "أعمالنا",
@@ -103,7 +103,7 @@ const content = {
       title: "كل شيك وكل موعد استحقاق، تحت السيطرة.",
       p1: "CheckBook تطبيق موبايل لمتابعة الشيكات: المبالغ والبنوك ومواعيد الاستحقاق والحالات، مع لوحة بالمجاميع.",
       p2: "خطّط لسلسلة شيكات كاملة في دقيقة بالخطة الذكية، وتلقَّ تذكيراً قبل استحقاق كل شيك.",
-      cta: "شاهد دراسة الحالة",
+      cta: "اكتشف التطبيق",
     },
     contact: {
       eyebrow: "تواصل",

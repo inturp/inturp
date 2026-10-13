@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds the Al Ameer case study in both languages: /alameer/ and /ar/alameer/ with privacy and delete-account pages.
+"""Builds the Al Ameer pages in both languages: /alameer/ and /ar/alameer/ with privacy and delete-account pages.
 
   python3 website-source/showcase/build_alameer.py
 """
@@ -351,8 +351,8 @@ def build_index():
     body = (pathlib.Path(__file__).parent / 'alameer.index.body.html').read_text(encoding='utf-8')
     body = body.replace('<section class="get section-padding section-space" id="get">', faq_html() + '\n\n<section class="get section-padding section-space" id="get">', 1)
     emit('', {'en': 'Al Ameer Hydraulics app — heavy-equipment parts and machines | Inturp', 'ar': 'تطبيق شركة الأمير — قطع غيار المعدات الثقيلة والآليات | انتيرب'},
-         {'en': 'Case study: the Al Ameer Hydraulics mobile app by Inturp. Browse machines and spare parts, order for delivery or branch pickup, and reach seven branches in Palestine, Jordan and Egypt.',
-          'ar': 'دراسة حالة: تطبيق شركة الأمير للهيدروليك من انتيرب. تصفّح الآليات وقطع الغيار، واطلب بالتوصيل أو بالاستلام من الفرع، وتواصل مع سبعة فروع في فلسطين والأردن ومصر.'},
+         {'en': 'The Al Ameer Hydraulics mobile app by Inturp. Browse machines and spare parts, order for delivery or branch pickup, and reach seven branches in Palestine, Jordan and Egypt.',
+          'ar': 'تطبيق شركة الأمير للهيدروليك من انتيرب. تصفّح الآليات وقطع الغيار، واطلب بالتوصيل أو بالاستلام من الفرع، وتواصل مع سبعة فروع في فلسطين والأردن ومصر.'},
          body, index_ld)
 
 
