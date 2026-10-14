@@ -121,10 +121,10 @@ def page(lang, data):
 
 
 def short_link(lang):
-    """/survey/ and /ar/survey/: short, readable addresses to send to clinics. They show the same share card and open the survey at once."""
+    """/survey/ (Arabic) and /survey/en/ (English): short, readable addresses to send to clinics. They show the same share card and open the survey at once."""
     m = META[lang]
     target = '/ar/clinic-survey/' if lang == 'ar' else '/clinic-survey/'
-    h = shared.head(lang=lang, title=m['title'], desc=m['desc'], en_path='/survey/', ar_path='/ar/survey/',
+    h = shared.head(lang=lang, title=m['title'], desc=m['desc'], en_path='/survey/en/', ar_path='/survey/',
                     css=f'/clinic-survey/assets/css/site.css?v={V}', og_image=f'/clinic-survey/assets/img/share-{lang}.png?v={V}',
                     og_alt=m['alt'], robots='noindex, nofollow',
                     extra=f'<meta http-equiv="refresh" content="0; url={target}">\n')
@@ -159,7 +159,7 @@ def main():
     for lang in ('en', 'ar'):
         OUT[lang].mkdir(parents=True, exist_ok=True)
         (OUT[lang] / 'index.html').write_text(page(lang, lang_data(src, lang)), encoding='utf-8')
-    for lang, folder in (('en', SITE / 'survey'), ('ar', SITE / 'ar' / 'survey')):
+    for lang, folder in (('ar', SITE / 'survey'), ('en', SITE / 'survey' / 'en')):
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(short_link(lang), encoding='utf-8')
     n = sum(1 for q in src['questions'] if 'showIf' not in q)
