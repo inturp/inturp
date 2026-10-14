@@ -100,6 +100,12 @@ def emit(page: str, lang: str, ar_path: str, en_path: str, out: str, desc=None) 
         img = f"{ORIGIN}/vet-charted/assets/img/dashboard.webp"
         block += (f'<meta property="og:type" content="website">\n<meta property="og:site_name" content="Inturp">\n<meta property="og:title" content="{title}">\n'
                   f'<meta property="og:description" content="{dm.group(1) if dm else ""}">\n<meta property="og:image" content="{img}">\n<meta name="twitter:card" content="summary_large_image">\n')
+    # Share card (1200x630, one per language) for every Vet Charted page
+    html = re.sub(r'<meta (?:property="og:image(?::[a-z]+)?"|name="twitter:(?:image(?::alt)?|card)") content="[^"]*">\n?', "", html)
+    card = f"{ORIGIN}/vet-charted/assets/img/share-{lang}.jpg?v=2"
+    alt_text = ("Vet Charted: veterinary clinic software" if lang == "en" else "Vet Charted: برنامج لإدارة العيادات البيطرية")
+    block += (f'<meta property="og:image" content="{card}">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+              f'<meta property="og:image:alt" content="{alt_text}">\n<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="{card}">\n')
     html = html.replace("</head>", block + "</head>", 1)
     if lang == "en":  # English pages link to the English twins of the shared pages
         for ar_href, en_href in (("/vet-charted/privacy/", "/vet-charted/en/privacy/"), ("/vet-charted/delete-account/", "/vet-charted/en/delete-account/")):
