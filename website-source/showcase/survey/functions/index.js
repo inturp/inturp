@@ -100,6 +100,45 @@ function validateAnswers(input, { allowContact }) {
   return { answers: out };
 }
 
+/** Everything the User-Agent header tells us, read on the server so a session is described even when the page could not send its own details
+ *  (an in-app browser, a blocked script, a first request that failed). */
+const IN_APP = [[/Snapchat\/([\d.]+)/, 'Snapchat'], [/Instagram ([\d.]+)/, 'Instagram'], [/FBAN|FBAV|FB_IAB/, 'Facebook'], [/Messenger(?:Lite)?ForiOS|FB_IAB\/MESSENGER/, 'Messenger'],
+  [/TikTok|musical_ly|BytedanceWebview/, 'TikTok'], [/Line\/([\d.]+)/, 'LINE'], [/Twitter|TwitterAndroid/, 'X (Twitter)'], [/LinkedInApp/, 'LinkedIn'], [/Telegram/, 'Telegram'], [/GSA\//, 'Google app']];
+function parseUa(ua) {
+  ua = String(ua || '');
+  const m = re => ua.match(re);
+  const out = {};
+  let t, os = 'Other', osVersion = '';
+  if ((t = m(/Windows NT ([\d.]+)/))) { os = 'Windows'; osVersion = t[1]; }
+  else if ((t = m(/(?:iPhone|iPad|iPod).*? OS ([\d_]+)/))) { os = /iPad/.test(ua) ? 'iPadOS' : 'iOS'; osVersion = t[1].replace(/_/g, '.'); }
+  else if ((t = m(/Android ([\d.]+)/))) { os = 'Android'; osVersion = t[1]; }
+  else if ((t = m(/Mac OS X ([\d_]+)/))) { os = 'macOS'; osVersion = t[1].replace(/_/g, '.'); }
+  else if (/CrOS/.test(ua)) os = 'ChromeOS';
+  else if (/Linux/.test(ua)) os = 'Linux';
+  let browser = '', bv = '';
+  if ((t = m(/EdgA?\/([\d.]+)/))) { browser = 'Edge'; bv = t[1]; }
+  else if ((t = m(/OPR\/([\d.]+)/))) { browser = 'Opera'; bv = t[1]; }
+  else if ((t = m(/SamsungBrowser\/([\d.]+)/))) { browser = 'Samsung Internet'; bv = t[1]; }
+  else if ((t = m(/(?:Firefox|FxiOS)\/([\d.]+)/))) { browser = 'Firefox'; bv = t[1]; }
+  else if ((t = m(/(?:Chrome|CriOS)\/([\d.]+)/))) { browser = 'Chrome'; bv = t[1]; }
+  else if ((t = m(/Version\/([\d.]+).*Safari/))) { browser = 'Safari'; bv = t[1]; }
+  let app = '';
+  for (const [re, name] of IN_APP) if (re.test(ua)) { app = name; break; }
+  if (!app && /iPhone|iPad|iPod/.test(ua) && !/Safari\//.test(ua) && /AppleWebKit/.test(ua)) app = 'In-app browser';
+  else if (!app && /; wv\)/.test(ua)) app = 'In-app browser (WebView)';
+  const tablet = /iPad|Tablet/i.test(ua) || (os === 'Android' && !/Mobile/i.test(ua));
+  out.type = tablet ? 'tablet' : /Mobi|iPhone|iPod|Android.*Mobile/i.test(ua) ? 'mobile' : 'desktop';
+  if (os !== 'Other') out.os = os;
+  if (osVersion) out.osVersion = osVersion.slice(0, 14);
+  if (browser) { out.browser = browser; out.browserVersion = bv.split('.')[0]; }
+  if (app) out.app = app;
+  const model = (m(/Android [\d.]+; ([^;)]+)/) || [])[1];
+  if (model && model !== 'K') out.model = model.trim().slice(0, 40);
+  else if (/iPhone/.test(ua)) out.model = 'iPhone';
+  else if (/iPad/.test(ua)) out.model = 'iPad';
+  return out;
+}
+
 const DEVICE_TYPES = new Set(['mobile', 'tablet', 'desktop']);
 const short = (v, n) => (isStr(v) ? clean(v, n) : undefined);
 /** A closed list of short, harmless values. Anything else is ignored. */
@@ -107,7 +146,7 @@ function validateDevice(d) {
   if (!d || typeof d !== 'object' || Array.isArray(d)) return undefined;
   const out = {};
   if (DEVICE_TYPES.has(d.type)) out.type = d.type;
-  for (const [k, n] of [['os', 24], ['osVersion', 14], ['browser', 24], ['browserVersion', 14], ['langs', 48], ['tz', 48], ['net', 10], ['ref', 80], ['model', 40]]) {
+  for (const [k, n] of [['os', 24], ['osVersion', 14], ['browser', 24], ['browserVersion', 14], ['langs', 48], ['tz', 48], ['net', 10], ['ref', 80], ['model', 40], ['app', 24]]) {
     const s = short(d[k], n); if (s) out[k] = s;
   }
   for (const k of ['screenW', 'screenH', 'viewW', 'viewH']) if (int(d[k], 0, 20000)) out[k] = d[k];
@@ -239,7 +278,9 @@ exports.submitSurvey = onRequest(
         };
         if (body.page) update.page = clean(body.page, 80);
         if (current) { if (current.qid) update.lastQuestion = current.qid; if (current.idx !== undefined) update.lastIndex = current.idx; }
-        if (device) update.device = device;
+        // Client details win; the User-Agent fills whatever is missing, but only the first time a session is stored.
+        if (!cur || !cur.device) update.device = { ...parseUa(req.get('user-agent')), ...(device || {}) };
+        else if (device) update.device = device;
         if (!cur) { update.createdAt = FieldValue.serverTimestamp(); update.ua = clean(req.get('user-agent') || '', 200); }
         if (completed) update.completedAt = FieldValue.serverTimestamp();
         tx.set(ref, update, { merge: true });
@@ -265,4 +306,4 @@ exports.submitSurvey = onRequest(
   }
 );
 
-if (process.env.SURVEY_TEST) Object.assign(exports, { _validateAnswers: validateAnswers, _validateEvents: validateEvents, _validateDevice: validateDevice });
+if (process.env.SURVEY_TEST) Object.assign(exports, { _validateAnswers: validateAnswers, _validateEvents: validateEvents, _validateDevice: validateDevice, _parseUa: parseUa });
