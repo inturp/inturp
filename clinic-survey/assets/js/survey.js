@@ -171,20 +171,18 @@
   /* screens */
   function renderIntro() {
     idx = -1; setProgress(); setNav(false);
-    const I = DATA.intro, n = visible().filter(q => q.type !== 'contact').length;
+    const I = DATA.intro;
     swap(`<section class="sv-intro"><div class="sv-intro-copy">
       <span class="eyebrow"><i class="status-dot"></i>${esc(I.eyebrow)}</span>
       <h1>${esc(I.title)}</h1>
       <p class="lead">${esc(I.lead)}</p>
       <div class="sv-chips">
         <span class="sv-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${esc(UI.minutes)}</span>
-        <span class="sv-chip"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>${esc(UI.count.replace('{n}', n))}</span>
         <span class="sv-chip"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>${esc(UI.private)}</span>
       </div>
       <div class="sv-start"><button type="button" class="btn btn-solid" id="svGo">${esc(I.start)}</button><p class="sv-note">${esc(I.note)}</p></div>
     </div></section>`, 1);
     $('#svGo').addEventListener('click', () => { startedAt = Date.now(); track('start'); go(0, 1); });
-    $('#svGo').focus({ preventScroll: true });
   }
 
   function optionsHtml(q) {

@@ -240,8 +240,8 @@
         "en": "The idea"
       },
       "q": {
-        "ar": "ما رأيك بإنشاء منصة رقمية موحدة للعيادات البيطرية في فلسطين؟",
-        "en": "What do you think of a unified digital platform for veterinary clinics in Palestine?"
+        "ar": "ما رأيك بإنشاء منصة رقمية موحدة للعيادات البيطرية في بلدك؟",
+        "en": "What do you think of a unified digital platform for veterinary clinics in your country?"
       },
       "hint": {
         "ar": "تتيح لأصحاب الحيوانات اكتشاف العيادات القريبة، وحجز المواعيد، وتلقي التذكيرات، مع احتفاظ كل عيادة بملفاتها وبياناتها الخاصة.",
@@ -350,8 +350,8 @@
         "en": "Subscription"
       },
       "q": {
-        "ar": "ما المبلغ الذي تعتبره مناسبًا للاشتراك الشهري ببرنامج متكامل لإدارة عيادتك؟",
-        "en": "What monthly subscription do you consider fair for complete software to run your clinic?"
+        "ar": "ما المبلغ الذي تعتبره مناسبًا للاشتراك الشهري ببرنامج متكامل لإدارة عيادتك (بالدولار الأمريكي)؟",
+        "en": "What monthly subscription do you consider fair for complete software to run your clinic (in US dollars)?"
       },
       "hint": {
         "ar": "بافتراض أن البرنامج يشمل الخدمات التي تحتاجها، والتحديثات والدعم الفني.",
@@ -359,34 +359,29 @@
       },
       "options": [
         {
-          "v": "free",
-          "ar": "أفضل أن يكون مجانيًا",
-          "en": "I would prefer it to be free"
+          "v": "up_to_15",
+          "ar": "حتى 15 دولارًا شهريًا",
+          "en": "Up to $15 per month"
         },
         {
-          "v": "up_to_50",
-          "ar": "حتى 50 شيكل شهريًا",
-          "en": "Up to 50 NIS per month"
+          "v": "16_30",
+          "ar": "16–30 دولارًا شهريًا",
+          "en": "$16–30 per month"
         },
         {
-          "v": "51_100",
-          "ar": "51–100 شيكل شهريًا",
-          "en": "51–100 NIS per month"
+          "v": "31_60",
+          "ar": "31–60 دولارًا شهريًا",
+          "en": "$31–60 per month"
         },
         {
-          "v": "101_200",
-          "ar": "101–200 شيكل شهريًا",
-          "en": "101–200 NIS per month"
+          "v": "61_100",
+          "ar": "61–100 دولار شهريًا",
+          "en": "$61–100 per month"
         },
         {
-          "v": "201_350",
-          "ar": "201–350 شيكل شهريًا",
-          "en": "201–350 NIS per month"
-        },
-        {
-          "v": "over_350",
-          "ar": "أكثر من 350 شيكل شهريًا",
-          "en": "More than 350 NIS per month"
+          "v": "over_100",
+          "ar": "أكثر من 100 دولار شهريًا",
+          "en": "More than $100 per month"
         },
         {
           "v": "depends",

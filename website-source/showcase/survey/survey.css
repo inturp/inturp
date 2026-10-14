@@ -20,15 +20,18 @@ body{background:var(--background)}
 .sv-card.swap{animation:svIn .4s var(--motion-ease) both}
 @keyframes svIn{from{opacity:0;transform:translateX(var(--dx))}to{opacity:1;transform:none}}
 
-/* intro */
-.sv-intro h1{letter-spacing:-.045em;font-size:clamp(38px,7vw,64px);font-weight:500;line-height:1.1;margin:20px 0 20px;text-wrap:balance}
-.sv-intro .lead{font-size:clamp(16.5px,1.5vw,18.5px);line-height:1.85;color:var(--muted-foreground)}
-.sv-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
-.sv-chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--border);border-radius:99px;font-size:13.5px;color:var(--muted-foreground)}
+/* intro: centred */
+.sv-card:has(.sv-intro){max-width:760px}
+.sv-intro{text-align:center;display:flex;flex-direction:column;align-items:center}
+.sv-intro-copy{display:flex;flex-direction:column;align-items:center}
+.sv-intro h1{letter-spacing:-.045em;font-size:clamp(36px,6.4vw,60px);font-weight:500;line-height:1.12;margin:22px 0 22px;text-wrap:balance}
+.sv-intro .lead{max-width:600px;font-size:clamp(16.5px,1.5vw,18.5px);line-height:1.9;color:var(--muted-foreground);text-wrap:balance}
+.sv-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px}
+.sv-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--border);border-radius:99px;font-size:13.5px;color:var(--muted-foreground)}
 .sv-chip svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.sv-start{margin-top:34px}
-.sv-start .btn{min-height:56px;padding-inline:36px;font-size:16px}
-.sv-note{margin-top:16px;font-size:13.5px;color:var(--muted-foreground);line-height:1.7}
+.sv-start{margin-top:36px;display:flex;flex-direction:column;align-items:center}
+.sv-start .btn{min-height:56px;padding-inline:40px;font-size:16px}
+.sv-note{margin-top:18px;max-width:520px;font-size:13.5px;color:var(--muted-foreground);line-height:1.8;text-wrap:balance}
 
 /* question */
 .sv-meta{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted-foreground);margin-bottom:18px}

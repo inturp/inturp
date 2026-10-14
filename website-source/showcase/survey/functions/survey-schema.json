@@ -95,12 +95,11 @@
    "type": "single",
    "required": false,
    "options": [
-    "free",
-    "up_to_50",
-    "51_100",
-    "101_200",
-    "201_350",
-    "over_350",
+    "up_to_15",
+    "16_30",
+    "31_60",
+    "61_100",
+    "over_100",
     "depends"
    ],
    "exclusive": []
