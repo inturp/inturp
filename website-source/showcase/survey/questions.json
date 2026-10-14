@@ -1,225 +1,453 @@
 {
   "_help": "Edit the questions here, then run: python3 website-source/showcase/build_survey.py. Types: single, multi (optional max), scale (1-5), short, long, contact. 'showIf': {id, in:[values]} shows a question only after a matching answer. 'required' defaults to true. Option values (v) are the codes saved in the results, keep them stable.",
   "intro": {
-    "eyebrow": {"ar": "استبيان العيادات البيطرية", "en": "Veterinary clinics survey"},
-    "title": {"ar": "ساعدنا نفهم عيادتك.", "en": "Help us understand your clinic."},
+    "eyebrow": {
+      "ar": "استبيان العيادات البيطرية",
+      "en": "Veterinary clinics survey"
+    },
+    "title": {
+      "ar": "ساعدنا نفهم عيادتك.",
+      "en": "Help us understand your clinic."
+    },
     "lead": {
-      "ar": "نبني برنامجاً لإدارة العيادات البيطرية بالعربية والإنجليزية، ونريد أن نبنيه على احتياجكم الفعلية لا على تخميننا. استبيان قصير، وكل إجابة تصنع فرقاً.",
-      "en": "We are building veterinary clinic software in Arabic and English, and we want it shaped by what clinics actually need, not by our guesses. A short survey, and every answer counts."
+      "ar": "نبني برنامجًا لإدارة العيادات البيطرية بالعربية والإنجليزية، ونريد أن نبنيه على احتياجكم الفعلية لا على تخميننا. أسئلة قصيرة، وكل إجابة تصنع فرقًا.",
+      "en": "We are building veterinary clinic software in Arabic and English, and we want it shaped by what clinics actually need, not by our guesses. A few short questions, and every answer counts."
     },
     "note": {
-      "ar": "لا نطلب اسمك أو رقمك إلا إن أردت أنت ذلك في الخطوة الأخيرة.",
-      "en": "We only ask for your name or number if you choose to share them in the last step."
+      "ar": "لا نطلب اسمك ولا بيانات تواصل. شكرًا لوقتك.",
+      "en": "We do not ask for your name or contact details. Thank you for your time."
     },
-    "start": {"ar": "ابدأ الاستبيان", "en": "Start the survey"}
+    "start": {
+      "ar": "ابدأ الاستبيان",
+      "en": "Start the survey"
+    }
   },
   "done": {
-    "title": {"ar": "شكراً لك، إجاباتك وصلتنا.", "en": "Thank you, your answers are in."},
+    "title": {
+      "ar": "شكراً لك، إجاباتك وصلتنا.",
+      "en": "Thank you, your answers are in."
+    },
     "lead": {
       "ar": "كل إجابة نقرؤها ونستخدمها لترتيب أولويات ما نبنيه. نقدّر وقتك ووقت عيادتك.",
       "en": "We read every answer and use it to set what we build first. We appreciate your time and your clinic's."
     },
-    "next_title": {"ar": "ماذا بعد؟", "en": "What happens next?"},
-    "next": {
-      "ar": ["نجمع الإجابات من عيادات كثيرة ونقرأ الاتجاهات.", "إن تركت وسيلة تواصل فسنراسلك بخصوص عرض مختصر فقط.", "تستطيع أن تشارك الاستبيان مع زميل لك."],
-      "en": ["We gather answers from many clinics and look for patterns.", "If you left contact details, we will only write to you about a short demo.", "Feel free to share the survey with a colleague."]
+    "next_title": {
+      "ar": "ماذا بعد؟",
+      "en": "What happens next?"
     },
-    "share": {"ar": "شارك الاستبيان", "en": "Share the survey"},
-    "home": {"ar": "تعرّف على VetCharted", "en": "Meet VetCharted"}
+    "next": {
+      "ar": [
+        "نجمع الإجابات من عيادات كثيرة ونقرأ الاتجاهات.",
+        "نستخدمها لتحديد ما نبنيه أولًا وكيف نسعّره.",
+        "تستطيع مشاركة الاستبيان مع زميل لك."
+      ],
+      "en": [
+        "We gather answers from many clinics and look for patterns.",
+        "We use them to decide what to build first and how to price it.",
+        "Feel free to share the survey with a colleague."
+      ]
+    },
+    "share": {
+      "ar": "شارك الاستبيان",
+      "en": "Share the survey"
+    },
+    "home": {
+      "ar": "تعرّف على VetCharted",
+      "en": "Meet VetCharted"
+    }
   },
   "questions": [
     {
-      "id": "clinic_type", "type": "single",
-      "section": {"ar": "عن عيادتك", "en": "About your clinic"},
-      "q": {"ar": "ما نوع عيادتك؟", "en": "What kind of clinic do you run?"},
+      "id": "uses_software",
+      "type": "single",
+      "section": {
+        "ar": "كيف تعملون اليوم",
+        "en": "How you work today"
+      },
+      "q": {
+        "ar": "هل تستخدم عيادتكم حاليًا برنامجًا لإدارة العمل؟",
+        "en": "Does your clinic currently use software to manage its work?"
+      },
       "options": [
-        {"v": "small", "ar": "حيوانات أليفة (قطط، كلاب…)", "en": "Small animals (cats, dogs…)"},
-        {"v": "large", "ar": "حيوانات المزرعة والمواشي", "en": "Farm animals and livestock"},
-        {"v": "mixed", "ar": "عيادة مختلطة", "en": "Mixed practice"},
-        {"v": "poultry", "ar": "دواجن وطيور", "en": "Poultry and birds"},
-        {"v": "other", "ar": "شيء آخر", "en": "Something else"}
+        {
+          "v": "vet_software",
+          "ar": "نعم، برنامج بيطري متخصص",
+          "en": "Yes, dedicated veterinary software"
+        },
+        {
+          "v": "general_software",
+          "ar": "نعم، برنامج محاسبة أو برنامج عام",
+          "en": "Yes, accounting or general-purpose software"
+        },
+        {
+          "v": "partial",
+          "ar": "جزئيًا، Excel أو أدوات متفرقة",
+          "en": "Partly: Excel or scattered tools"
+        },
+        {
+          "v": "manual",
+          "ar": "لا، نعتمد على الدفاتر والطرق اليدوية",
+          "en": "No, we rely on notebooks and manual methods"
+        }
       ]
     },
     {
-      "id": "vets", "type": "single",
-      "section": {"ar": "عن عيادتك", "en": "About your clinic"},
-      "q": {"ar": "كم عدد الأطباء البيطريين في عيادتك؟", "en": "How many vets work in your clinic?"},
+      "id": "records_today",
+      "type": "single",
+      "section": {
+        "ar": "كيف تعملون اليوم",
+        "en": "How you work today"
+      },
+      "q": {
+        "ar": "كيف تديرون حاليًا ملفات الحيوانات وسجلاتها الطبية؟",
+        "en": "How do you currently manage animal files and medical records?"
+      },
       "options": [
-        {"v": "1", "ar": "طبيب واحد", "en": "Just one"},
-        {"v": "2_3", "ar": "2 إلى 3", "en": "2 to 3"},
-        {"v": "4_7", "ar": "4 إلى 7", "en": "4 to 7"},
-        {"v": "8_plus", "ar": "8 فأكثر", "en": "8 or more"}
+        {
+          "v": "paper",
+          "ar": "ملفات ورقية ودفاتر",
+          "en": "Paper files and notebooks"
+        },
+        {
+          "v": "excel_phone",
+          "ar": "Excel أو الهاتف",
+          "en": "Excel or the phone"
+        },
+        {
+          "v": "electronic",
+          "ar": "برنامج إلكتروني",
+          "en": "Electronic software"
+        },
+        {
+          "v": "mixed",
+          "ar": "مزيج من أكثر من طريقة",
+          "en": "A mix of more than one method"
+        }
       ]
     },
     {
-      "id": "daily_cases", "type": "single",
-      "section": {"ar": "عن عيادتك", "en": "About your clinic"},
-      "q": {"ar": "كم حالة تستقبل في اليوم تقريباً؟", "en": "Roughly how many cases do you see in a day?"},
+      "id": "top_problems",
+      "type": "multi",
+      "max": 2,
+      "section": {
+        "ar": "التحديات",
+        "en": "Challenges"
+      },
+      "q": {
+        "ar": "ما أكبر مشكلة تواجهكم في إدارة العيادة؟",
+        "en": "What is the biggest problem you face running your clinic?"
+      },
+      "hint": {
+        "ar": "اختر بحد أقصى مشكلتين.",
+        "en": "Choose up to two."
+      },
       "options": [
-        {"v": "under_10", "ar": "أقل من 10", "en": "Fewer than 10"},
-        {"v": "10_25", "ar": "من 10 إلى 25", "en": "10 to 25"},
-        {"v": "26_50", "ar": "من 26 إلى 50", "en": "26 to 50"},
-        {"v": "over_50", "ar": "أكثر من 50", "en": "More than 50"}
+        {
+          "v": "records",
+          "ar": "ضياع أو صعوبة الوصول إلى السجلات الطبية",
+          "en": "Lost records or difficulty reaching medical records"
+        },
+        {
+          "v": "vaccines",
+          "ar": "صعوبة متابعة التطعيمات والمراجعات",
+          "en": "Difficulty following up on vaccinations and revisits"
+        },
+        {
+          "v": "appointments",
+          "ar": "تنظيم المواعيد والتواصل مع أصحاب الحيوانات",
+          "en": "Organising appointments and communicating with animal owners"
+        },
+        {
+          "v": "billing",
+          "ar": "الفواتير والحسابات المالية",
+          "en": "Invoices and financial accounts"
+        },
+        {
+          "v": "stock",
+          "ar": "إدارة الأدوية والمخزون والنواقص",
+          "en": "Managing medicines, stock and shortages"
+        },
+        {
+          "v": "reports",
+          "ar": "إعداد التقارير ومعرفة أداء العيادة",
+          "en": "Reporting and knowing how the clinic performs"
+        },
+        {
+          "v": "none",
+          "ar": "لا توجد مشكلة كبيرة حاليًا",
+          "en": "No major problem at the moment",
+          "exclusive": true
+        },
+        {
+          "v": "other",
+          "ar": "أخرى",
+          "en": "Other"
+        }
       ]
     },
     {
-      "id": "location", "type": "short",
-      "section": {"ar": "عن عيادتك", "en": "About your clinic"},
-      "q": {"ar": "في أي دولة ومدينة تعمل؟", "en": "Which country and city are you in?"},
-      "placeholder": {"ar": "مثال: فلسطين، نابلس", "en": "For example: Palestine, Nablus"}
-    },
-    {
-      "id": "records_today", "type": "multi",
-      "section": {"ar": "كيف تعمل اليوم", "en": "How you work today"},
-      "q": {"ar": "كيف تحفظ ملفات الحيوانات اليوم؟", "en": "How do you keep animal records today?"},
-      "hint": {"ar": "اختر كل ما ينطبق.", "en": "Choose all that apply."},
+      "id": "unified_platform_view",
+      "type": "single",
+      "section": {
+        "ar": "الفكرة",
+        "en": "The idea"
+      },
+      "q": {
+        "ar": "ما رأيك ببرنامج موحد لإدارة العيادة، مع إمكانية وصول صاحب الحيوان إلى خدماته من خلال حساب خاص به؟",
+        "en": "What do you think of one clinic-management program that also lets animal owners reach their services through their own account?"
+      },
+      "hint": {
+        "ar": "مثل إدارة العيادة من جهة، وتمكين صاحب الحيوان من متابعة سجلات حيواناته ومواعيدها من جهة أخرى.",
+        "en": "Clinic management on one side, and owners following their animals' records and appointments on the other."
+      },
       "options": [
-        {"v": "paper", "ar": "دفاتر وأوراق", "en": "Paper notebooks and files"},
-        {"v": "office", "ar": "إكسل أو وورد", "en": "Excel or Word"},
-        {"v": "chat", "ar": "واتساب وصور على الهاتف", "en": "WhatsApp and phone photos"},
-        {"v": "software", "ar": "برنامج مخصص للعيادات", "en": "Dedicated clinic software"},
-        {"v": "none", "ar": "لا شيء منظّم", "en": "Nothing organised"}
+        {
+          "v": "excellent",
+          "ar": "فكرة ممتازة ومفيدة",
+          "en": "An excellent and useful idea"
+        },
+        {
+          "v": "conditional_privacy",
+          "ar": "مفيدة بشرط استقلال بيانات كل عيادة وخصوصيتها",
+          "en": "Useful, provided each clinic's data stays independent and private"
+        },
+        {
+          "v": "clinic_only",
+          "ar": "أفضل برنامجًا للعيادة فقط، دون حساب لأصحاب الحيوانات",
+          "en": "I prefer clinic-only software, without owner accounts"
+        },
+        {
+          "v": "no_need",
+          "ar": "لا أرى حاجة لها حاليًا",
+          "en": "I do not see a need for it at the moment"
+        },
+        {
+          "v": "need_info",
+          "ar": "أحتاج إلى معرفة المزيد قبل الحكم",
+          "en": "I need to know more before judging"
+        }
       ]
     },
     {
-      "id": "uses_software", "type": "single",
-      "section": {"ar": "كيف تعمل اليوم", "en": "How you work today"},
-      "q": {"ar": "هل تستخدم برنامجاً لإدارة العيادة؟", "en": "Do you use software to run your clinic?"},
+      "id": "national_platform_view",
+      "type": "single",
+      "section": {
+        "ar": "الفكرة",
+        "en": "The idea"
+      },
+      "q": {
+        "ar": "ما رأيك بإنشاء منصة رقمية موحدة للعيادات البيطرية في فلسطين؟",
+        "en": "What do you think of a unified digital platform for veterinary clinics in Palestine?"
+      },
+      "hint": {
+        "ar": "تتيح لأصحاب الحيوانات اكتشاف العيادات القريبة، وحجز المواعيد، وتلقي التذكيرات، مع احتفاظ كل عيادة بملفاتها وبياناتها الخاصة.",
+        "en": "It lets animal owners discover nearby clinics, book appointments and receive reminders, while every clinic keeps its own files and data."
+      },
       "options": [
-        {"v": "yes_happy", "ar": "نعم، وأنا راضٍ عنه", "en": "Yes, and I am happy with it"},
-        {"v": "yes_unhappy", "ar": "نعم، لكنه لا يلبّي حاجتي", "en": "Yes, but it does not meet my needs"},
-        {"v": "planning", "ar": "لا، وأفكر في ذلك", "en": "No, but I am thinking about it"},
-        {"v": "no", "ar": "لا، ولا أخطط لذلك", "en": "No, and I am not planning to"}
+        {
+          "v": "excellent_independent",
+          "ar": "فكرة ممتازة، إذا كان لكل عيادة حساب مستقل وبيانات محمية",
+          "en": "An excellent idea, if every clinic has an independent account and protected data"
+        },
+        {
+          "v": "helps_new_clients",
+          "ar": "مفيدة إذا ساعدت في جذب مراجعين جدد",
+          "en": "Useful if it helps attract new clients"
+        },
+        {
+          "v": "own_only",
+          "ar": "أفضل برنامجًا مستقلًا لعيادتي فقط",
+          "en": "I prefer an independent program for my clinic only"
+        },
+        {
+          "v": "privacy_competition",
+          "ar": "لدي مخاوف تتعلق بالخصوصية والمنافسة",
+          "en": "I have concerns about privacy and competition"
+        },
+        {
+          "v": "not_needed",
+          "ar": "لا أرى أنها ضرورية حاليًا",
+          "en": "I do not think it is necessary at the moment"
+        }
       ]
     },
     {
-      "id": "software_name", "type": "short", "required": false,
-      "section": {"ar": "كيف تعمل اليوم", "en": "How you work today"},
-      "showIf": {"id": "uses_software", "in": ["yes_happy", "yes_unhappy"]},
-      "q": {"ar": "ما اسم البرنامج الذي تستخدمه؟", "en": "Which software do you use?"},
-      "hint": {"ar": "اختياري.", "en": "Optional."},
-      "placeholder": {"ar": "اسم البرنامج", "en": "Software name"}
-    },
-    {
-      "id": "challenges", "type": "multi", "max": 3,
-      "section": {"ar": "كيف تعمل اليوم", "en": "How you work today"},
-      "q": {"ar": "ما أكبر ثلاث صعوبات في عملك اليومي؟", "en": "What are your three biggest daily challenges?"},
-      "hint": {"ar": "اختر حتى 3.", "en": "Pick up to 3."},
+      "id": "top_services",
+      "type": "multi",
+      "max": 3,
+      "section": {
+        "ar": "الخدمات",
+        "en": "Services"
+      },
+      "q": {
+        "ar": "ما الخدمات التي ستفيد عيادتكم أكثر؟",
+        "en": "Which services would help your clinic the most?"
+      },
+      "hint": {
+        "ar": "اختر بحد أقصى 3 خدمات.",
+        "en": "Choose up to three services."
+      },
       "options": [
-        {"v": "history", "ar": "الوصول إلى تاريخ الحيوان المرضي", "en": "Finding an animal's history"},
-        {"v": "vaccines", "ar": "متابعة التطعيمات", "en": "Keeping up with vaccinations"},
-        {"v": "billing", "ar": "الفواتير والمدفوعات", "en": "Invoices and payments"},
-        {"v": "stock", "ar": "المخزون والأدوية", "en": "Stock and medicines"},
-        {"v": "appointments", "ar": "المواعيد وعدم الحضور", "en": "Appointments and no-shows"},
-        {"v": "staff", "ar": "التنسيق بين الفريق", "en": "Coordinating the team"},
-        {"v": "reports", "ar": "التقارير والحسابات", "en": "Reports and accounts"},
-        {"v": "owners", "ar": "التواصل مع أصحاب الحيوانات", "en": "Communicating with animal owners"}
+        {
+          "v": "records",
+          "ar": "ملفات طبية متكاملة للحيوانات",
+          "en": "Complete medical files for animals"
+        },
+        {
+          "v": "reminders",
+          "ar": "تذكير أصحاب الحيوانات بالتطعيمات والمراجعات",
+          "en": "Reminding owners about vaccinations and revisits"
+        },
+        {
+          "v": "booking",
+          "ar": "المواعيد والحجوزات الإلكترونية",
+          "en": "Appointments and online booking"
+        },
+        {
+          "v": "billing",
+          "ar": "الفواتير والحسابات والتقارير المالية",
+          "en": "Invoices, accounts and financial reports"
+        },
+        {
+          "v": "inventory",
+          "ar": "إدارة الأدوية والمخزون",
+          "en": "Managing medicines and stock"
+        },
+        {
+          "v": "prescriptions",
+          "ar": "إرسال الوصفات والتقارير لأصحاب الحيوانات",
+          "en": "Sending prescriptions and reports to owners"
+        },
+        {
+          "v": "visibility",
+          "ar": "زيادة ظهور العيادة واستقبال مراجعين جدد",
+          "en": "More visibility for the clinic and new clients"
+        },
+        {
+          "v": "none",
+          "ar": "لا أحتاج إلى هذه الخدمات حاليًا",
+          "en": "I do not need these services at the moment",
+          "exclusive": true
+        },
+        {
+          "v": "other",
+          "ar": "أخرى",
+          "en": "Other"
+        }
       ]
     },
     {
-      "id": "reminders", "type": "multi",
-      "section": {"ar": "كيف تعمل اليوم", "en": "How you work today"},
-      "q": {"ar": "كيف تذكّر أصحاب الحيوانات بالتطعيمات والمواعيد؟", "en": "How do you remind owners about vaccines and appointments?"},
-      "hint": {"ar": "اختر كل ما ينطبق.", "en": "Choose all that apply."},
+      "id": "monthly_price",
+      "type": "single",
+      "section": {
+        "ar": "الاشتراك",
+        "en": "Subscription"
+      },
+      "q": {
+        "ar": "ما المبلغ الذي تعتبره مناسبًا للاشتراك الشهري ببرنامج متكامل لإدارة عيادتك؟",
+        "en": "What monthly subscription do you consider fair for complete software to run your clinic?"
+      },
+      "hint": {
+        "ar": "بافتراض أن البرنامج يشمل الخدمات التي تحتاجها، والتحديثات والدعم الفني.",
+        "en": "Assuming it includes the services you need, updates and technical support."
+      },
       "options": [
-        {"v": "call", "ar": "اتصال هاتفي", "en": "Phone calls"},
-        {"v": "whatsapp", "ar": "رسائل واتساب يدوية", "en": "WhatsApp messages, by hand"},
-        {"v": "sms", "ar": "رسائل نصية SMS", "en": "SMS"},
-        {"v": "app", "ar": "إشعارات تطبيق", "en": "App notifications"},
-        {"v": "none", "ar": "لا أذكّرهم", "en": "I don't remind them"}
+        {
+          "v": "free",
+          "ar": "أفضل أن يكون مجانيًا",
+          "en": "I would prefer it to be free"
+        },
+        {
+          "v": "up_to_50",
+          "ar": "حتى 50 شيكل شهريًا",
+          "en": "Up to 50 NIS per month"
+        },
+        {
+          "v": "51_100",
+          "ar": "51–100 شيكل شهريًا",
+          "en": "51–100 NIS per month"
+        },
+        {
+          "v": "101_200",
+          "ar": "101–200 شيكل شهريًا",
+          "en": "101–200 NIS per month"
+        },
+        {
+          "v": "201_350",
+          "ar": "201–350 شيكل شهريًا",
+          "en": "201–350 NIS per month"
+        },
+        {
+          "v": "over_350",
+          "ar": "أكثر من 350 شيكل شهريًا",
+          "en": "More than 350 NIS per month"
+        },
+        {
+          "v": "depends",
+          "ar": "يعتمد على الخدمات المقدمة",
+          "en": "It depends on the services offered"
+        }
       ]
     },
     {
-      "id": "top_features", "type": "multi", "max": 4,
-      "section": {"ar": "ما الذي يهمك", "en": "What matters to you"},
-      "q": {"ar": "ما أهم أربع مزايا تريدها في برنامج العيادة؟", "en": "Which four features matter most in clinic software?"},
-      "hint": {"ar": "اختر حتى 4.", "en": "Pick up to 4."},
+      "id": "adoption_stance",
+      "type": "single",
+      "section": {
+        "ar": "موقفكم",
+        "en": "Your position"
+      },
+      "q": {
+        "ar": "إذا توفر برنامج مناسب لاحتياجات عيادتكم، ما موقفكم من استخدامه؟",
+        "en": "If suitable software for your clinic's needs were available, what would be your position on using it?"
+      },
       "options": [
-        {"v": "records", "ar": "ملفات رقمية للحيوانات والفحوصات", "en": "Digital animal records and exams"},
-        {"v": "wa_reminders", "ar": "تذكيرات واتساب تلقائية", "en": "Automatic WhatsApp reminders"},
-        {"v": "invoices", "ar": "فواتير وطباعة PDF", "en": "Invoices and PDF printing"},
-        {"v": "inventory", "ar": "إدارة المخزون", "en": "Inventory management"},
-        {"v": "calendar", "ar": "تقويم المواعيد", "en": "Appointment calendar"},
-        {"v": "owner_app", "ar": "تطبيق لصاحب الحيوان", "en": "An app for animal owners"},
-        {"v": "accounting", "ar": "محاسبة وتقارير", "en": "Accounting and reports"},
-        {"v": "multi_branch", "ar": "عدة فروع", "en": "Multiple branches"},
-        {"v": "shared_record", "ar": "سجل مشترك بين العيادات بموافقة المالك", "en": "A record shared between clinics with the owner's consent"}
+        {
+          "v": "ready_to_try",
+          "ar": "مستعد لتجربته إذا كان مناسبًا",
+          "en": "Ready to try it if it fits"
+        },
+        {
+          "v": "need_demo",
+          "ar": "مهتم، لكن أحتاج إلى عرض توضيحي",
+          "en": "Interested, but I need a demonstration"
+        },
+        {
+          "v": "maybe_future",
+          "ar": "قد أستخدمه مستقبلًا",
+          "en": "I may use it in the future"
+        },
+        {
+          "v": "keep_current",
+          "ar": "أفضل الاستمرار بالنظام الحالي",
+          "en": "I prefer to keep the current system"
+        },
+        {
+          "v": "not_interested",
+          "ar": "لا أرغب باستخدام برنامج حاليًا",
+          "en": "I do not want to use software at the moment"
+        }
       ]
     },
     {
-      "id": "platforms", "type": "multi",
-      "section": {"ar": "ما الذي يهمك", "en": "What matters to you"},
-      "q": {"ar": "على أي أجهزة تفضّل استخدامه؟", "en": "Where would you like to use it?"},
-      "hint": {"ar": "اختر كل ما ينطبق.", "en": "Choose all that apply."},
-      "options": [
-        {"v": "windows", "ar": "حاسوب ويندوز", "en": "Windows computer"},
-        {"v": "mac", "ar": "ماك", "en": "Mac"},
-        {"v": "android", "ar": "هاتف أندرويد", "en": "Android phone"},
-        {"v": "iphone", "ar": "آيفون", "en": "iPhone"},
-        {"v": "web", "ar": "متصفح الويب", "en": "Web browser"}
-      ]
-    },
-    {
-      "id": "arabic_importance", "type": "scale",
-      "section": {"ar": "ما الذي يهمك", "en": "What matters to you"},
-      "q": {"ar": "ما أهمية أن يكون البرنامج بالعربية بالكامل؟", "en": "How important is a fully Arabic interface?"},
-      "min_label": {"ar": "غير مهم", "en": "Not important"},
-      "max_label": {"ar": "ضروري جداً", "en": "Essential"}
-    },
-    {
-      "id": "pricing_model", "type": "single",
-      "section": {"ar": "التسعير", "en": "Pricing"},
-      "q": {"ar": "ما طريقة الدفع التي تفضّلها؟", "en": "How would you prefer to pay?"},
-      "options": [
-        {"v": "monthly", "ar": "اشتراك شهري", "en": "A monthly subscription"},
-        {"v": "yearly", "ar": "اشتراك سنوي", "en": "A yearly subscription"},
-        {"v": "one_time", "ar": "ترخيص بدفعة واحدة", "en": "A one-time licence"},
-        {"v": "per_feature", "ar": "أدفع على ما أستخدمه من مزايا", "en": "Pay only for the features I use"}
-      ]
-    },
-    {
-      "id": "budget", "type": "single",
-      "section": {"ar": "التسعير", "en": "Pricing"},
-      "q": {"ar": "ما الميزانية الشهرية التي تراها مناسبة لعيادتك؟", "en": "What monthly budget feels right for your clinic?"},
-      "hint": {"ar": "بالدولار الأمريكي تقريباً.", "en": "Approximately, in US dollars."},
-      "options": [
-        {"v": "under_15", "ar": "أقل من 15$", "en": "Under $15"},
-        {"v": "15_30", "ar": "15$ إلى 30$", "en": "$15 to $30"},
-        {"v": "30_60", "ar": "30$ إلى 60$", "en": "$30 to $60"},
-        {"v": "60_100", "ar": "60$ إلى 100$", "en": "$60 to $100"},
-        {"v": "over_100", "ar": "أكثر من 100$", "en": "Over $100"},
-        {"v": "unsure", "ar": "لست متأكداً", "en": "Not sure yet"}
-      ]
-    },
-    {
-      "id": "switch_reason", "type": "long", "required": false,
-      "section": {"ar": "كلمتك الأخيرة", "en": "Your last word"},
-      "q": {"ar": "ما الذي سيجعلك تنتقل من طريقتك الحالية إلى برنامج جديد؟", "en": "What would make you switch from your current way of working to new software?"},
-      "hint": {"ar": "اختياري، لكنه من أثمن ما نقرأ.", "en": "Optional, but it is among the most valuable things we read."},
-      "placeholder": {"ar": "اكتب بحرية…", "en": "Write freely…"}
-    },
-    {
-      "id": "demo", "type": "single",
-      "section": {"ar": "كلمتك الأخيرة", "en": "Your last word"},
-      "q": {"ar": "هل تحب أن نرتب لك عرضاً قصيراً لـ VetCharted؟", "en": "Would you like a short demo of VetCharted?"},
-      "options": [
-        {"v": "yes", "ar": "نعم، يسعدني", "en": "Yes, I would love that"},
-        {"v": "later", "ar": "ربما لاحقاً", "en": "Maybe later"},
-        {"v": "no", "ar": "لا، شكراً", "en": "No, thank you"}
-      ]
-    },
-    {
-      "id": "contact", "type": "contact", "required": false,
-      "section": {"ar": "كلمتك الأخيرة", "en": "Your last word"},
-      "q": {"ar": "إن أحببت أن نتواصل معك، اترك بياناتك.", "en": "If you would like us to get in touch, leave your details."},
-      "hint": {"ar": "كل الحقول اختيارية، ولن نستخدمها إلا للتواصل بخصوص هذا الاستبيان.", "en": "Every field is optional, and we use them only to follow up on this survey."},
-      "fields": [
-        {"id": "name", "type": "text", "ar": "الاسم", "en": "Name", "autocomplete": "name"},
-        {"id": "clinic", "type": "text", "ar": "اسم العيادة", "en": "Clinic name", "autocomplete": "organization"},
-        {"id": "phone", "type": "tel", "ar": "واتساب / هاتف", "en": "WhatsApp / phone", "autocomplete": "tel"},
-        {"id": "email", "type": "email", "ar": "البريد الإلكتروني", "en": "Email", "autocomplete": "email"}
-      ],
-      "consent": {"ar": "أوافق أن تتواصلوا معي بخصوص هذا الاستبيان.", "en": "I agree that you may contact me about this survey."}
+      "id": "wish",
+      "type": "long",
+      "required": false,
+      "section": {
+        "ar": "كلمتك الأخيرة",
+        "en": "Your last word"
+      },
+      "q": {
+        "ar": "هل لديك ملاحظة أو احتياج تتمنى توفره في أي برنامج للعيادات البيطرية؟",
+        "en": "Is there a remark or a need you wish any veterinary clinic software provided?"
+      },
+      "hint": {
+        "ar": "اختياري — اذكر أهم شيء تتمنى أن يحلّه البرنامج لك.",
+        "en": "Optional — tell us the most important thing you wish the software would solve for you."
+      },
+      "placeholder": {
+        "ar": "اكتب بحرية…",
+        "en": "Write freely…"
+      }
     }
   ]
 }

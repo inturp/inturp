@@ -2,190 +2,126 @@
  "id": "vet-clinics-2026",
  "questions": [
   {
-   "id": "clinic_type",
-   "type": "single",
-   "required": true,
-   "options": [
-    "small",
-    "large",
-    "mixed",
-    "poultry",
-    "other"
-   ]
-  },
-  {
-   "id": "vets",
-   "type": "single",
-   "required": true,
-   "options": [
-    "1",
-    "2_3",
-    "4_7",
-    "8_plus"
-   ]
-  },
-  {
-   "id": "daily_cases",
-   "type": "single",
-   "required": true,
-   "options": [
-    "under_10",
-    "10_25",
-    "26_50",
-    "over_50"
-   ]
-  },
-  {
-   "id": "location",
-   "type": "short",
-   "required": true
-  },
-  {
-   "id": "records_today",
-   "type": "multi",
-   "required": true,
-   "options": [
-    "paper",
-    "office",
-    "chat",
-    "software",
-    "none"
-   ]
-  },
-  {
    "id": "uses_software",
    "type": "single",
    "required": true,
    "options": [
-    "yes_happy",
-    "yes_unhappy",
-    "planning",
-    "no"
-   ]
+    "vet_software",
+    "general_software",
+    "partial",
+    "manual"
+   ],
+   "exclusive": []
   },
   {
-   "id": "software_name",
-   "type": "short",
-   "required": false,
-   "showIf": {
-    "id": "uses_software",
-    "in": [
-     "yes_happy",
-     "yes_unhappy"
-    ]
-   }
+   "id": "records_today",
+   "type": "single",
+   "required": true,
+   "options": [
+    "paper",
+    "excel_phone",
+    "electronic",
+    "mixed"
+   ],
+   "exclusive": []
   },
   {
-   "id": "challenges",
+   "id": "top_problems",
    "type": "multi",
    "required": true,
-   "max": 3,
+   "max": 2,
    "options": [
-    "history",
+    "records",
     "vaccines",
+    "appointments",
     "billing",
     "stock",
-    "appointments",
-    "staff",
     "reports",
-    "owners"
-   ]
-  },
-  {
-   "id": "reminders",
-   "type": "multi",
-   "required": true,
-   "options": [
-    "call",
-    "whatsapp",
-    "sms",
-    "app",
+    "none",
+    "other"
+   ],
+   "exclusive": [
     "none"
    ]
   },
   {
-   "id": "top_features",
+   "id": "unified_platform_view",
+   "type": "single",
+   "required": true,
+   "options": [
+    "excellent",
+    "conditional_privacy",
+    "clinic_only",
+    "no_need",
+    "need_info"
+   ],
+   "exclusive": []
+  },
+  {
+   "id": "national_platform_view",
+   "type": "single",
+   "required": true,
+   "options": [
+    "excellent_independent",
+    "helps_new_clients",
+    "own_only",
+    "privacy_competition",
+    "not_needed"
+   ],
+   "exclusive": []
+  },
+  {
+   "id": "top_services",
    "type": "multi",
    "required": true,
-   "max": 4,
+   "max": 3,
    "options": [
     "records",
-    "wa_reminders",
-    "invoices",
+    "reminders",
+    "booking",
+    "billing",
     "inventory",
-    "calendar",
-    "owner_app",
-    "accounting",
-    "multi_branch",
-    "shared_record"
+    "prescriptions",
+    "visibility",
+    "none",
+    "other"
+   ],
+   "exclusive": [
+    "none"
    ]
   },
   {
-   "id": "platforms",
-   "type": "multi",
-   "required": true,
-   "options": [
-    "windows",
-    "mac",
-    "android",
-    "iphone",
-    "web"
-   ]
-  },
-  {
-   "id": "arabic_importance",
-   "type": "scale",
-   "required": true
-  },
-  {
-   "id": "pricing_model",
+   "id": "monthly_price",
    "type": "single",
    "required": true,
    "options": [
-    "monthly",
-    "yearly",
-    "one_time",
-    "per_feature"
-   ]
+    "free",
+    "up_to_50",
+    "51_100",
+    "101_200",
+    "201_350",
+    "over_350",
+    "depends"
+   ],
+   "exclusive": []
   },
   {
-   "id": "budget",
+   "id": "adoption_stance",
    "type": "single",
    "required": true,
    "options": [
-    "under_15",
-    "15_30",
-    "30_60",
-    "60_100",
-    "over_100",
-    "unsure"
-   ]
+    "ready_to_try",
+    "need_demo",
+    "maybe_future",
+    "keep_current",
+    "not_interested"
+   ],
+   "exclusive": []
   },
   {
-   "id": "switch_reason",
+   "id": "wish",
    "type": "long",
    "required": false
-  },
-  {
-   "id": "demo",
-   "type": "single",
-   "required": true,
-   "options": [
-    "yes",
-    "later",
-    "no"
-   ]
-  },
-  {
-   "id": "contact",
-   "type": "contact",
-   "required": false,
-   "fields": [
-    "name",
-    "clinic",
-    "phone",
-    "email"
-   ]
   }
  ]
 }

@@ -146,7 +146,8 @@
     el.textContent = UI.upto.replace('{n}', q.max) + ' · ' + UI.selected.replace('{n}', n);
     card.querySelectorAll('.sv-opt').forEach(b => {
       const on = b.getAttribute('aria-checked') === 'true';
-      b.setAttribute('aria-disabled', String(!on && n >= q.max));
+      const ex = q.options.find(o => o.v === b.dataset.v);
+      b.setAttribute('aria-disabled', String(!on && n >= q.max && !(ex && ex.exclusive)));
     });
   }
 
@@ -163,9 +164,12 @@
       card.querySelectorAll('.sv-opt').forEach(b => b.addEventListener('click', () => {
         if (b.getAttribute('aria-disabled') === 'true') return;
         const cur = new Set(answers[q.id] || []);
-        cur.has(b.dataset.v) ? cur.delete(b.dataset.v) : cur.add(b.dataset.v);
+        const excl = new Set(q.options.filter(o => o.exclusive).map(o => o.v));
+        if (cur.has(b.dataset.v)) cur.delete(b.dataset.v);
+        else if (excl.has(b.dataset.v)) { cur.clear(); cur.add(b.dataset.v); } // "none of these" stands alone
+        else { excl.forEach(x => cur.delete(x)); cur.add(b.dataset.v); }
         answers[q.id] = [...cur]; saveDraft();
-        b.setAttribute('aria-checked', String(cur.has(b.dataset.v)));
+        card.querySelectorAll('.sv-opt').forEach(x => x.setAttribute('aria-checked', String(cur.has(x.dataset.v))));
         err.textContent = ''; updateCount(q);
       }));
       updateCount(q);

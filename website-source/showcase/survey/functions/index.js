@@ -55,6 +55,7 @@ function validate(input) {
         const set = [...new Set(v)];
         if (set.some(x => !isStr(x) || !q.options.includes(x))) return { error: 'bad_option' };
         if (q.max && set.length > q.max) return { error: 'too_many' };
+        if (set.length > 1 && set.some(x => (q.exclusive || []).includes(x))) return { error: 'exclusive' };
         out[q.id] = set; break;
       }
       case 'scale':

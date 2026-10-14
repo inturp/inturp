@@ -22,13 +22,13 @@ V = '20261040'
 SURVEY_ID = 'vet-clinics-2026'
 
 UI = {
-    'en': dict(next='Continue', send='Send answers', back='Back', minutes='About 3 minutes', count='{n} short questions', private='Anonymous unless you choose otherwise',
+    'en': dict(next='Continue', send='Send answers', back='Back', minutes='About 2 minutes', count='{n} short questions', private='No names or contact details',
                needChoice='Please choose an answer to continue.', needText='Please write a short answer to continue.', badEmail='That email address does not look right.',
                needConsent='Tick the box so we know we may contact you, or clear the contact fields.', upto='Pick up to {n}', selected='{n} selected',
                lastTitle='One last step.', lastLead='Your answers are ready. Send them to us and you are done.', failLead='We could not reach our server. You can still send your answers another way.',
                lastHow='Open an email with your answers already written, or copy them and send them however you like.', openMail='Open email', copy='Copy answers', copied='Copied',
                mailSubject='Veterinary clinics survey: my answers', mailIntro='My answers to the Inturp veterinary clinics survey:', share='Share', keysEnter='Enter'),
-    'ar': dict(next='متابعة', send='إرسال الإجابات', back='رجوع', minutes='نحو 3 دقائق', count='{n} سؤالاً قصيراً', private='دون الكشف عن هويتك إلا إن أردت',
+    'ar': dict(next='متابعة', send='إرسال الإجابات', back='رجوع', minutes='نحو دقيقتين', count='{n} أسئلة قصيرة', private='بدون أسماء أو بيانات تواصل',
                needChoice='اختر إجابة للمتابعة.', needText='اكتب إجابة قصيرة للمتابعة.', badEmail='البريد الإلكتروني غير صحيح.',
                needConsent='فعّل المربع لنعرف أن بإمكاننا التواصل معك، أو امسح بيانات التواصل.', upto='اختر حتى {n}', selected='تم اختيار {n}',
                lastTitle='خطوة أخيرة.', lastLead='إجاباتك جاهزة. أرسلها لنا وننتهي.', failLead='تعذّر الوصول إلى خادمنا، لكن تستطيع إرسال إجاباتك بطريقة أخرى.',
@@ -37,9 +37,9 @@ UI = {
 }
 META = {
     'en': dict(title='Veterinary clinics survey | Inturp',
-               desc='A short survey for veterinary clinics: how you work today and what you need from clinic software. About three minutes.'),
+               desc='A short survey for veterinary clinics: how you work today and what you need from clinic software. About two minutes.'),
     'ar': dict(title='استبيان العيادات البيطرية | انتيرب',
-               desc='استبيان قصير للعيادات البيطرية: كيف تعملون اليوم وماذا تحتاجون من برنامج العيادة. نحو ثلاث دقائق.'),
+               desc='استبيان قصير للعيادات البيطرية: كيف تعملون اليوم وماذا تحتاجون من برنامج العيادة. نحو دقيقتين.'),
 }
 HOME = {'en': '/vet-charted/en/', 'ar': '/vet-charted/'}
 
@@ -73,7 +73,7 @@ def lang_data(src, lang):
             if k in q:
                 item[k] = q[k][lang]
         if 'options' in q:
-            item['options'] = [{'v': o['v'], 'label': o[lang]} for o in q['options']]
+            item['options'] = [dict({'v': o['v'], 'label': o[lang]}, **({'exclusive': True} if o.get('exclusive') else {})) for o in q['options']]
         if 'fields' in q:
             item['fields'] = [{'id': f['id'], 'type': f['type'], 'label': f[lang], 'autocomplete': f.get('autocomplete', 'off')} for f in q['fields']]
         qs.append(item)
@@ -135,7 +135,9 @@ def main():
         item = {'id': q['id'], 'type': q['type'], 'required': q.get('required', True)}
         if 'max' in q: item['max'] = q['max']
         if 'showIf' in q: item['showIf'] = q['showIf']
-        if 'options' in q: item['options'] = [o['v'] for o in q['options']]
+        if 'options' in q:
+            item['options'] = [o['v'] for o in q['options']]
+            item['exclusive'] = [o['v'] for o in q['options'] if o.get('exclusive')]
         if 'fields' in q: item['fields'] = [f['id'] for f in q['fields']]
         schema['questions'].append(item)
     (HERE / 'survey' / 'functions' / 'survey-schema.json').write_text(json.dumps(schema, ensure_ascii=False, indent=1), encoding='utf-8')
