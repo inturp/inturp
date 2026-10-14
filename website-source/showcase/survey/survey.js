@@ -18,6 +18,13 @@
   const answers = {};
   let idx = -1, busy = false, sent = false, startedAt = Date.now();
   try { Object.assign(answers, JSON.parse(store.get(DRAFT) || '{}').answers || {}); } catch (_) {}
+  // A saved draft from an older version of the questions may hold options that no longer exist: drop those values.
+  DATA.questions.forEach(q => {
+    if (!q.options || answers[q.id] == null) return;
+    const ok = new Set(q.options.map(o => o.v)), v = answers[q.id];
+    if (Array.isArray(v)) { const f = v.filter(x => ok.has(x)); if (f.length) answers[q.id] = f; else delete answers[q.id]; }
+    else if (!ok.has(v)) delete answers[q.id];
+  });
 
   /* theme + language buttons (same behaviour as the other pages) */
   document.querySelectorAll('[data-theme-toggle]').forEach(b => b.addEventListener('click', () => {
@@ -88,7 +95,7 @@
   const newSid = () => { const b = new Uint8Array(16); (window.crypto || {}).getRandomValues ? crypto.getRandomValues(b) : b.forEach((_, i) => { b[i] = Math.random() * 256; }); return [...b].map(x => x.toString(16).padStart(2, '0')).join(''); };
   let sess = null;
   try { sess = JSON.parse(store.get(SESS_KEY) || 'null'); } catch (_) {}
-  if (!sess || !sess.sid || Date.now() - sess.t0 > 24 * 3600e3) sess = { sid: newSid(), t0: Date.now(), n: 0, deviceSent: false };
+  if (!sess || !sess.sid || Date.now() - sess.t0 > 12 * 3600e3) sess = { sid: newSid(), t0: Date.now(), n: 0, deviceSent: false };
   const persist = () => store.set(SESS_KEY, JSON.stringify(sess));
   let queue = [], timer = null, inflight = false, trackingOn = TRACK, qStart = Date.now();
 
@@ -372,6 +379,8 @@
         track('submit', { qid: curQid(), idx });
         for (let i = 0; i < 6 && queue.length > 40; i++) await flush();
         ok = await flush({ final: true });
+        // The answers matter more than the click log: if the send was refused, try once more without the queued clicks.
+        if (!ok && trackingOn) { queue.length = 0; ok = await flush({ final: true }); }
       }
       if (!ok) throw new Error('send');
       sent = true; store.del(DRAFT); store.del(SESS_KEY); trackingOn = false;

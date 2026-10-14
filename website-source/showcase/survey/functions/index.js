@@ -32,7 +32,7 @@ const ORIGINS = new Set(['https://inturp.com', 'https://www.inturp.com']);
 if (process.env.ALLOW_LOCALHOST === 'true') ORIGINS.add('http://localhost:8765');
 const MAX_BODY = 32 * 1024;
 const MIN_FINAL_MS = Number(process.env.MIN_FILL_MS || 4000);
-const LIMITS = { newSessionsPerHour: 10, newSessionsPerDay: 30, syncsPerHour: 600, globalSessionsPerDay: 3000, eventsPerSession: 500, eventsPerCall: 40 };
+const LIMITS = { newSessionsPerHour: 60, newSessionsPerDay: 300, syncsPerHour: 600, globalSessionsPerDay: 3000, eventsPerSession: 500, eventsPerCall: 40 };
 const EMAIL = /^[^@\s]{1,64}@[^@\s]{1,190}\.[^@\s]{2,}$/;
 const PHONE = /^[0-9+\-\s().]{5,40}$/;
 const SID = /^[a-f0-9]{32}$/;
@@ -40,53 +40,53 @@ const CONTROL = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g;
 const EVENT_TYPES = new Set(['intro', 'start', 'view', 'answer', 'next', 'skip', 'back', 'submit', 'leave']);
 const QIDS = new Set(schema.questions.map(q => q.id));
 
-const fail = (res, code, error) => { res.status(code).json({ ok: false, error }); };
+const fail = (res, code, error) => { logger.warn('survey rejected', { code, error }); res.status(code).json({ ok: false, error }); };
 const clean = (s, max) => String(s).replace(CONTROL, '').trim().slice(0, max);
 const isStr = v => typeof v === 'string';
 const int = (v, min, max) => Number.isInteger(v) && v >= min && v <= max;
 const visible = (q, answers) => !q.showIf || (q.showIf.in || []).includes(answers[q.showIf.id]);
 
-/** Validates one answer. Returns { value } (value undefined = nothing to store) or { error }. */
+const TOKEN = /^[a-z0-9_]{1,40}$/;
+const ARABIC_DIGITS = { '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4', '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9' };
+const latinDigits = s => String(s).replace(/[٠-٩۰-۹]/g, d => ARABIC_DIGITS[d]);
+
+/** Validates one answer. Never rejects a whole submission because of one odd value: a malformed answer is dropped, and an option that is no
+ *  longer in the list (a visitor who opened an older version of the page) is kept as its plain code. Returns { value } (undefined = store nothing). */
 function validateOne(q, v, { allowContact }) {
   if (v === undefined || v === null || v === '' || (Array.isArray(v) && !v.length)) return { value: undefined };
   switch (q.type) {
     case 'single':
-      return isStr(v) && q.options.includes(v) ? { value: v } : { error: 'bad_option' };
+      return isStr(v) && (q.options.includes(v) || TOKEN.test(v)) ? { value: v } : { value: undefined };
     case 'multi': {
-      if (!Array.isArray(v) || v.length > q.options.length) return { error: 'bad_multi' };
-      const set = [...new Set(v)];
-      if (set.some(x => !isStr(x) || !q.options.includes(x))) return { error: 'bad_option' };
-      if (q.max && set.length > q.max) return { error: 'too_many' };
-      if (set.length > 1 && set.some(x => (q.exclusive || []).includes(x))) return { error: 'exclusive' };
-      return { value: set };
+      if (!Array.isArray(v)) return { value: undefined };
+      let set = [...new Set(v.filter(x => isStr(x) && (q.options.includes(x) || TOKEN.test(x))))];
+      const excl = set.filter(x => (q.exclusive || []).includes(x));
+      if (set.length > 1 && excl.length) set = [excl[0]];
+      if (q.max && set.length > q.max) set = set.slice(0, q.max);
+      return { value: set.length ? set : undefined };
     }
     case 'scale':
-      return int(v, 1, 5) ? { value: v } : { error: 'bad_scale' };
+      return int(v, 1, 5) ? { value: v } : { value: undefined };
     case 'short':
-      return isStr(v) ? { value: clean(v, 160) } : { error: 'bad_text' };
+      return isStr(v) ? { value: clean(v, 160) } : { value: undefined };
     case 'long':
-      return isStr(v) ? { value: clean(v, 2000) } : { error: 'bad_text' };
+      return isStr(v) ? { value: clean(v, 2000) } : { value: undefined };
     case 'contact': {
-      if (!allowContact) return { value: undefined };
-      if (typeof v !== 'object' || Array.isArray(v)) return { error: 'bad_contact' };
-      const allowed = new Set([...q.fields, 'consent']);
-      for (const k of Object.keys(v)) if (!allowed.has(k)) return { error: 'bad_contact' };
+      if (!allowContact || typeof v !== 'object' || Array.isArray(v)) return { value: undefined };
       const c = {};
-      for (const f of q.fields) if (isStr(v[f]) && v[f].trim()) c[f] = clean(v[f], 120);
-      if (c.email && !EMAIL.test(c.email)) return { error: 'bad_email' };
-      if (c.phone && !PHONE.test(c.phone)) return { error: 'bad_phone' };
+      for (const f of q.fields) if (isStr(v[f]) && v[f].trim()) c[f] = clean(f === 'phone' ? latinDigits(v[f]) : v[f], 120);
+      if (c.email && !EMAIL.test(c.email)) delete c.email;
       return { value: Object.keys(c).length ? c : undefined };
     }
     default:
-      return { error: 'schema' };
+      return { value: undefined };
   }
 }
 
 function validateAnswers(input, { allowContact }) {
   if (input === undefined) return { answers: {} };
-  if (!input || typeof input !== 'object' || Array.isArray(input)) return { error: 'answers' };
+  if (!input || typeof input !== 'object' || Array.isArray(input)) return { answers: {} };
   const byId = new Map(schema.questions.map(q => [q.id, q]));
-  for (const k of Object.keys(input)) if (!byId.has(k)) return { error: 'unknown_question' };
   const out = {};
   for (const q of schema.questions) {
     const r = validateOne(q, input[q.id], { allowContact });
@@ -118,21 +118,20 @@ function validateDevice(d) {
 }
 
 function validateEvents(list) {
-  if (list === undefined) return { events: [] };
-  if (!Array.isArray(list) || list.length > LIMITS.eventsPerCall) return { error: 'events' };
+  if (!Array.isArray(list)) return { events: [] };
   const out = [];
-  for (const e of list) {
-    if (!e || typeof e !== 'object') return { error: 'event' };
-    if (!int(e.n, 0, 100000) || !int(e.t, 0, 24 * 3600e3) || !EVENT_TYPES.has(e.type)) return { error: 'event' };
-    const ev = { n: e.n, t: e.t, type: e.type };
-    if (e.qid !== undefined) { if (!QIDS.has(e.qid) || e.qid === 'contact' && e.type === 'answer') return { error: 'event_qid' }; ev.qid = e.qid; }
-    if (e.idx !== undefined) { if (!int(e.idx, 0, 100)) return { error: 'event' }; ev.idx = e.idx; }
-    if (e.ms !== undefined) { if (!int(e.ms, 0, 6 * 3600e3)) return { error: 'event' }; ev.ms = e.ms; }
-    if (e.type === 'answer' && !e.qid) return { error: 'event_qid' };
-    if (e.type === 'answer' && e.qid) {
-      const q = schema.questions.find(x => x.id === e.qid);
+  for (const e of list.slice(0, LIMITS.eventsPerCall)) {
+    // Tracking is secondary: a malformed or out-of-range click is skipped, it never blocks the answers.
+    if (!e || typeof e !== 'object' || !int(e.n, 0, 100000) || !EVENT_TYPES.has(e.type)) continue;
+    const ev = { n: e.n, t: Math.min(Math.max(Number(e.t) || 0, 0), 24 * 3600e3), type: e.type };
+    if (Number.isFinite(ev.t)) ev.t = Math.round(ev.t);
+    if (e.qid !== undefined) { if (!QIDS.has(e.qid) || (e.qid === 'contact' && e.type === 'answer')) continue; ev.qid = e.qid; }
+    if (e.idx !== undefined && int(e.idx, 0, 100)) ev.idx = e.idx;
+    if (e.ms !== undefined && Number.isFinite(e.ms)) ev.ms = Math.min(Math.max(Math.round(e.ms), 0), 6 * 3600e3);
+    if (e.type === 'answer') {
+      const q = e.qid && schema.questions.find(x => x.id === e.qid);
+      if (!q) continue;
       const r = validateOne(q, e.v, { allowContact: false });
-      if (r.error) return { error: r.error };
       if (r.value !== undefined) ev.v = r.value;
     }
     out.push(ev);
@@ -221,9 +220,9 @@ exports.submitSurvey = onRequest(
           tx.set(dayRef, { n: total + 1 }, { merge: true });
         }
         const lastN = cur ? cur.lastN ?? -1 : -1;
-        const fresh = ev.events.filter(e => e.n > lastN);
+        const fresh = ev.events.filter(e => e.n > lastN && e.n < LIMITS.eventsPerSession);
         const maxN = fresh.length ? Math.max(...fresh.map(e => e.n)) : lastN;
-        if (maxN + 1 > LIMITS.eventsPerSession) throw new Error('rate');
+        
 
         const update = {
           survey: schema.id,
