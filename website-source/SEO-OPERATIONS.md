@@ -53,3 +53,9 @@ The publish script preserves the product assets and rebuilds the product pages f
 - GA4 property ID: 558524565; web stream ID: 16112185073.
 - A consented test visit appeared as one active user in the live Analytics overview.
 - Shared analytics script initializes once across client navigation. The script URL is versioned to refresh browser caches.
+
+## Clinic survey
+
+- Pages: `/clinic-survey/` (English) and `/ar/clinic-survey/` (Arabic). Both are `noindex` and left out of the sitemap on purpose; the link is sent directly to clinics.
+- Questions live in `showcase/survey/questions.json`. After editing, run `python3 showcase/build_survey.py`.
+- Answers go to the URL in `clinic-survey/assets/js/survey-config.js` (`endpoint`). `showcase/survey/survey-apps-script.gs` is a ready Google Apps Script that writes each submission as a row in a Google Sheet. With no endpoint set, the last step offers to send the answers by email instead.

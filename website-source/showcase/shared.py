@@ -207,7 +207,7 @@ def prepaint(lang, ar_path):
     return f'<script>(function(){{try{{{theme}{rule}}}catch(e){{}} }})()</script>'
 
 
-def head(*, lang, title, desc, en_path, ar_path, css, og_image, og_alt, extra='', icon='/inturp-tab-icon.png'):
+def head(*, lang, title, desc, en_path, ar_path, css, og_image, og_alt, extra='', icon='/inturp-tab-icon.png', robots='index, follow, max-image-preview:large'):
     origin = 'https://inturp.com'
     url = origin + (ar_path if lang == 'ar' else en_path)
     locale, alt_locale = ('ar_AR', 'en_US') if lang == 'ar' else ('en_US', 'ar_AR')
@@ -223,7 +223,7 @@ def head(*, lang, title, desc, en_path, ar_path, css, og_image, og_alt, extra=''
 <link rel="alternate" hreflang="en" href="{origin}{en_path}">
 <link rel="alternate" hreflang="ar" href="{origin}{ar_path}">
 <link rel="alternate" hreflang="x-default" href="{origin}{en_path}">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="{robots}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Inturp">
 <meta property="og:locale" content="{locale}">
