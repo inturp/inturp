@@ -5,7 +5,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const root = document.documentElement;
   const DATA = JSON.parse($('#sv-data').textContent);
-  const CFG = Object.assign({ endpoint: '', email: 'info@inturp.com' }, window.SURVEY_CONFIG || {});
+  const CFG = Object.assign({ endpoint: '', transport: 'json', email: 'info@inturp.com' }, window.SURVEY_CONFIG || {});
   const UI = DATA.ui;
   const card = $('#svCard'), nav = $('#svNav'), bar = $('#svBar'), top = $('.sv-top');
   const backBtn = $('#svBack'), nextBtn = $('#svNext');
@@ -16,7 +16,7 @@
   };
   const DRAFT = 'inturp-survey-draft-' + DATA.id;
   const answers = {};
-  let idx = -1, busy = false, sent = false;
+  let idx = -1, busy = false, sent = false, startedAt = Date.now();
   try { Object.assign(answers, JSON.parse(store.get(DRAFT) || '{}').answers || {}); } catch (_) {}
 
   /* theme + language buttons (same behaviour as the other pages) */
@@ -93,7 +93,7 @@
       </div>
       <div class="sv-start"><button type="button" class="btn btn-solid" id="svGo">${esc(I.start)}</button><p class="sv-note">${esc(I.note)}</p></div>
     </div>${mock}</section>`, 1);
-    $('#svGo').addEventListener('click', () => go(0, 1));
+    $('#svGo').addEventListener('click', () => { startedAt = Date.now(); go(0, 1); });
     $('#svGo').focus({ preventScroll: true });
   }
 
@@ -255,7 +255,9 @@
     return lines.join('\n');
   }
   function payload() {
-    return { survey: DATA.id, lang: root.lang, submitted_at: new Date().toISOString(), page: location.pathname, answers };
+    const hp = $('#svHp');
+    return { survey: DATA.id, lang: root.lang, submitted_at: new Date().toISOString(), page: location.pathname,
+      elapsed_ms: Date.now() - startedAt, hp: hp ? hp.value : '', answers };
   }
 
   async function submit() {
@@ -264,7 +266,12 @@
     busy = true; nextBtn.disabled = true;
     nextBtn.querySelector('.lbl').insertAdjacentHTML('beforebegin', '<span class="sv-spin"></span>');
     try {
-      await fetch(CFG.endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload()) });
+      if (CFG.transport === 'script') { // Google Apps Script web app: opaque no-cors request
+        await fetch(CFG.endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload()) });
+      } else { // our own API: a real request, so a refusal is noticed
+        const res = await fetch(CFG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload()), credentials: 'omit' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+      }
       sent = true; store.del(DRAFT);
       renderDone();
     } catch (_) {

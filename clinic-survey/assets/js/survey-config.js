@@ -1,11 +1,12 @@
-/* Where the answers go.
+/* Where the survey answers go.
  *
- * endpoint: the URL that receives each submission as JSON (see survey-apps-script.gs: Google Apps Script web app
- *           that writes a row per answer into a Google Sheet). Leave it empty and the last step offers to send
- *           the answers by email instead.
- * email:    the address used for that email fallback.
+ * endpoint:  our Firebase function (project vet-charted, region europe-west1). It validates every answer, applies
+ *            rate limits and stores the result in a Firestore database that no browser can read or write.
+ * transport: 'json' for that function. Use 'script' only with a Google Apps Script web app (survey-apps-script.gs).
+ * email:     the address used for the email fallback if the endpoint is empty or unreachable.
  */
 window.SURVEY_CONFIG = {
-  endpoint: '',
+  endpoint: 'https://europe-west1-vet-charted.cloudfunctions.net/submitSurvey',
+  transport: 'json',
   email: 'info@inturp.com',
 };

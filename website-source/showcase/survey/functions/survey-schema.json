@@ -1,0 +1,191 @@
+{
+ "id": "vet-clinics-2026",
+ "questions": [
+  {
+   "id": "clinic_type",
+   "type": "single",
+   "required": true,
+   "options": [
+    "small",
+    "large",
+    "mixed",
+    "poultry",
+    "other"
+   ]
+  },
+  {
+   "id": "vets",
+   "type": "single",
+   "required": true,
+   "options": [
+    "1",
+    "2_3",
+    "4_7",
+    "8_plus"
+   ]
+  },
+  {
+   "id": "daily_cases",
+   "type": "single",
+   "required": true,
+   "options": [
+    "under_10",
+    "10_25",
+    "26_50",
+    "over_50"
+   ]
+  },
+  {
+   "id": "location",
+   "type": "short",
+   "required": true
+  },
+  {
+   "id": "records_today",
+   "type": "multi",
+   "required": true,
+   "options": [
+    "paper",
+    "office",
+    "chat",
+    "software",
+    "none"
+   ]
+  },
+  {
+   "id": "uses_software",
+   "type": "single",
+   "required": true,
+   "options": [
+    "yes_happy",
+    "yes_unhappy",
+    "planning",
+    "no"
+   ]
+  },
+  {
+   "id": "software_name",
+   "type": "short",
+   "required": false,
+   "showIf": {
+    "id": "uses_software",
+    "in": [
+     "yes_happy",
+     "yes_unhappy"
+    ]
+   }
+  },
+  {
+   "id": "challenges",
+   "type": "multi",
+   "required": true,
+   "max": 3,
+   "options": [
+    "history",
+    "vaccines",
+    "billing",
+    "stock",
+    "appointments",
+    "staff",
+    "reports",
+    "owners"
+   ]
+  },
+  {
+   "id": "reminders",
+   "type": "multi",
+   "required": true,
+   "options": [
+    "call",
+    "whatsapp",
+    "sms",
+    "app",
+    "none"
+   ]
+  },
+  {
+   "id": "top_features",
+   "type": "multi",
+   "required": true,
+   "max": 4,
+   "options": [
+    "records",
+    "wa_reminders",
+    "invoices",
+    "inventory",
+    "calendar",
+    "owner_app",
+    "accounting",
+    "multi_branch",
+    "shared_record"
+   ]
+  },
+  {
+   "id": "platforms",
+   "type": "multi",
+   "required": true,
+   "options": [
+    "windows",
+    "mac",
+    "android",
+    "iphone",
+    "web"
+   ]
+  },
+  {
+   "id": "arabic_importance",
+   "type": "scale",
+   "required": true
+  },
+  {
+   "id": "pricing_model",
+   "type": "single",
+   "required": true,
+   "options": [
+    "monthly",
+    "yearly",
+    "one_time",
+    "per_feature"
+   ]
+  },
+  {
+   "id": "budget",
+   "type": "single",
+   "required": true,
+   "options": [
+    "under_15",
+    "15_30",
+    "30_60",
+    "60_100",
+    "over_100",
+    "unsure"
+   ]
+  },
+  {
+   "id": "switch_reason",
+   "type": "long",
+   "required": false
+  },
+  {
+   "id": "demo",
+   "type": "single",
+   "required": true,
+   "options": [
+    "yes",
+    "later",
+    "no"
+   ]
+  },
+  {
+   "id": "contact",
+   "type": "contact",
+   "required": false,
+   "fields": [
+    "name",
+    "clinic",
+    "phone",
+    "email"
+   ]
+  }
+ ]
+}

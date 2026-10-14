@@ -58,4 +58,4 @@ The publish script preserves the product assets and rebuilds the product pages f
 
 - Pages: `/clinic-survey/` (English) and `/ar/clinic-survey/` (Arabic). Both are `noindex` and left out of the sitemap on purpose; the link is sent directly to clinics.
 - Questions live in `showcase/survey/questions.json`. After editing, run `python3 showcase/build_survey.py`.
-- Answers go to the URL in `clinic-survey/assets/js/survey-config.js` (`endpoint`). `showcase/survey/survey-apps-script.gs` is a ready Google Apps Script that writes each submission as a row in a Google Sheet. With no endpoint set, the last step offers to send the answers by email instead.
+- Answers go to the Firebase function `submitSurvey` (project `vet-charted`, database `survey`), set in `clinic-survey/assets/js/survey-config.js`. See `showcase/survey/functions/README.md` for how it is secured, how to read the answers and how to redeploy. If the endpoint is empty or unreachable the last step offers to send the answers by email. `survey-apps-script.gs` is an alternative Google Sheet destination (`transport: 'script'`).

@@ -129,6 +129,16 @@ def main():
     cfg = ASSETS / 'js' / 'survey-config.js'
     if not cfg.exists():
         shutil.copy2(HERE / 'survey' / 'survey-config.js', cfg)
+    # the backend validates answers against the same questions
+    schema = {'id': SURVEY_ID, 'questions': []}
+    for q in src['questions']:
+        item = {'id': q['id'], 'type': q['type'], 'required': q.get('required', True)}
+        if 'max' in q: item['max'] = q['max']
+        if 'showIf' in q: item['showIf'] = q['showIf']
+        if 'options' in q: item['options'] = [o['v'] for o in q['options']]
+        if 'fields' in q: item['fields'] = [f['id'] for f in q['fields']]
+        schema['questions'].append(item)
+    (HERE / 'survey' / 'functions' / 'survey-schema.json').write_text(json.dumps(schema, ensure_ascii=False, indent=1), encoding='utf-8')
     for lang in ('en', 'ar'):
         OUT[lang].mkdir(parents=True, exist_ok=True)
         (OUT[lang] / 'index.html').write_text(page(lang, lang_data(src, lang)), encoding='utf-8')

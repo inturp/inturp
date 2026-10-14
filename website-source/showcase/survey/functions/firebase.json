@@ -1,0 +1,24 @@
+{
+  "firestore": [
+    {
+      "database": "survey",
+      "rules": "firestore.rules",
+      "indexes": "firestore.indexes.json"
+    }
+  ],
+  "functions": [
+    {
+      "source": ".",
+      "codebase": "survey",
+      "runtime": "nodejs22",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "*.log",
+        "export.mjs",
+        "survey-responses.csv",
+        ".env.local"
+      ]
+    }
+  ]
+}

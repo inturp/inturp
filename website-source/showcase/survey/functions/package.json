@@ -1,0 +1,14 @@
+{
+  "name": "inturp-survey-functions",
+  "private": true,
+  "description": "Receives clinic survey submissions and stores them in Firestore (Admin SDK only).",
+  "engines": { "node": "22" },
+  "main": "index.js",
+  "scripts": {
+    "export": "node export.mjs"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.0.0",
+    "firebase-functions": "^6.0.0"
+  }
+}

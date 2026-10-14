@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Nothing is readable or writable from a browser or an app. The survey function writes with the Admin SDK,
+    // which is not subject to these rules, and responses are read from the Firebase console or the export script.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
