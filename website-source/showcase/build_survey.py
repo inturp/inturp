@@ -22,13 +22,13 @@ V = '20261040'
 SURVEY_ID = 'vet-clinics-2026'
 
 UI = {
-    'en': dict(next='Continue', send='Send answers', back='Back', minutes='About 2 minutes', count='{n} short questions', private='No names or contact details',
+    'en': dict(next='Continue', send='Send answers', back='Back', minutes='About 2 minutes', count='{n} short questions', private='Every question is optional',
                needChoice='Please choose an answer to continue.', needText='Please write a short answer to continue.', badEmail='That email address does not look right.',
                needConsent='Tick the box so we know we may contact you, or clear the contact fields.', upto='Pick up to {n}', selected='{n} selected',
                lastTitle='One last step.', lastLead='Your answers are ready. Send them to us and you are done.', failLead='We could not reach our server. You can still send your answers another way.',
                lastHow='Open an email with your answers already written, or copy them and send them however you like.', openMail='Open email', copy='Copy answers', copied='Copied',
                mailSubject='Veterinary clinics survey: my answers', mailIntro='My answers to the Inturp veterinary clinics survey:', share='Share', keysEnter='Enter', skip='Skip', needAny='Answer at least one question before sending.'),
-    'ar': dict(next='متابعة', send='إرسال الإجابات', back='رجوع', minutes='نحو دقيقتين', count='{n} أسئلة قصيرة', private='بدون أسماء أو بيانات تواصل',
+    'ar': dict(next='متابعة', send='إرسال الإجابات', back='رجوع', minutes='نحو دقيقتين', count='{n} أسئلة قصيرة', private='كل الأسئلة اختيارية',
                needChoice='اختر إجابة للمتابعة.', needText='اكتب إجابة قصيرة للمتابعة.', badEmail='البريد الإلكتروني غير صحيح.',
                needConsent='فعّل المربع لنعرف أن بإمكاننا التواصل معك، أو امسح بيانات التواصل.', upto='اختر حتى {n}', selected='تم اختيار {n}',
                lastTitle='خطوة أخيرة.', lastLead='إجاباتك جاهزة. أرسلها لنا وننتهي.', failLead='تعذّر الوصول إلى خادمنا، لكن تستطيع إرسال إجاباتك بطريقة أخرى.',

@@ -14,8 +14,8 @@
       "en": "We are building veterinary clinic software in Arabic and English, and we want it shaped by what clinics actually need, not by our guesses. A few short questions, and every answer counts."
     },
     "note": {
-      "ar": "لا نطلب اسمك ولا بيانات تواصل. شكرًا لوقتك.",
-      "en": "We do not ask for your name or contact details. Thank you for your time."
+      "ar": "كل الأسئلة اختيارية، ويمكنك تخطي ما لا تريد الإجابة عنه.",
+      "en": "Every question is optional, and you can skip anything you would rather not answer."
     },
     "start": {
       "ar": "ابدأ الاستبيان",
@@ -39,12 +39,12 @@
       "ar": [
         "نجمع الإجابات من عيادات كثيرة ونقرأ الاتجاهات.",
         "نستخدمها لتحديد ما نبنيه أولًا وكيف نسعّره.",
-        "تستطيع مشاركة الاستبيان مع زميل لك."
+        "إن تركت بياناتك فسنتواصل معك بخصوص هذا الاستبيان فقط."
       ],
       "en": [
         "We gather answers from many clinics and look for patterns.",
         "We use them to decide what to build first and how to price it.",
-        "Feel free to share the survey with a colleague."
+        "If you left your details, we will contact you about this survey only."
       ]
     },
     "share": {
@@ -456,6 +456,53 @@
         "ar": "اكتب بحرية…",
         "en": "Write freely…"
       }
+    },
+    {
+      "id": "contact",
+      "type": "contact",
+      "required": false,
+      "section": {
+        "ar": "بيانات التواصل",
+        "en": "Contact details"
+      },
+      "q": {
+        "ar": "إن أحببت أن نتواصل معك، اترك بيانات عيادتك.",
+        "en": "If you would like us to get in touch, leave your clinic's details."
+      },
+      "hint": {
+        "ar": "كل الحقول اختيارية، ولن نستخدمها إلا للتواصل بخصوص هذا الاستبيان.",
+        "en": "Every field is optional, and we use them only to follow up on this survey."
+      },
+      "fields": [
+        {
+          "id": "name",
+          "type": "text",
+          "ar": "اسم الطبيب البيطري / المسؤول عن العيادة",
+          "en": "Veterinarian / clinic manager name",
+          "autocomplete": "name"
+        },
+        {
+          "id": "phone",
+          "type": "tel",
+          "ar": "رقم الهاتف للتواصل",
+          "en": "Phone number",
+          "autocomplete": "tel"
+        },
+        {
+          "id": "clinic",
+          "type": "text",
+          "ar": "اسم العيادة",
+          "en": "Clinic name",
+          "autocomplete": "organization"
+        },
+        {
+          "id": "address",
+          "type": "text",
+          "ar": "عنوان العيادة (المدينة والمنطقة)",
+          "en": "Clinic address (city and area)",
+          "autocomplete": "street-address"
+        }
+      ]
     }
   ]
 }

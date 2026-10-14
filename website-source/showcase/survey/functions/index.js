@@ -74,10 +74,7 @@ function validate(input) {
         const c = {};
         for (const f of q.fields) if (isStr(v[f]) && v[f].trim()) c[f] = clean(v[f], 120);
         if (c.email && !EMAIL.test(c.email)) return { error: 'bad_email' };
-        if (Object.keys(c).length) {
-          if (v.consent !== true) return { error: 'no_consent' };
-          c.consent = true;
-        }
+        if (c.phone && !/^[0-9+\-\s().]{5,40}$/.test(c.phone)) return { error: 'bad_phone' };
         if (Object.keys(c).length) out[q.id] = c;
         break;
       }

@@ -82,7 +82,7 @@
   /* screens */
   function renderIntro() {
     idx = -1; setProgress(); setNav(false);
-    const I = DATA.intro, n = visible().length;
+    const I = DATA.intro, n = visible().filter(q => q.type !== 'contact').length;
     swap(`<section class="sv-intro"><div class="sv-intro-copy">
       <span class="eyebrow"><i class="status-dot"></i>${esc(I.eyebrow)}</span>
       <h1>${esc(I.title)}</h1>
@@ -117,8 +117,8 @@
       case 'long': return `<textarea class="sv-text" id="svIn" maxlength="2000" placeholder="${esc(q.placeholder || '')}">${esc(v || '')}</textarea>`;
       case 'contact': {
         const c = v || {};
-        return `<div class="sv-fields">${q.fields.map(f => `<label>${esc(f.label)}<input class="sv-input" type="${f.type}" data-f="${f.id}" autocomplete="${f.autocomplete || 'off'}" maxlength="120" value="${esc(c[f.id] || '')}"></label>`).join('')}</div>
-        <label class="sv-consent"><input type="checkbox" id="svConsent" ${c.consent ? 'checked' : ''}><span>${esc(q.consent)}</span></label>
+        return `<div class="sv-fields">${q.fields.map(f => `<label>${esc(f.label)}<input class="sv-input" type="${f.type}" data-f="${f.id}" autocomplete="${f.autocomplete || 'off'}" maxlength="120"${f.type === 'tel' ? ' inputmode="tel"' : ''} value="${esc(c[f.id] || '')}"></label>`).join('')}</div>
+        ${q.consent ? `<label class="sv-consent"><input type="checkbox" id="svConsent" ${c.consent ? 'checked' : ''}><span>${esc(q.consent)}</span></label>` : ''}
         <input class="sv-hp" type="text" name="website" id="svHp" tabindex="-1" autocomplete="off" aria-hidden="true">`;
       }
     }
@@ -187,7 +187,7 @@
       card.querySelectorAll('[data-f]').forEach(i => i.addEventListener('input', () => {
         const c = Object.assign({}, answers[q.id]); c[i.dataset.f] = i.value; answers[q.id] = c; saveDraft();
       }));
-      $('#svConsent').addEventListener('change', e => { answers[q.id] = Object.assign({}, answers[q.id], { consent: e.target.checked }); saveDraft(); });
+      const cb = $('#svConsent'); if (cb) cb.addEventListener('change', e => { answers[q.id] = Object.assign({}, answers[q.id], { consent: e.target.checked }); saveDraft(); });
     }
   }
 
@@ -198,7 +198,7 @@
     else if (q.type === 'contact') {
       const c = v || {};
       if (c.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.email)) return UI.badEmail;
-      if ((c.name || c.clinic || c.phone || c.email) && !c.consent) return UI.needConsent;
+      if (q.consent && (c.name || c.clinic || c.phone || c.email || c.address) && !c.consent) return UI.needConsent;
     } else if (required && empty(v)) return UI.needChoice;
     return '';
   }

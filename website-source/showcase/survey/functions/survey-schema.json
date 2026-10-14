@@ -122,6 +122,17 @@
    "id": "wish",
    "type": "long",
    "required": false
+  },
+  {
+   "id": "contact",
+   "type": "contact",
+   "required": false,
+   "fields": [
+    "name",
+    "phone",
+    "clinic",
+    "address"
+   ]
   }
  ]
 }
