@@ -37,9 +37,11 @@ UI = {
 }
 META = {
     'en': dict(title='Veterinary clinics survey | Inturp',
-               desc='A short survey for veterinary clinics: how you work today and what you need from clinic software. About two minutes.'),
+               desc='Help us build clinic software around what you actually need. A short survey, about two minutes, and every question is optional.',
+               alt='Inturp veterinary clinics survey: help us understand your clinic'),
     'ar': dict(title='استبيان العيادات البيطرية | انتيرب',
-               desc='استبيان قصير للعيادات البيطرية: كيف تعملون اليوم وماذا تحتاجون من برنامج العيادة. نحو دقيقتين.'),
+               desc='ساعدونا نبني برنامج العيادات حسب احتياجكم الفعلية. استبيان قصير، نحو دقيقتين، وكل الأسئلة اختيارية.',
+               alt='استبيان انتيرب للعيادات البيطرية: ساعدنا نفهم عيادتك'),
 }
 HOME = {'en': '/vet-charted/en/', 'ar': '/vet-charted/'}
 
@@ -85,8 +87,8 @@ def page(lang, data):
     en_path, ar_path = '/clinic-survey/', '/ar/clinic-survey/'
     m = META[lang]
     h = shared.head(lang=lang, title=m['title'], desc=m['desc'], en_path=en_path, ar_path=ar_path,
-                    css=f'/clinic-survey/assets/css/site.css?v={V}', og_image='/vet-charted/assets/img/dashboard.webp',
-                    og_alt='Vet Charted', robots='noindex, nofollow')
+                    css=f'/clinic-survey/assets/css/site.css?v={V}', og_image=f'/clinic-survey/assets/img/share-{lang}.png?v={V}',
+                    og_alt=m['alt'], robots='noindex, nofollow')
     ui = UI[lang]
     payload = json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
     back = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>')
