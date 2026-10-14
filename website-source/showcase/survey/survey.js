@@ -48,7 +48,7 @@
   const empty = v => v == null || v === '' || (Array.isArray(v) && !v.length);
   const letter = i => String.fromCharCode(65 + i);
   const CHECK = '<svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg>';
-  const saveDraft = () => store.set(DRAFT, JSON.stringify({ answers }));
+  const saveDraft = () => { store.set(DRAFT, JSON.stringify({ answers })); if (typeof syncNext === 'function' && idx >= 0 && !nav.hidden) syncNext(); };
 
   function setProgress() {
     const vis = visible();
@@ -68,20 +68,21 @@
   function setNav(show, last) {
     nav.hidden = !show;
     backBtn.disabled = idx <= 0;
-    nextBtn.querySelector('.lbl').textContent = last ? UI.send : UI.next;
+    nav.dataset.last = last ? '1' : '';
+    syncNext();
+  }
+  function syncNext() {
+    const q = visible()[idx];
+    const last = nav.dataset.last === '1';
+    const answered = q && !empty(answers[q.id]) && !(q.type === 'contact' && !Object.values(answers[q.id]).some(x => x && x !== true));
+    nextBtn.querySelector('.lbl').textContent = last ? UI.send : (answered ? UI.next : UI.skip);
+    nextBtn.classList.toggle('is-skip', !last && !answered);
   }
 
   /* screens */
   function renderIntro() {
     idx = -1; setProgress(); setNav(false);
     const I = DATA.intro, n = visible().length;
-    const mq = DATA.questions.find(q => q.id === 'top_features') || DATA.questions[0];
-    const mock = `<div class="sv-visual" aria-hidden="true">
-      <div class="sv-mock back2"></div><div class="sv-mock back1"></div>
-      <div class="sv-mock front"><div class="sv-meta"><b>01 / ${String(n).padStart(2, '0')}</b><i></i></div><p class="mq">${esc(mq.q)}</p>
-        ${(mq.options || []).slice(0, 4).map((o, i) => `<div class="mo${i === 1 ? ' on' : ''}"><span class="k">${letter(i)}</span><span>${esc(o.label)}</span>${i === 1 ? CHECK : ''}</div>`).join('')}
-      </div></div>`;
-    card.classList.add('wide');
     swap(`<section class="sv-intro"><div class="sv-intro-copy">
       <span class="eyebrow"><i class="status-dot"></i>${esc(I.eyebrow)}</span>
       <h1>${esc(I.title)}</h1>
@@ -92,17 +93,17 @@
         <span class="sv-chip"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>${esc(UI.private)}</span>
       </div>
       <div class="sv-start"><button type="button" class="btn btn-solid" id="svGo">${esc(I.start)}</button><p class="sv-note">${esc(I.note)}</p></div>
-    </div>${mock}</section>`, 1);
+    </div></section>`, 1);
     $('#svGo').addEventListener('click', () => { startedAt = Date.now(); go(0, 1); });
     $('#svGo').focus({ preventScroll: true });
   }
 
   function optionsHtml(q) {
-    const two = q.options.length > 5 ? ' two' : '';
+    const two = '';
     const sel = answers[q.id];
     return `<div class="sv-opts${two}" role="${q.type === 'multi' ? 'group' : 'radiogroup'}" aria-label="${esc(q.q)}">` + q.options.map((o, i) => {
       const on = q.type === 'multi' ? (sel || []).includes(o.v) : sel === o.v;
-      return `<button type="button" class="sv-opt" role="${q.type === 'multi' ? 'checkbox' : 'radio'}" aria-checked="${on}" data-v="${esc(o.v)}"><span class="k">${letter(i)}</span><span class="t">${esc(o.label)}</span>${CHECK}</button>`;
+      return `<button type="button" class="sv-opt" role="${q.type === 'multi' ? 'checkbox' : 'radio'}" aria-checked="${on}" data-v="${esc(o.v)}"><span class="ind" aria-hidden="true">${CHECK}</span><span class="t">${esc(o.label)}</span></button>`;
     }).join('') + '</div>' + (q.type === 'multi' && q.max ? `<p class="sv-count" id="svCount"></p>` : '');
   }
 
@@ -265,6 +266,8 @@
   }
 
   async function submit() {
+    const any = Object.values(answers).some(v => !empty(v) && !(typeof v === 'object' && !Array.isArray(v) && !Object.values(v).some(x => x && x !== true)));
+    if (!any) return fail(UI.needAny);
     const hp = $('#svHp'); if (hp && hp.value) return renderDone(); // bots fill the hidden field
     if (!CFG.endpoint) return renderFallback();
     busy = true; nextBtn.disabled = true;

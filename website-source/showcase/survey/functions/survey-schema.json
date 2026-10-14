@@ -4,7 +4,7 @@
   {
    "id": "uses_software",
    "type": "single",
-   "required": true,
+   "required": false,
    "options": [
     "vet_software",
     "general_software",
@@ -16,7 +16,7 @@
   {
    "id": "records_today",
    "type": "single",
-   "required": true,
+   "required": false,
    "options": [
     "paper",
     "excel_phone",
@@ -28,7 +28,7 @@
   {
    "id": "top_problems",
    "type": "multi",
-   "required": true,
+   "required": false,
    "max": 2,
    "options": [
     "records",
@@ -47,7 +47,7 @@
   {
    "id": "unified_platform_view",
    "type": "single",
-   "required": true,
+   "required": false,
    "options": [
     "excellent",
     "conditional_privacy",
@@ -60,7 +60,7 @@
   {
    "id": "national_platform_view",
    "type": "single",
-   "required": true,
+   "required": false,
    "options": [
     "excellent_independent",
     "helps_new_clients",
@@ -73,7 +73,7 @@
   {
    "id": "top_services",
    "type": "multi",
-   "required": true,
+   "required": false,
    "max": 3,
    "options": [
     "records",
@@ -93,7 +93,7 @@
   {
    "id": "monthly_price",
    "type": "single",
-   "required": true,
+   "required": false,
    "options": [
     "free",
     "up_to_50",
@@ -108,7 +108,7 @@
   {
    "id": "adoption_stance",
    "type": "single",
-   "required": true,
+   "required": false,
    "options": [
     "ready_to_try",
     "need_demo",

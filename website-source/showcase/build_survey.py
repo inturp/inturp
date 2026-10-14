@@ -27,13 +27,13 @@ UI = {
                needConsent='Tick the box so we know we may contact you, or clear the contact fields.', upto='Pick up to {n}', selected='{n} selected',
                lastTitle='One last step.', lastLead='Your answers are ready. Send them to us and you are done.', failLead='We could not reach our server. You can still send your answers another way.',
                lastHow='Open an email with your answers already written, or copy them and send them however you like.', openMail='Open email', copy='Copy answers', copied='Copied',
-               mailSubject='Veterinary clinics survey: my answers', mailIntro='My answers to the Inturp veterinary clinics survey:', share='Share', keysEnter='Enter'),
+               mailSubject='Veterinary clinics survey: my answers', mailIntro='My answers to the Inturp veterinary clinics survey:', share='Share', keysEnter='Enter', skip='Skip', needAny='Answer at least one question before sending.'),
     'ar': dict(next='متابعة', send='إرسال الإجابات', back='رجوع', minutes='نحو دقيقتين', count='{n} أسئلة قصيرة', private='بدون أسماء أو بيانات تواصل',
                needChoice='اختر إجابة للمتابعة.', needText='اكتب إجابة قصيرة للمتابعة.', badEmail='البريد الإلكتروني غير صحيح.',
                needConsent='فعّل المربع لنعرف أن بإمكاننا التواصل معك، أو امسح بيانات التواصل.', upto='اختر حتى {n}', selected='تم اختيار {n}',
                lastTitle='خطوة أخيرة.', lastLead='إجاباتك جاهزة. أرسلها لنا وننتهي.', failLead='تعذّر الوصول إلى خادمنا، لكن تستطيع إرسال إجاباتك بطريقة أخرى.',
                lastHow='افتح رسالة بريد جاهزة بإجاباتك، أو انسخها وأرسلها كما تحب.', openMail='فتح البريد', copy='نسخ الإجابات', copied='تم النسخ',
-               mailSubject='استبيان العيادات البيطرية: إجاباتي', mailIntro='إجاباتي على استبيان انتيرب للعيادات البيطرية:', share='مشاركة', keysEnter='Enter'),
+               mailSubject='استبيان العيادات البيطرية: إجاباتي', mailIntro='إجاباتي على استبيان انتيرب للعيادات البيطرية:', share='مشاركة', keysEnter='Enter', skip='تخطي', needAny='أجب عن سؤال واحد على الأقل قبل الإرسال.'),
 }
 META = {
     'en': dict(title='Veterinary clinics survey | Inturp',
@@ -91,24 +91,24 @@ def page(lang, data):
     payload = json.dumps(data, ensure_ascii=False).replace('</', '<\\/')
     back = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>')
     nxt = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>')
-    body = f'''{shared.single(shared.header(None), lang)}<main class="sv-main" id="main">
+    sun = '<svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41"/></svg>'
+    moon = '<svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>'
+    lang_btn = '<span class="ar">EN</span><span class="en">عربي</span>'
+    head_html = shared.single(f'''<header class="sv-head" dir="ltr">
+  <a class="brand-link" href="{'/ar/' if lang == 'ar' else '/'}" aria-label="Inturp"><img src="/inturp-logo.png" alt="" width="58" height="58"><span>inturp<span class="brand-dot">.</span></span></a>
+  <div class="nav-preferences"><button type="button" class="language-control" data-lang-toggle aria-label="Language / اللغة">{lang_btn}</button><button type="button" class="icon-control" data-theme-toggle aria-label="Theme">{sun}{moon}</button></div>
+</header>''', lang)
+    body = f'''{head_html}<main class="sv-main" id="main">
   <div class="sv-top" aria-hidden="true"><i id="svBar"></i></div>
   <div class="sv-stage"><div class="sv-card" id="svCard"></div></div>
   <div class="sv-nav" id="svNav" hidden>
     <div class="sv-nav-in">
       <button type="button" class="btn btn-outline" id="svBack">{back}<span>{ui['back']}</span></button>
-      <span class="sv-keys"><kbd>{ui['keysEnter']} ↵</kbd></span>
       <button type="button" class="btn btn-solid" id="svNext"><span class="lbl">{ui['next']}</span>{nxt}</button>
     </div>
   </div>
   <noscript><p class="sv-noscript">{'يحتاج الاستبيان إلى تفعيل JavaScript في المتصفح.' if lang == 'ar' else 'This survey needs JavaScript enabled in your browser.'}</p></noscript>
 </main>
-<footer class="sv-foot"><div class="in">
-  <a class="brand-link" href="{ '/ar/' if lang == 'ar' else '/' }" aria-label="Inturp"><img src="/inturp-logo.png" alt="" width="44" height="44" style="width:26px;height:26px"><span style="font-size:20px">inturp.</span></a>
-  <a href="{ '/ar/privacy/' if lang == 'ar' else '/privacy/' }">{'الخصوصية' if lang == 'ar' else 'Privacy'}</a>
-  <a href="mailto:info@inturp.com" dir="ltr">info@inturp.com</a>
-  <span>© <span id="year">2026</span> Inturp</span>
-</div></footer>
 <script type="application/json" id="sv-data">{payload}</script>
 <script src="/clinic-survey/assets/js/survey-config.js?v={V}"></script>
 <script src="/clinic-survey/assets/js/survey.js?v={V}"></script>

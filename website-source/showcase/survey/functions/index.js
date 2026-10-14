@@ -24,7 +24,7 @@ const db = getFirestore('survey');
 const ORIGINS = new Set(['https://inturp.com', 'https://www.inturp.com']);
 if (process.env.ALLOW_LOCALHOST === 'true') ORIGINS.add('http://localhost:8765');
 const MAX_BODY = 24 * 1024;
-const MIN_MS = Number(process.env.MIN_FILL_MS || 12000);
+const MIN_MS = Number(process.env.MIN_FILL_MS || 4000);
 const LIMITS = { perHour: 4, perDay: 12, globalPerDay: 3000 };
 const EMAIL = /^[^@\s]{1,64}@[^@\s]{1,190}\.[^@\s]{2,}$/;
 const CONTROL = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g;

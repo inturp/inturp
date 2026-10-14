@@ -1,5 +1,5 @@
 {
-  "_help": "Edit the questions here, then run: python3 website-source/showcase/build_survey.py. Types: single, multi (optional max), scale (1-5), short, long, contact. 'showIf': {id, in:[values]} shows a question only after a matching answer. 'required' defaults to true. Option values (v) are the codes saved in the results, keep them stable.",
+  "_help": "Edit the questions here, then run: python3 website-source/showcase/build_survey.py. Types: single, multi (optional max), scale (1-5), short, long, contact. 'showIf': {id, in:[values]} shows a question only after a matching answer. 'required' defaults to true; every question here is optional (required: false). Option values (v) are the codes saved in the results, keep them stable.",
   "intro": {
     "eyebrow": {
       "ar": "استبيان العيادات البيطرية",
@@ -89,7 +89,8 @@
           "ar": "لا، نعتمد على الدفاتر والطرق اليدوية",
           "en": "No, we rely on notebooks and manual methods"
         }
-      ]
+      ],
+      "required": false
     },
     {
       "id": "records_today",
@@ -123,7 +124,8 @@
           "ar": "مزيج من أكثر من طريقة",
           "en": "A mix of more than one method"
         }
-      ]
+      ],
+      "required": false
     },
     {
       "id": "top_problems",
@@ -183,7 +185,8 @@
           "ar": "أخرى",
           "en": "Other"
         }
-      ]
+      ],
+      "required": false
     },
     {
       "id": "unified_platform_view",
@@ -226,7 +229,8 @@
           "ar": "أحتاج إلى معرفة المزيد قبل الحكم",
           "en": "I need to know more before judging"
         }
-      ]
+      ],
+      "required": false
     },
     {
       "id": "national_platform_view",
@@ -269,7 +273,8 @@
           "ar": "لا أرى أنها ضرورية حاليًا",
           "en": "I do not think it is necessary at the moment"
         }
-      ]
+      ],
+      "required": false
     },
     {
       "id": "top_services",
@@ -334,7 +339,8 @@
           "ar": "أخرى",
           "en": "Other"
         }
-      ]
+      ],
+      "required": false
     },
     {
       "id": "monthly_price",
@@ -387,7 +393,8 @@
           "ar": "يعتمد على الخدمات المقدمة",
           "en": "It depends on the services offered"
         }
-      ]
+      ],
+      "required": false
     },
     {
       "id": "adoption_stance",
@@ -426,7 +433,8 @@
           "ar": "لا أرغب باستخدام برنامج حاليًا",
           "en": "I do not want to use software at the moment"
         }
-      ]
+      ],
+      "required": false
     },
     {
       "id": "wish",
