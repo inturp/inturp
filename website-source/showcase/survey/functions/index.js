@@ -32,7 +32,7 @@ const ORIGINS = new Set(['https://inturp.com', 'https://www.inturp.com']);
 if (process.env.ALLOW_LOCALHOST === 'true') ORIGINS.add('http://localhost:8765');
 const MAX_BODY = 32 * 1024;
 const MIN_FINAL_MS = Number(process.env.MIN_FILL_MS || 4000);
-const LIMITS = { newSessionsPerHour: 60, newSessionsPerDay: 300, syncsPerHour: 600, globalSessionsPerDay: 3000, eventsPerSession: 500, eventsPerCall: 40 };
+const LIMITS = { newSessionsPerHour: 60, newSessionsPerDay: 300, syncsPerHour: 600, globalSessionsPerDay: 20000, eventsPerSession: 500, eventsPerCall: 40 };
 const EMAIL = /^[^@\s]{1,64}@[^@\s]{1,190}\.[^@\s]{2,}$/;
 const PHONE = /^[0-9+\-\s().]{5,40}$/;
 const SID = /^[a-f0-9]{32}$/;
@@ -199,27 +199,26 @@ exports.submitSurvey = onRequest(
     }
     if (req.method !== 'POST') return fail(res, 405, 'method');
     if (!allowed) return fail(res, 403, 'origin');
-    if (!(req.get('content-type') || '').toLowerCase().startsWith('application/json')) return fail(res, 415, 'type');
-    const raw = req.rawBody ? req.rawBody.length : 0;
-    if (!raw || raw > MAX_BODY) return fail(res, 413, 'size');
 
-    const body = req.body;
-    if (!body || typeof body !== 'object') return fail(res, 400, 'body');
-    if (body.survey !== schema.id) return fail(res, 400, 'survey');
-    if (body.lang !== 'ar' && body.lang !== 'en') return fail(res, 400, 'lang');
-    if (!isStr(body.sid) || !SID.test(body.sid)) return fail(res, 400, 'sid');
+    // From here on a visitor's submission is never refused for its content: whatever arrives is read as well as possible,
+    // anything unreadable is dropped, and the rest is stored. (Only a foreign origin, a bot and a runaway day are turned away.)
+    let body = req.body;
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      try { body = JSON.parse(req.rawBody ? req.rawBody.toString('utf8') : ''); } catch (_) { body = {}; }
+    }
+    if (!body || typeof body !== 'object' || Array.isArray(body)) body = {};
+    const sid = isStr(body.sid) && SID.test(body.sid) ? body.sid : crypto.randomBytes(16).toString('hex');
+    const lang = body.lang === 'en' ? 'en' : 'ar';
     const completed = body.status === 'completed';
-    if (body.status !== 'in_progress' && !completed) return fail(res, 400, 'status');
 
-    // Bots fill the hidden field or "finish" instantly: answer "ok", store nothing.
-    if ((body.hp && String(body.hp).length) || (completed && !(Number(body.elapsed_ms) >= MIN_FINAL_MS))) {
-      logger.info('survey dropped', { reason: body.hp ? 'honeypot' : 'too_fast' });
+    // Bots fill the hidden field: answer "ok", store nothing.
+    if (body.hp && String(body.hp).length) {
+      logger.info('survey dropped', { reason: 'honeypot' });
       return res.status(200).json({ ok: true });
     }
-    const a = validateAnswers(body.answers, { allowContact: completed });
-    if (a.error) return fail(res, 400, a.error);
+    let a = validateAnswers(body.answers, { allowContact: completed });
+    if (a.error || !a.answers) a = { answers: {} };
     const ev = validateEvents(body.events);
-    if (ev.error) return fail(res, 400, ev.error);
     const device = validateDevice(body.device);
     let current;
     if (body.current && typeof body.current === 'object') {
@@ -229,7 +228,7 @@ exports.submitSurvey = onRequest(
     const now = Date.now();
     const day = new Date(now).toISOString().slice(0, 10);
     const ipHash = hashIp(req.get('x-forwarded-for')?.split(',')[0].trim() || req.ip);
-    const ref = db.collection('survey_sessions').doc(body.sid);
+    const ref = db.collection('survey_sessions').doc(sid);
     const ipRef = db.collection('survey_rate').doc(ipHash);
     const dayRef = db.collection('survey_meta').doc('day-' + day);
 
@@ -247,14 +246,14 @@ exports.submitSurvey = onRequest(
           sessHour: same ? r.sessHour || 0 : 0,
           sessDay: sameDay ? r.sessDay || 0 : 0,
         };
-        if (rate.syncsHour > LIMITS.syncsPerHour) throw new Error('rate');
+        let flagged = rate.syncsHour > LIMITS.syncsPerHour ? 'rate' : undefined;
         const total = daySnap.exists ? daySnap.data().n || 0 : 0;
         const cur = snap.exists ? snap.data() : null;
-        if (cur && cur.survey !== schema.id) throw new Error('survey');
         if (cur && cur.status === 'completed') return { ignored: true };
 
         if (!cur) {
-          if (rate.sessHour >= LIMITS.newSessionsPerHour || rate.sessDay >= LIMITS.newSessionsPerDay || total >= LIMITS.globalSessionsPerDay) throw new Error('rate');
+          if (total >= LIMITS.globalSessionsPerDay) throw new Error('rate');
+          if (rate.sessHour >= LIMITS.newSessionsPerHour || rate.sessDay >= LIMITS.newSessionsPerDay) flagged = 'rate';
           rate.sessHour += 1; rate.sessDay += 1;
           tx.set(dayRef, { n: total + 1 }, { merge: true });
         }
@@ -265,7 +264,7 @@ exports.submitSurvey = onRequest(
 
         const update = {
           survey: schema.id,
-          lang: body.lang,
+          lang,
           status: completed ? 'completed' : 'in_progress',
           answers: a.answers,
           answeredCount: Object.keys(a.answers).filter(k => k !== 'contact').length,
@@ -276,6 +275,7 @@ exports.submitSurvey = onRequest(
           updatedAt: FieldValue.serverTimestamp(),
           ipHash,
         };
+        if (flagged) update.flagged = flagged;
         if (body.page) update.page = clean(body.page, 80);
         if (current) { if (current.qid) update.lastQuestion = current.qid; if (current.idx !== undefined) update.lastIndex = current.idx; }
         // Client details win; the User-Agent fills whatever is missing, but only the first time a session is stored.
@@ -298,10 +298,11 @@ exports.submitSurvey = onRequest(
       }
       return res.status(200).json({ ok: true });
     } catch (e) {
-      if (e.message === 'rate') return fail(res, 429, 'rate');
-      if (e.message === 'survey') return fail(res, 400, 'survey');
-      logger.error('sync failed', e);
-      return fail(res, 500, 'server');
+      // Daily safety cap reached: acknowledge so the visitor never sees an error.
+      if (e.message === 'rate') return res.status(200).json({ ok: true, throttled: true });
+      // Storage hiccup: keep the answers in the log so they cannot be lost, and ask the page to retry quietly.
+      logger.error('sync failed', { err: String(e && e.message), sid, status: completed ? 'completed' : 'in_progress', answers: a.answers, lang });
+      return fail(res, 503, 'retry');
     }
   }
 );

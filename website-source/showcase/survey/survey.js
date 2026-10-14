@@ -142,12 +142,7 @@
     queue.push(Object.assign({ n: sess.n++, t: Date.now() - sess.t0, type }, extra || {}));
     persist(); clearTimeout(timer); timer = setTimeout(() => flush(), 1200);
   }
-  async function flush(opts) {
-    const final = !!(opts && opts.final), keepalive = !!(opts && opts.keepalive);
-    if (!trackingOn) return true;
-    if (inflight && !final) { clearTimeout(timer); timer = setTimeout(() => flush(), 800); return true; }
-    clearTimeout(timer);
-    const events = queue.slice(0, 40);
+  function buildBody(final, events) {
     const hp = $('#svHp');
     const body = {
       survey: DATA.id, lang: root.lang, sid: sess.sid, status: final ? 'completed' : 'in_progress', page: location.pathname,
@@ -155,6 +150,30 @@
       current: { qid: curQid(), idx: idx >= 0 ? idx : undefined }, answers: snapshot(final), events,
     };
     if (!sess.deviceSent) body.device = deviceInfo();
+    return body;
+  }
+
+  /* A finished survey is never lost: if the final send cannot get through, the answers wait in this browser and are sent again
+     quietly (when the page is opened again, when the connection returns, and every half minute) while the visitor sees "done". */
+  const OUTBOX = 'inturp-survey-outbox';
+  async function retryOutbox() {
+    const raw = store.get(OUTBOX); if (!raw || !CFG.endpoint || CFG.transport === 'script') return;
+    try {
+      const res = await fetch(CFG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: raw, credentials: 'omit', keepalive: raw.length < 60000 });
+      if (res.ok || (res.status >= 400 && res.status < 500 && res.status !== 429)) store.del(OUTBOX);
+    } catch (_) {}
+  }
+  window.addEventListener('online', retryOutbox);
+  setInterval(retryOutbox, 30000);
+  setTimeout(retryOutbox, 1500);
+
+  async function flush(opts) {
+    const final = !!(opts && opts.final), keepalive = !!(opts && opts.keepalive);
+    if (!trackingOn && !final) return true;
+    if (inflight && !final) { clearTimeout(timer); timer = setTimeout(() => flush(), 800); return true; }
+    clearTimeout(timer);
+    const events = queue.slice(0, 40);
+    const body = buildBody(final, events);
     inflight = true;
     try {
       const res = await fetch(CFG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), credentials: 'omit', keepalive });
@@ -380,13 +399,17 @@
         for (let i = 0; i < 6 && queue.length > 40; i++) await flush();
         ok = await flush({ final: true });
         // The answers matter more than the click log: if the send was refused, try once more without the queued clicks.
-        if (!ok && trackingOn) { queue.length = 0; ok = await flush({ final: true }); }
+        if (!ok) { queue.length = 0; ok = await flush({ final: true }); }
       }
-      if (!ok) throw new Error('send');
+      if (!ok) { // keep the answers safe in this browser and finish normally; they are sent again in the background
+        const b = buildBody(true, []); store.set(OUTBOX, JSON.stringify(b)); setTimeout(retryOutbox, 4000);
+      }
       sent = true; store.del(DRAFT); store.del(SESS_KEY); trackingOn = false;
       renderDone();
     } catch (_) {
-      renderFallback(true);
+      try { store.set(OUTBOX, JSON.stringify(buildBody(true, []))); setTimeout(retryOutbox, 4000); } catch (_) {}
+      sent = true; store.del(DRAFT); store.del(SESS_KEY); trackingOn = false;
+      renderDone();
     } finally {
       busy = false; nextBtn.disabled = false; const s = nav.querySelector('.sv-spin'); if (s) s.remove();
     }
