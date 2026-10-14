@@ -14,8 +14,8 @@
       "en": "We are building veterinary clinic software in Arabic and English, and we want it shaped by what clinics actually need, not by our guesses. A few short questions, and every answer counts."
     },
     "note": {
-      "ar": "كل الأسئلة اختيارية، ويمكنك تخطي ما لا تريد الإجابة عنه.",
-      "en": "Every question is optional, and you can skip anything you would rather not answer."
+      "ar": "كل الأسئلة اختيارية. نحفظ إجاباتك أولًا بأول حتى لو لم تكمل، مع نوع جهازك ومتصفحك. أما بيانات التواصل فلا تُرسل إلا عند الضغط على «إرسال».",
+      "en": "Every question is optional. We save your answers as you go, even if you do not finish, together with your device and browser type. Contact details are only sent when you press “Send”."
     },
     "start": {
       "ar": "ابدأ الاستبيان",

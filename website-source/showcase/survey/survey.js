@@ -79,6 +79,95 @@
     nextBtn.classList.toggle('is-skip', !last && !answered);
   }
 
+
+  /* ── session tracking ────────────────────────────────────────────────────────────────────────────────
+     Every answer and click is sent as it happens, so a visitor who stops after one question is still kept.
+     Contact details are the exception: they are sent only with the final "send". */
+  const TRACK = Boolean(CFG.endpoint) && CFG.transport !== 'script';
+  const SESS_KEY = 'inturp-survey-session';
+  const newSid = () => { const b = new Uint8Array(16); (window.crypto || {}).getRandomValues ? crypto.getRandomValues(b) : b.forEach((_, i) => { b[i] = Math.random() * 256; }); return [...b].map(x => x.toString(16).padStart(2, '0')).join(''); };
+  let sess = null;
+  try { sess = JSON.parse(store.get(SESS_KEY) || 'null'); } catch (_) {}
+  if (!sess || !sess.sid || Date.now() - sess.t0 > 24 * 3600e3) sess = { sid: newSid(), t0: Date.now(), n: 0, deviceSent: false };
+  const persist = () => store.set(SESS_KEY, JSON.stringify(sess));
+  let queue = [], timer = null, inflight = false, trackingOn = TRACK, qStart = Date.now();
+
+  function deviceInfo() {
+    const ua = navigator.userAgent || '';
+    const m = (re) => { const r = ua.match(re); return r ? r : null; };
+    let os = 'Other', osVersion = '', t;
+    if ((t = m(/Windows NT ([\d.]+)/))) { os = 'Windows'; osVersion = t[1]; }
+    else if ((t = m(/(?:iPhone|iPad|iPod).*? OS ([\d_]+)/))) { os = 'iOS'; osVersion = t[1].replace(/_/g, '.'); }
+    else if ((t = m(/Android ([\d.]+)/))) { os = 'Android'; osVersion = t[1]; }
+    else if ((t = m(/Mac OS X ([\d_]+)/))) { os = (navigator.maxTouchPoints > 1) ? 'iPadOS' : 'macOS'; osVersion = t[1].replace(/_/g, '.'); }
+    else if (/CrOS/.test(ua)) os = 'ChromeOS';
+    else if (/Linux/.test(ua)) os = 'Linux';
+    let browser = 'Other', bv = '';
+    if ((t = m(/EdgA?\/([\d.]+)/))) { browser = 'Edge'; bv = t[1]; }
+    else if ((t = m(/OPR\/([\d.]+)/))) { browser = 'Opera'; bv = t[1]; }
+    else if ((t = m(/SamsungBrowser\/([\d.]+)/))) { browser = 'Samsung Internet'; bv = t[1]; }
+    else if ((t = m(/(?:Firefox|FxiOS)\/([\d.]+)/))) { browser = 'Firefox'; bv = t[1]; }
+    else if ((t = m(/(?:Chrome|CriOS)\/([\d.]+)/))) { browser = 'Chrome'; bv = t[1]; }
+    else if ((t = m(/Version\/([\d.]+).*Safari/))) { browser = 'Safari'; bv = t[1]; }
+    const tablet = /iPad|Tablet/i.test(ua) || os === 'iPadOS' || (os === 'Android' && !/Mobile/i.test(ua));
+    const mobile = /Mobi|iPhone|iPod|Android.*Mobile/i.test(ua);
+    const model = (m(/Android [\d.]+; ([^;)]+)/) || [])[1];
+    let ref = '';
+    try { ref = document.referrer ? new URL(document.referrer).host : ''; } catch (_) {}
+    const conn = navigator.connection && navigator.connection.effectiveType;
+    return {
+      type: tablet ? 'tablet' : mobile ? 'mobile' : 'desktop', os, osVersion, browser, browserVersion: bv.split('.')[0], model,
+      screenW: screen.width, screenH: screen.height, viewW: innerWidth, viewH: innerHeight, dpr: window.devicePixelRatio || 1,
+      touch: (navigator.maxTouchPoints || 0) > 0, langs: (navigator.languages || [navigator.language || '']).join(',').slice(0, 48),
+      tz: (Intl.DateTimeFormat().resolvedOptions().timeZone || '').slice(0, 48), net: conn || '', ref,
+      theme: root.classList.contains('dark') ? 'dark' : 'light',
+    };
+  }
+  const curQid = () => (idx < 0 ? 'intro' : (visible()[idx] ? visible()[idx].id : 'done'));
+  const dwell = () => { const ms = Math.min(Date.now() - qStart, 3600e3); qStart = Date.now(); return ms; };
+  function snapshot(final) {
+    const a = {};
+    Object.keys(answers).forEach(k => { if (k === 'contact' && !final) return; if (!empty(answers[k])) a[k] = answers[k]; });
+    return a;
+  }
+  function track(type, extra) {
+    if (!trackingOn) return;
+    queue.push(Object.assign({ n: sess.n++, t: Date.now() - sess.t0, type }, extra || {}));
+    persist(); clearTimeout(timer); timer = setTimeout(() => flush(), 1200);
+  }
+  async function flush(opts) {
+    const final = !!(opts && opts.final), keepalive = !!(opts && opts.keepalive);
+    if (!trackingOn) return true;
+    if (inflight && !final) { clearTimeout(timer); timer = setTimeout(() => flush(), 800); return true; }
+    clearTimeout(timer);
+    const events = queue.slice(0, 40);
+    const hp = $('#svHp');
+    const body = {
+      survey: DATA.id, lang: root.lang, sid: sess.sid, status: final ? 'completed' : 'in_progress', page: location.pathname,
+      elapsed_ms: final ? Date.now() - startedAt : Date.now() - sess.t0, hp: hp ? hp.value : '',
+      current: { qid: curQid(), idx: idx >= 0 ? idx : undefined }, answers: snapshot(final), events,
+    };
+    if (!sess.deviceSent) body.device = deviceInfo();
+    inflight = true;
+    try {
+      const res = await fetch(CFG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), credentials: 'omit', keepalive });
+      if (res.status === 429) { trackingOn = false; return !final ? true : false; }
+      if (!res.ok) return false;
+      queue.splice(0, events.length); sess.deviceSent = true; persist();
+      if (queue.length && !final) { timer = setTimeout(() => flush(), 300); }
+      return true;
+    } catch (_) {
+      return false;
+    } finally { inflight = false; }
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      if (idx < 0 || idx < visible().length) track('leave', { qid: curQid() === 'intro' ? undefined : curQid(), idx: idx >= 0 ? idx : undefined, ms: dwell() });
+      flush({ keepalive: true });
+    } else qStart = Date.now();
+  });
+  addEventListener('pagehide', () => { if (queue.length) flush({ keepalive: true }); });
+
   /* screens */
   function renderIntro() {
     idx = -1; setProgress(); setNav(false);
@@ -94,7 +183,7 @@
       </div>
       <div class="sv-start"><button type="button" class="btn btn-solid" id="svGo">${esc(I.start)}</button><p class="sv-note">${esc(I.note)}</p></div>
     </div></section>`, 1);
-    $('#svGo').addEventListener('click', () => { startedAt = Date.now(); go(0, 1); });
+    $('#svGo').addEventListener('click', () => { startedAt = Date.now(); track('start'); go(0, 1); });
     $('#svGo').focus({ preventScroll: true });
   }
 
@@ -136,6 +225,7 @@
       <div class="sv-body">${bodyHtml(q)}</div>
       <p class="sv-err" id="svErr" role="alert"></p>
     </section>`, dir);
+    qStart = Date.now(); track('view', { qid: q.id, idx });
     bind(q);
     const f = card.querySelector('#svIn, [data-f="name"]');
     if (f) setTimeout(() => f.focus({ preventScroll: true }), 120);
@@ -156,7 +246,7 @@
     const err = $('#svErr');
     if (q.type === 'single') {
       card.querySelectorAll('.sv-opt').forEach(b => b.addEventListener('click', () => {
-        answers[q.id] = b.dataset.v; saveDraft();
+        answers[q.id] = b.dataset.v; saveDraft(); track('answer', { qid: q.id, v: answers[q.id] });
         card.querySelectorAll('.sv-opt').forEach(x => x.setAttribute('aria-checked', String(x === b)));
         err.textContent = '';
         clearTimeout(bind.t); bind.t = setTimeout(() => next(), 380);
@@ -169,20 +259,21 @@
         if (cur.has(b.dataset.v)) cur.delete(b.dataset.v);
         else if (excl.has(b.dataset.v)) { cur.clear(); cur.add(b.dataset.v); } // "none of these" stands alone
         else { excl.forEach(x => cur.delete(x)); cur.add(b.dataset.v); }
-        answers[q.id] = [...cur]; saveDraft();
+        answers[q.id] = [...cur]; saveDraft(); track('answer', { qid: q.id, v: answers[q.id] });
         card.querySelectorAll('.sv-opt').forEach(x => x.setAttribute('aria-checked', String(cur.has(x.dataset.v))));
         err.textContent = ''; updateCount(q);
       }));
       updateCount(q);
     } else if (q.type === 'scale') {
       card.querySelectorAll('[data-v]').forEach(b => b.addEventListener('click', () => {
-        answers[q.id] = Number(b.dataset.v); saveDraft();
+        answers[q.id] = Number(b.dataset.v); saveDraft(); track('answer', { qid: q.id, v: answers[q.id] });
         card.querySelectorAll('[data-v]').forEach(x => x.setAttribute('aria-checked', String(x === b)));
         err.textContent = '';
         clearTimeout(bind.t); bind.t = setTimeout(() => next(), 380);
       }));
     } else if (q.type === 'short' || q.type === 'long') {
       $('#svIn').addEventListener('input', e => { answers[q.id] = e.target.value; saveDraft(); err.textContent = ''; });
+      $('#svIn').addEventListener('change', e => track('answer', { qid: q.id, v: String(e.target.value || '').slice(0, 2000) }));
     } else if (q.type === 'contact') {
       card.querySelectorAll('[data-f]').forEach(i => i.addEventListener('input', () => {
         const c = Object.assign({}, answers[q.id]); c[i.dataset.f] = i.value; answers[q.id] = c; saveDraft();
@@ -215,10 +306,12 @@
     const vis = visible(), q = vis[idx];
     const msg = validate(q);
     if (msg) return fail(msg);
+    const answered = !empty(answers[q.id]) && !(q.type === 'contact' && !Object.values(answers[q.id]).some(x => x && x !== true));
+    track(answered ? 'next' : 'skip', { qid: q.id, idx, ms: dwell() });
     if (idx >= vis.length - 1) return submit();
     go(idx + 1, 1);
   }
-  function prev() { if (idx > 0) go(idx - 1, -1); }
+  function prev() { if (idx > 0) { const q = visible()[idx]; track('back', { qid: q.id, idx, ms: dwell() }); go(idx - 1, -1); } }
   nextBtn.addEventListener('click', next);
   backBtn.addEventListener('click', prev);
 
@@ -273,13 +366,17 @@
     busy = true; nextBtn.disabled = true;
     nextBtn.querySelector('.lbl').insertAdjacentHTML('beforebegin', '<span class="sv-spin"></span>');
     try {
+      let ok;
       if (CFG.transport === 'script') { // Google Apps Script web app: opaque no-cors request
         await fetch(CFG.endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload()) });
-      } else { // our own API: a real request, so a refusal is noticed
-        const res = await fetch(CFG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload()), credentials: 'omit' });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
+        ok = true;
+      } else {
+        track('submit', { qid: curQid(), idx });
+        for (let i = 0; i < 6 && queue.length > 40; i++) await flush();
+        ok = await flush({ final: true });
       }
-      sent = true; store.del(DRAFT);
+      if (!ok) throw new Error('send');
+      sent = true; store.del(DRAFT); store.del(SESS_KEY); trackingOn = false;
       renderDone();
     } catch (_) {
       renderFallback(true);
@@ -328,5 +425,6 @@
   }
 
   renderIntro();
+  if (!sess.n) track('intro');
   const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
 })();
