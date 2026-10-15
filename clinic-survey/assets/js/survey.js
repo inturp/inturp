@@ -14,6 +14,13 @@
     set: (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} },
     del: k => { try { localStorage.removeItem(k); } catch (_) {} },
   };
+  // Which audience this link was made for (?c=ps, ?c=jo …). It is remembered, so a refresh or the language button keeps it.
+  const COHORT = (() => {
+    let c = '';
+    try { c = (new URLSearchParams(location.search).get('c') || '').toLowerCase().replace(/[^a-z]/g, '').slice(0, 2); } catch (_) {}
+    try { if (c.length === 2) localStorage.setItem('inturp-survey-cohort', c); else c = (localStorage.getItem('inturp-survey-cohort') || '').slice(0, 2); } catch (_) {}
+    return c;
+  })();
   const DRAFT = 'inturp-survey-draft-' + DATA.id;
   const answers = {};
   let idx = -1, busy = false, sent = false, startedAt = Date.now();
@@ -145,7 +152,7 @@
   function buildBody(final, events) {
     const hp = $('#svHp');
     const body = {
-      survey: DATA.id, lang: root.lang, sid: sess.sid, status: final ? 'completed' : 'in_progress', page: location.pathname,
+      survey: DATA.id, lang: root.lang, sid: sess.sid, status: final ? 'completed' : 'in_progress', page: location.pathname, cohort: COHORT,
       elapsed_ms: final ? Date.now() - startedAt : Date.now() - sess.t0, hp: hp ? hp.value : '',
       current: { qid: curQid(), idx: idx >= 0 ? idx : undefined }, answers: snapshot(final), events,
     };

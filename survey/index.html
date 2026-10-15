@@ -32,10 +32,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="/clinic-survey/assets/css/site.css?v=20261040">
-<meta http-equiv="refresh" content="0; url=/ar/clinic-survey/">
+<meta http-equiv="refresh" content="0; url=/ar/clinic-survey/?c=ps">
 </head>
 <body>
-<script>location.replace("/ar/clinic-survey/"+location.search+location.hash)</script>
-<p style="font-family:Inter,sans-serif;text-align:center;margin:30vh 24px 0"><a href="/ar/clinic-survey/">فتح الاستبيان</a></p>
+<script>var q=location.search;location.replace("/ar/clinic-survey/?c=ps"+(q?"&"+q.slice(1):"")+location.hash)</script>
+<p style="font-family:Inter,sans-serif;text-align:center;margin:30vh 24px 0"><a href="/ar/clinic-survey/?c=ps">فتح الاستبيان</a></p>
 </body>
 </html>

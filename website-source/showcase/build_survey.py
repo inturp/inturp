@@ -120,16 +120,17 @@ def page(lang, data):
     return h + body
 
 
-def short_link(lang):
-    """/survey/ (Arabic) and /survey/en/ (English): short, readable addresses to send to clinics. They show the same share card and open the survey at once."""
+def short_link(lang, cohort, own_ar, own_en):
+    """Short addresses to send to clinics. /survey/ (Palestine) and /survey/jo/ (Jordan) open the Arabic survey tagged with its audience;
+    each has an English twin under /en/. They show the same share card and open the survey at once."""
     m = META[lang]
-    target = '/ar/clinic-survey/' if lang == 'ar' else '/clinic-survey/'
-    h = shared.head(lang=lang, title=m['title'], desc=m['desc'], en_path='/survey/en/', ar_path='/survey/',
+    target = ('/ar/clinic-survey/' if lang == 'ar' else '/clinic-survey/') + f'?c={cohort}'
+    h = shared.head(lang=lang, title=m['title'], desc=m['desc'], en_path=own_en, ar_path=own_ar,
                     css=f'/clinic-survey/assets/css/site.css?v={V}', og_image=f'/clinic-survey/assets/img/share-{lang}.png?v={V}',
                     og_alt=m['alt'], robots='noindex, nofollow',
                     extra=f'<meta http-equiv="refresh" content="0; url={target}">\n')
     label = 'فتح الاستبيان' if lang == 'ar' else 'Open the survey'
-    return (h + f'<script>location.replace("{target}"+location.search+location.hash)</script>\n'
+    return (h + f'<script>var q=location.search;location.replace("{target}"+(q?"&"+q.slice(1):"")+location.hash)</script>\n'
             f'<p style="font-family:Inter,sans-serif;text-align:center;margin:30vh 24px 0"><a href="{target}">{label}</a></p>\n</body>\n</html>\n')
 
 
@@ -159,9 +160,11 @@ def main():
     for lang in ('en', 'ar'):
         OUT[lang].mkdir(parents=True, exist_ok=True)
         (OUT[lang] / 'index.html').write_text(page(lang, lang_data(src, lang)), encoding='utf-8')
-    for lang, folder in (('ar', SITE / 'survey'), ('en', SITE / 'survey' / 'en')):
-        folder.mkdir(parents=True, exist_ok=True)
-        (folder / 'index.html').write_text(short_link(lang), encoding='utf-8')
+    for cohort, base in (('ps', SITE / 'survey'), ('jo', SITE / 'survey' / 'jo')):
+        web = '/survey/' if cohort == 'ps' else f'/survey/{cohort}/'
+        for lang, folder in (('ar', base), ('en', base / 'en')):
+            folder.mkdir(parents=True, exist_ok=True)
+            (folder / 'index.html').write_text(short_link(lang, cohort, web, web + 'en/'), encoding='utf-8')
     n = sum(1 for q in src['questions'] if 'showIf' not in q)
     print(f'survey built: {n} questions (+ conditional)')
 

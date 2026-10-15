@@ -19,11 +19,11 @@ const sessions = snap.docs.map(d => ({ id: d.id, ...d.data() }));
 const qids = [...new Set(sessions.flatMap(s => Object.keys(s.answers || {})))].filter(k => k !== 'contact');
 const contactKeys = ['name', 'phone', 'clinic', 'address'];
 const devKeys = ['type', 'os', 'osVersion', 'browser', 'browserVersion', 'model', 'screenW', 'screenH', 'viewW', 'viewH', 'dpr', 'touch', 'langs', 'tz', 'net', 'ref', 'theme'];
-const head = ['session', 'created_at', 'updated_at', 'completed_at', 'status', 'lang', 'answered', 'last_question', 'events', 'seconds',
+const head = ['session', 'country', 'created_at', 'updated_at', 'completed_at', 'status', 'lang', 'answered', 'last_question', 'events', 'seconds',
   ...devKeys.map(k => 'device_' + k), ...qids, ...contactKeys.map(k => 'contact_' + k)];
 const rows = sessions.map(s => {
   const a = s.answers || {}, c = a.contact || {}, d = s.device || {};
-  return [s.id, iso(s.createdAt), iso(s.updatedAt), iso(s.completedAt), s.status, s.lang, s.answeredCount, s.lastQuestion, s.eventsCount, Math.round((s.elapsedMs || 0) / 1000),
+  return [s.id, s.cohort || 'ps', iso(s.createdAt), iso(s.updatedAt), iso(s.completedAt), s.status, s.lang, s.answeredCount, s.lastQuestion, s.eventsCount, Math.round((s.elapsedMs || 0) / 1000),
     ...devKeys.map(k => d[k]), ...qids.map(k => (Array.isArray(a[k]) ? a[k].join('; ') : a[k])), ...contactKeys.map(k => c[k])];
 });
 writeFileSync('survey-sessions.csv', csv(head, rows));

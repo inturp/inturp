@@ -32,10 +32,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="/clinic-survey/assets/css/site.css?v=20261040">
-<meta http-equiv="refresh" content="0; url=/clinic-survey/">
+<meta http-equiv="refresh" content="0; url=/clinic-survey/?c=ps">
 </head>
 <body>
-<script>location.replace("/clinic-survey/"+location.search+location.hash)</script>
-<p style="font-family:Inter,sans-serif;text-align:center;margin:30vh 24px 0"><a href="/clinic-survey/">Open the survey</a></p>
+<script>var q=location.search;location.replace("/clinic-survey/?c=ps"+(q?"&"+q.slice(1):"")+location.hash)</script>
+<p style="font-family:Inter,sans-serif;text-align:center;margin:30vh 24px 0"><a href="/clinic-survey/?c=ps">Open the survey</a></p>
 </body>
 </html>

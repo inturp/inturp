@@ -210,6 +210,7 @@ exports.submitSurvey = onRequest(
     const sid = isStr(body.sid) && SID.test(body.sid) ? body.sid : crypto.randomBytes(16).toString('hex');
     const lang = body.lang === 'en' ? 'en' : 'ar';
     const completed = body.status === 'completed';
+    const cohort = isStr(body.cohort) && /^[a-z]{2}$/.test(body.cohort) ? body.cohort : '';
 
     // Bots fill the hidden field: answer "ok", store nothing.
     if (body.hp && String(body.hp).length) {
@@ -275,6 +276,7 @@ exports.submitSurvey = onRequest(
           updatedAt: FieldValue.serverTimestamp(),
           ipHash,
         };
+        if (cohort) update.cohort = cohort;
         if (flagged) update.flagged = flagged;
         if (body.page) update.page = clean(body.page, 80);
         if (current) { if (current.qid) update.lastQuestion = current.qid; if (current.idx !== undefined) update.lastIndex = current.idx; }
