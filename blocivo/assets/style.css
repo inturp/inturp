@@ -1,0 +1,142 @@
+/* Blocivo — product pages (landing, privacy, support). Self-contained. */
+:root{
+  --bg0:#06151a;--bg1:#0e2a33;--bg2:#183d48;--violet:#8fb7ff;
+  --cyan:#6fd3e6;--green:#5bd68a;--gold:#ffc53d;--red:#ff6a5e;
+  --text:#eaf6f4;--dim:#9fc0c2;--panel:rgba(20,52,62,.66);--line:rgba(111,211,230,.26);
+  --radius:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh;color:var(--text);line-height:1.7;font-size:17px;
+  font-family:'Tajawal',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:radial-gradient(1200px 700px at 50% -10%,var(--bg2) 0%,var(--bg1) 45%,var(--bg0) 100%) fixed;
+  overflow-x:hidden;
+}
+html[lang=ar] body{font-family:'Tajawal','Rajdhani',system-ui,sans-serif;line-height:1.9}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%;display:block}
+.wrap{width:min(1080px,100% - 40px);margin-inline:auto}
+.narrow{width:min(820px,100% - 40px);margin-inline:auto}
+
+/* language switch: only the active language is visible */
+html[lang=en] [data-l=ar],html[lang=ar] [data-l=en]{display:none!important}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(6,21,26,.72);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:66px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text);font-family:'Tajawal',sans-serif;
+  font-weight:700;letter-spacing:.14em;font-size:15px}
+.brand:hover{text-decoration:none}
+.brand img{width:36px;height:36px;border-radius:10px;box-shadow:0 0 18px rgba(111,211,230,.45)}
+.brand b{color:var(--cyan);font-weight:700}
+.nav{margin-inline-start:auto;display:flex;align-items:center;gap:6px}
+.nav a{color:var(--dim);padding:8px 12px;border-radius:12px;font-size:16px;font-weight:600}
+.nav a:hover,.nav a[aria-current]{color:var(--text);background:rgba(111,211,230,.08);text-decoration:none}
+.lang{margin-inline-start:6px;cursor:pointer;font:inherit;font-weight:700;color:var(--cyan);
+  background:rgba(111,211,230,.08);border:1px solid rgba(111,211,230,.45);border-radius:999px;padding:6px 16px}
+.lang:hover{background:rgba(111,211,230,.18)}
+
+/* hero */
+.hero{position:relative;padding:72px 0 56px;text-align:center}
+.hero .glow{position:absolute;inset:auto;left:50%;top:40px;width:560px;height:560px;transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(111,211,230,.22),transparent 62%);filter:blur(10px);pointer-events:none}
+.ring{position:relative;width:200px;height:200px;margin:0 auto 26px}
+.ring svg{width:100%;height:100%;overflow:visible}
+.ring .spin{transform-origin:100px 100px;animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero h1{font-family:'Tajawal',sans-serif;font-size:clamp(40px,8vw,72px);line-height:1.05;letter-spacing:.12em;font-weight:800}
+html[lang=ar] .hero h1{letter-spacing:0}
+.hero h1 span{color:var(--cyan);text-shadow:0 0 28px rgba(111,211,230,.55)}
+.hero p.lead{max-width:640px;margin:20px auto 0;color:var(--dim);font-size:20px}
+.cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:18px;font-weight:700;font-size:17px;
+  border:1.6px solid var(--cyan);color:var(--cyan);background:rgba(111,211,230,.1);
+  box-shadow:0 0 22px rgba(111,211,230,.22);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(111,211,230,.4);text-decoration:none}
+.btn.gold{border-color:var(--gold);color:var(--gold);background:rgba(255,197,61,.09);box-shadow:0 0 22px rgba(255,197,61,.18)}
+.btn.green{border-color:var(--green);color:var(--green);background:rgba(91,214,138,.09);box-shadow:0 0 22px rgba(91,214,138,.18)}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:12px auto 64px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.card .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:14px;font-size:22px;
+  background:rgba(111,211,230,.12);border:1px solid rgba(111,211,230,.35)}
+.card:nth-child(2) .ico{background:rgba(91,214,138,.12);border-color:rgba(91,214,138,.35)}
+.card:nth-child(3) .ico{background:rgba(255,197,61,.12);border-color:rgba(255,197,61,.35)}
+.card h3{font-size:21px;margin-bottom:6px}
+.card p{color:var(--dim);font-size:16.5px}
+
+/* legal / support pages */
+.page-hero{padding:56px 0 18px;text-align:center}
+.page-hero h1{font-family:'Tajawal',sans-serif;font-size:clamp(30px,5.5vw,46px);letter-spacing:.06em;font-weight:800}
+html[lang=ar] .page-hero h1{letter-spacing:0}
+.page-hero p{color:var(--dim);margin-top:12px}
+.meta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
+.chip{border:1px solid var(--line);background:rgba(20,52,62,.55);color:var(--dim);border-radius:999px;padding:6px 16px;font-size:15px}
+.chip b{color:var(--text)}
+.toc{margin:32px auto 8px;padding:20px 24px;border-radius:var(--radius);background:var(--panel);border:1px solid var(--line)}
+.toc h2{font-size:16px;letter-spacing:.14em;color:var(--dim);margin-bottom:10px;text-transform:uppercase}
+html[lang=ar] .toc h2{letter-spacing:0}
+.toc ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2px 24px;padding-inline-start:22px}
+.toc a{color:var(--text);font-size:16.5px}
+.doc{padding-bottom:70px}
+.doc section{margin-top:34px;padding:26px 28px;border-radius:var(--radius);background:var(--panel);border:1px solid var(--line);
+  scroll-margin-top:90px}
+.doc h2{font-size:25px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.doc h2 i{font-style:normal;font-family:'Tajawal',sans-serif;font-size:14px;color:var(--bg0);background:var(--cyan);
+  border-radius:9px;min-width:34px;height:30px;display:inline-grid;place-items:center;padding:0 8px;
+  box-shadow:0 0 16px rgba(111,211,230,.5)}
+.doc p,.doc li{color:#d6ecea}
+.doc p+p,.doc p+ul,.doc ul+p{margin-top:12px}
+.doc ul{padding-inline-start:22px}
+.doc li{margin:7px 0}
+.doc li::marker{color:var(--cyan)}
+.doc strong{color:var(--text)}
+.table{width:100%;border-collapse:separate;border-spacing:0;margin-top:14px;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:16px}
+.table th,.table td{padding:12px 14px;text-align:start;vertical-align:top;border-bottom:1px solid var(--line)}
+.table th{background:rgba(111,211,230,.1);color:var(--cyan);font-weight:700}
+.table tr:last-child td{border-bottom:0}
+.table td{color:#d6ecea}
+.note{margin-top:14px;padding:14px 18px;border-radius:16px;border:1px solid rgba(255,197,61,.4);background:rgba(255,197,61,.07);color:#ffeaa8}
+.scroll{overflow-x:auto}
+
+/* support */
+.contact{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:30px}
+.contact .card h3{display:flex;gap:10px;align-items:center}
+details{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:16px 20px;margin-top:12px}
+summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';color:var(--cyan);font-size:24px;line-height:1}
+details[open] summary::after{content:'–'}
+details p{margin-top:10px;color:#d6ecea}
+.steps{counter-reset:s;list-style:none;padding:0!important}
+.steps li{counter-increment:s;position:relative;padding-inline-start:46px;margin:12px 0}
+.steps li::before{content:counter(s);position:absolute;inset-inline-start:0;top:2px;width:32px;height:32px;border-radius:50%;
+  display:grid;place-items:center;background:rgba(111,211,230,.14);border:1px solid var(--cyan);color:var(--cyan);font-weight:700}
+
+footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--dim);text-align:center;font-size:15px}
+footer a{color:var(--dim);margin:0 10px}
+footer a:hover{color:var(--cyan)}
+
+@media (max-width:640px){
+  body{font-size:16.5px}
+  .nav a.hide-sm{display:none}
+  .hero{padding-top:44px}
+  .ring{width:150px;height:150px}
+  .doc section{padding:20px 18px}
+  .doc h2{font-size:21px}
+}
+@media (prefers-reduced-motion:reduce){.ring .spin{animation:none}.btn{transition:none}html{scroll-behavior:auto}}
+
+
+
+/* Blocivo hero art: the tower glows */
+.ring svg .win{animation:bl-win 2.4s ease-in-out infinite alternate}
+@keyframes bl-win{from{opacity:.55}to{opacity:1}}
+.ring svg .coin{animation:bl-coin 1.8s ease-in-out infinite alternate}
+@keyframes bl-coin{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.ring svg .win,.ring svg .coin{animation:none}}
